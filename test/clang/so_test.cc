@@ -4,7 +4,7 @@
 #include <string>
 #include <Python.h>
 
-#include "test/cc_rules/clang/embedded_files.h"
+#include "test/clang/embedded_files.h"
 
 
 namespace plz {

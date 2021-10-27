@@ -1,4 +1,4 @@
-#include "test/cc_rules/lib1.h"
+#include "test/lib1.h"
 
 namespace plz {
 

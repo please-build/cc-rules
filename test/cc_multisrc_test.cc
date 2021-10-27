@@ -1,4 +1,4 @@
-#include "test/cc_rules/multisrc.h"
+#include "test/multisrc.h"
 
 #include <UnitTest++/UnitTest++.h>
 

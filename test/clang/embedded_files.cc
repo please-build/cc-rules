@@ -1,7 +1,7 @@
-#include "test/cc_rules/clang/embedded_files.h"
+#include "test/clang/embedded_files.h"
 
-#include "test/cc_rules/clang/embedded_file_1.h"
-#include "test/cc_rules/clang/embedded_file_3.h"
+#include "test/clang/embedded_file_1.h"
+#include "test/clang/embedded_file_3.h"
 
 namespace plz {
 

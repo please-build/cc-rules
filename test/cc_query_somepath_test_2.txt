@@ -1,1 +1,1 @@
-Couldn't find any dependency path between //test/cc_rules:_lib2#cc and //test/cc_rules:_lib1#cc
+Couldn't find any dependency path between //test:_lib2#cc and //test:_lib1#cc

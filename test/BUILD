@@ -13,7 +13,7 @@ cc_library(
     name = "lib2",
     srcs = ["lib2.cc"],
     hdrs = ["lib2.h"],
-    visibility = ["//test/cc_rules/..."],
+    visibility = ["//test/..."],
     deps = [
         ":lib1",
     ],
@@ -30,14 +30,14 @@ cc_test(
 # lib2 should express a direct dependency on lib1
 plz_e2e_test(
     name = "cc_query_somepath_test_1",
-    cmd = "plz query somepath //test/cc_rules:lib2 //test/cc_rules:lib1",
+    cmd = "plz query somepath //test:lib2 //test:lib1",
     expected_output = "cc_query_somepath_test_1.txt",
 )
 
 # lib2's object file should not have any dependency on lib1's though.
 plz_e2e_test(
     name = "cc_query_somepath_test_2",
-    cmd = "plz query somepath //test/cc_rules:_lib2#cc //test/cc_rules:_lib1#cc",
+    cmd = "plz query somepath //test:_lib2#cc //test:_lib1#cc",
     expected_failure = True,
     expected_output = "cc_query_somepath_test_2.txt",
 )

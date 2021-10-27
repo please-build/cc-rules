@@ -2,8 +2,8 @@
 
 #include "gtest/gtest.h"
 
-#include "test/cc_rules/lib1.h"
-#include "test/cc_rules/lib2.h"
+#include "test/lib1.h"
+#include "test/lib2.h"
 
 namespace plz {
 
