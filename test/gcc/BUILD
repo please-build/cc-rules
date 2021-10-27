@@ -41,6 +41,7 @@ cc_library(
     ],
 )
 
+# TODO(peterebden): now Python is becoming a plugin, we should choose something else to test with.
 cc_shared_object(
     name = "so_test",
     srcs = ["so_test.cc"],

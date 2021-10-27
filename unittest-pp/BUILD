@@ -11,5 +11,5 @@ cc_library(
     name = "main",
     srcs = ["unittest_main.cc"],
     visibility = ["PUBLIC"],
-    deps = [":unittest_cpp"],
+    deps = ["///unittest-pp/unittest_cpp//:unittest_cpp"],
 )
