@@ -1,6 +1,9 @@
 [please]
 version = >=16.10.1
 
+[parse]
+preloadbuilddefs = build_defs/cc.build_defs
+
 [PluginDefinition]
 name = cc
 
