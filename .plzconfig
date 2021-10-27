@@ -72,3 +72,11 @@ Type = bool
 [PluginConfig "dsym_tool"]
 ConfigKey = DsymTool
 DefaultValue = dsymutil
+
+[PluginConfig "asm_tool"]
+ConfigKey = AsmTool
+DefaultValue = nasm
+
+[PluginConfig "default_namespace"]
+ConfigKey = DefaultNamespace
+DefaultValue =

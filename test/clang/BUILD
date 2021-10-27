@@ -3,7 +3,7 @@
 # might use underneath - ie. we are not passing -fuse-ld or similar).
 
 # Must pass -stdlib so the STL implementation matches what we use for other deps (i.e. unittest)
-subinclude("//test/build_defs:cc_embed_binary")
+subinclude("//build_defs:cc_embed_binary")
 
 package(
     cpp_tool = "clang++",
