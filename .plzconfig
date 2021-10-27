@@ -1,0 +1,5 @@
+[please]
+version = >=16.10.1
+
+[PluginDefinition]
+name = cc
