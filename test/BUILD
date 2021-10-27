@@ -1,5 +1,3 @@
-subinclude("//test/build_defs")
-
 # Test the way cc rules depend on one another; ideally we should be able to
 # pick up all transitive dependencies correctly but compile the .o files independently.
 
@@ -27,20 +25,21 @@ cc_test(
     ],
 )
 
+# TODO(peterebden): how to best do this kind of testing in a plugin?
 # lib2 should express a direct dependency on lib1
-plz_e2e_test(
-    name = "cc_query_somepath_test_1",
-    cmd = "plz query somepath //test:lib2 //test:lib1",
-    expected_output = "cc_query_somepath_test_1.txt",
-)
-
-# lib2's object file should not have any dependency on lib1's though.
-plz_e2e_test(
-    name = "cc_query_somepath_test_2",
-    cmd = "plz query somepath //test:_lib2#cc //test:_lib1#cc",
-    expected_failure = True,
-    expected_output = "cc_query_somepath_test_2.txt",
-)
+# plz_e2e_test(
+#     name = "cc_query_somepath_test_1",
+#     cmd = "plz query somepath //test:lib2 //test:lib1",
+#     expected_output = "cc_query_somepath_test_1.txt",
+# )
+#
+# # lib2's object file should not have any dependency on lib1's though.
+# plz_e2e_test(
+#     name = "cc_query_somepath_test_2",
+#     cmd = "plz query somepath //test:_lib2#cc //test:_lib1#cc",
+#     expected_failure = True,
+#     expected_output = "cc_query_somepath_test_2.txt",
+# )
 
 # These rules test that cc_library correctly accepts multiple srcs.
 cc_library(
