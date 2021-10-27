@@ -2,8 +2,6 @@
 
 subinclude("//build_defs:cc_embed_binary")
 
-package(default_namespace = "plz")
-
 cc_embed_binary(
     name = "embedded_file_1",
     src = "embedded_file_1.txt",
@@ -18,6 +16,7 @@ genrule(
 cc_embed_binary(
     name = "embedded_file_3",
     src = ":embedded_file_3_gen",
+    namespace = "plz",
     deps = [":embedded_file_3_gen"],
 )
 
