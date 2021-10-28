@@ -1,4 +1,6 @@
-package(cc_test_main = "///third_party/cc/gtest//:gtest_main")
+package(cc = {
+    "test_main": "//gtest:main",
+})
 
 cc_test(
     name = "gtest_test",
