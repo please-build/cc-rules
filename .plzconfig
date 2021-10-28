@@ -1,5 +1,5 @@
 [please]
-version = >=16.10.1
+version = >=16.12.1
 
 [parse]
 preloadbuilddefs = build_defs/cc.build_defs
