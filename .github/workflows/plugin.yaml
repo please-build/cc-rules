@@ -1,4 +1,4 @@
-name: Python rules
+name: C & C++ rules
 on: [push, pull_request]
 jobs:
   test:
@@ -6,10 +6,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Setup python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.6.9'
       - name: Run tests
         run: ./pleasew test -e e2e
       - name: Run e2e test
