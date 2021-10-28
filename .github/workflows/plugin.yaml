@@ -1,0 +1,12 @@
+name: C & C++ rules
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run tests
+        run: ./pleasew test -e e2e
+      - name: Run e2e test
+        run: ./pleasew test -i e2e
