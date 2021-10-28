@@ -2,7 +2,7 @@
 
 import unittest
 
-from test.cc_rules.clang import so_test
+from test.clang import so_test
 
 
 class SharedObjectTest(unittest.TestCase):

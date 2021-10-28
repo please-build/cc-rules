@@ -6,11 +6,13 @@
 subinclude("//build_defs:cc_embed_binary")
 
 package(
-    cpp_tool = "clang++",
-    default_dbg_cppflags = "--std=c++11 -g3 -DDEBUG -Wall -Wextra -Werror -Wno-unused-parameter -stdlib=libstdc++",
-    default_namespace = "plz",
-    default_opt_cppflags = "--std=c++11 -O2 -DNDEBUG -Wall -Wextra -Werror -Wno-unused-parameter -stdlib=libstdc++",
-    ld_tool = "gold",
+    cc = {
+        "cpp_tool": "clang++",
+        "default_dbg_cppflags": "--std=c++11 -g3 -DDEBUG -Wall -Wextra -Werror -Wno-unused-parameter -stdlib=libstdc++",
+        "default_namespace": "plz",
+        "default_opt_cppflags": "--std=c++11 -O2 -DNDEBUG -Wall -Wextra -Werror -Wno-unused-parameter -stdlib=libstdc++",
+        "ld_tool": "gold",
+    },
 )
 
 cc_embed_binary(
