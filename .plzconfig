@@ -23,12 +23,6 @@ DefaultValue = ld
 ConfigKey = ARTool
 DefaultValue = ar
 
-; TODO(peterebden): Remove this.
-[PluginConfig "link_with_ld_tool"]
-ConfigKey = LinkWithLDTool
-DefaultValue = false
-Type = bool
-
 [PluginConfig "default_opt_cflags"]
 ConfigKey = DefaultOptCFlags
 DefaultValue = --std=c99 -O3 -pipe -DNDEBUG -Wall -Werror
