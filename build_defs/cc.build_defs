@@ -615,12 +615,11 @@ def cc_test(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&cflags&cop
         test_cmd = f'$(worker {worker}) && {test_cmd} '
         deps += [worker]
 
-    if CONFIG.CC.COVERAGE:
-        test_cmd = {
-            'opt': test_cmd,
-            'dbg': test_cmd,
-            'cover': test_cmd + '; R=$?; cp $GCNO_DIR/*.gcno . && gcov *.gcda && cat *.gcov > test.coverage; exit $R'
-        }
+    test_cmd = {
+        'opt': test_cmd,
+        'dbg': test_cmd,
+        'cover': test_cmd + '; R=$?; cp $GCNO_DIR/*.gcno . && gcov *.gcda && cat *.gcov > test.coverage; exit $R'
+    }
 
     return build_rule(
         name=name,
@@ -698,13 +697,11 @@ def _library_cmds(c, compiler_flags, pkg_config_libs, pkg_config_cflags, extra_f
     cmd_template = '$TOOLS_CC -c -I . ${SRCS_SRCS} %s %s'
     if archive:
         cmd_template += ' && "$TOOLS_JARCAT" ar -r && "$TOOLS_AR" s "$OUT"'
-    cmds = {
+    return {
         'dbg': cmd_template % (dbg_flags, extra_flags),
         'opt': cmd_template % (opt_flags, extra_flags),
-    }
-    if CONFIG.CC.COVERAGE:
-        cmds['cover'] = cmd_template % (dbg_flags + _COVERAGE_FLAGS, extra_flags)
-    return cmds, {
+        'cover': cmd_template % (dbg_flags + _COVERAGE_FLAGS, extra_flags),
+    }, {
         'cc': [CONFIG.CC.CC_TOOL if c else CONFIG.CC.CPP_TOOL],
         'jarcat': [CONFIG.JARCAT_TOOL if archive else None],
         'ar': [CONFIG.CC.AR_TOOL if archive else None],
@@ -718,12 +715,11 @@ def _binary_cmds(c, linker_flags, pkg_config_libs, extra_flags='', shared=False,
     cmds = {
         'dbg': f'"$TOOL" -o "$OUT" {dbg_flags} {extra_flags}',
         'opt': f'"$TOOL" -o "$OUT" {opt_flags} {extra_flags}',
+        'cover': f'"$TOOL" -o "$OUT" {dbg_flags} {extra_flags} {_COVERAGE_FLAGS} -lgcov'
     }
     if CONFIG.CC.DSYM_TOOL:
         dbg = cmds['dbg']
         cmds['dbg'] = f'{dbg} && {CONFIG.DSYM_TOOL} $OUT'
-    if CONFIG.CC.COVERAGE:
-        cmds['cover'] = f'"$TOOL" -o "$OUT" {dbg_flags} {extra_flags} {_COVERAGE_FLAGS} -lgcov'
     return cmds, [CONFIG.CC.CC_TOOL if c else CONFIG.CC.CPP_TOOL]
 
 

@@ -47,12 +47,6 @@ DefaultValue =
 ConfigKey = PkgConfigPath
 DefaultValue =
 
-; TODO(peterebden): is this still relevant? The comment suggests it should work on Clang out-of-the-box now.
-[PluginConfig "coverage"]
-ConfigKey = Coverage
-DefaultValue = true
-Type = bool
-
 [PluginConfig "test_main"]
 ConfigKey = TestMain
 DefaultValue = @self//unittest-pp:main
