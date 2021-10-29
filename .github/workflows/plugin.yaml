@@ -24,7 +24,3 @@ jobs:
         compiler:
           - gcc
           - clang
-        exclude:
-          # only do clang on macos
-          - os: macos-latest
-            compiler: gcc
