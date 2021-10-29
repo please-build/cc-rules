@@ -2,8 +2,8 @@
 
 #include <string>
 #include <UnitTest++/UnitTest++.h>
-#include "test/gcc/embedded_file_1.h"
-#include "test/gcc/embedded_file_3.h"
+#include "test/embed/embedded_file_1.h"
+#include "test/embed/embedded_file_3.h"
 
 namespace plz {
 
