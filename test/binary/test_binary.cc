@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "test/gcc/embedded_files.h"
+#include "test/embed/embedded_files.h"
 
 
 int main(int argc, char** argv) {
