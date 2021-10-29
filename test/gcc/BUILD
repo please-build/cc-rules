@@ -12,29 +12,6 @@ cc_shared_object(
     ],
 )
 
-# Used by Python build code as a convenient way of testing itself.
-python_library(
-    name = "so_test_py",
-    srcs = ["__init__.py"],
-    resources = [":so_test"],
-    visibility = ["//test/python_rules:zip_unsafe_test"],
-    zip_safe = False,
-)
-
-python_test(
-    name = "shared_object_test",
-    srcs = ["shared_object_test.py"],
-    labels = [
-        "cc",
-        "py3_pkg_config",
-        "embed",
-    ],
-    zip_safe = False,
-    deps = [
-        ":so_test",
-    ],
-)
-
 # Make sure we have at least one working cc_binary rule.
 cc_binary(
     name = "test_binary",
