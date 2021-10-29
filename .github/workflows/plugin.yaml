@@ -1,12 +1,26 @@
 name: C & C++ rules
-on: [push, pull_request]
+on:
+  - push
+  - pull_request
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Install nasm
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: brew install nasm
       - name: Run tests
-        run: ./pleasew test -e e2e
+        run: ./pleasew test -e e2e --profile ${{ matrix.compiler }}
       - name: Run e2e test
-        run: ./pleasew test -i e2e
+        run: ./pleasew test -i e2e --profile ${{ matrix.compiler }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+        compiler:
+          - gcc
+          - clang

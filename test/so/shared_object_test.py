@@ -2,7 +2,7 @@
 
 import unittest
 
-from test.clang import so_test
+from test.so import so_test
 
 
 class SharedObjectTest(unittest.TestCase):
