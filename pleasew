@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -u
 
+
 RED="\x1B[31m"
 GREEN="\x1B[32m"
 YELLOW="\x1B[33m"
