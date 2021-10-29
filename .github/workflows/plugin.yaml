@@ -1,8 +1,10 @@
 name: C & C++ rules
-on: [push, pull_request]
+on:
+  - push
+  - pull_request
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -10,3 +12,15 @@ jobs:
         run: ./pleasew test -e e2e
       - name: Run e2e test
         run: ./pleasew test -i e2e
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+        compiler:
+          - gcc
+          - clang
+        exclude:
+          # only do clang on macos
+          os: macos-latest
+          compiler: gcc
