@@ -1,5 +1,7 @@
 name: C & C++ rules
-on: [push, pull_request]
+on:
+  - push
+  - pull_request
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -20,5 +22,5 @@ jobs:
           - clang
         exclude:
           # only do clang on macos
-          os: macos-latest
-          compiler: gcc
+          - os: macos-latest
+            compiler: gcc
