@@ -51,12 +51,6 @@ DefaultValue =
 ConfigKey = TestMain
 DefaultValue = @self//unittest-pp:main
 
-; TODO(peterebden): is this still relevant?
-[PluginConfig "clang_modules"]
-ConfigKey = ClangModules
-DefaultValue = true
-Type = bool
-
 [PluginConfig "dsym_tool"]
 ConfigKey = DsymTool
 DefaultValue = dsymutil

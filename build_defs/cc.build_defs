@@ -99,15 +99,13 @@ def cc_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:
     )
     provides = {'cc_hdrs': hdrs_rule}
 
-    if _module:
-        compiler_flags += ['-fmodules-ts' if CONFIG.CC.CLANG_MODULES else '-fmodules']
     # TODO(pebers): handle includes and defines in _library_cmds as well.
     pre_build = _library_transitive_labels(_c, compiler_flags, pkg_config_libs, pkg_config_cflags) if (deps or includes or defines or _interfaces) else None
     pkg = package_name()
 
     if _interfaces:
         # Generate the module interface file
-        xflags = ['-fmodules-ts --precompile -x c++-module -o "$OUT"' if CONFIG.CC.CLANG_MODULES else '-fmodules -fmodule-output="$OUT"']
+        xflags = ['-fmodules-ts --precompile -x c++-module -o "$OUT"']
         cmds, tools = _library_cmds(_c, compiler_flags + xflags, pkg_config_libs, pkg_config_cflags, archive=False)
         interface_rule = build_rule(
             name = name,
@@ -427,9 +425,8 @@ def cc_module(name:str, srcs:list=[], hdrs:list=[], interfaces:list=[], private_
               defines:list|dict=[], alwayslink:bool=False):
     """Generate a C++ module.
 
-    This is still experimental. Currently it has only been tested with clang - you can use
-    `package(cc_modules_clang=False)` to try with gcc (this may be needed since the two support
-    different flag structures at present).
+    This is still experimental. Currently it has only been tested with clang; support for GCC
+    will be added later once versions of GCC supporting modules are more conveniently available.
 
     Args:
       name (str): Name of the rule
@@ -735,7 +732,7 @@ def _library_transitive_labels(c, compiler_flags, pkg_config_libs, pkg_config_cf
         mods = ['-fmodule-file=' + l[4:] for l in labels if l.startswith('mod:')]
         flags += mods
         if mods:
-            flags += ['-fmodules-ts' if CONFIG.CC.CLANG_MODULES else '-fmodules']
+            flags += ['-fmodules-ts']
         if flags:  # Don't update if there aren't any relevant labels
             cmds, _ = _library_cmds(c, compiler_flags, pkg_config_libs, pkg_config_cflags, ' '.join(flags), archive=archive)
             for k, v in cmds.items():
