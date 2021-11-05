@@ -12,9 +12,16 @@ jobs:
         if: ${{ matrix.os == 'macos-latest' }}
         run: brew install nasm
       - name: Run tests
-        run: ./pleasew test -e e2e --profile ${{ matrix.compiler }}
+        run: ./pleasew test -e e2e --profile ${{ matrix.compiler }} --log_file plz-out/log/test.log
       - name: Run e2e test
-        run: ./pleasew test -i e2e --profile ${{ matrix.compiler }}
+        run: ./pleasew test -i e2e --profile ${{ matrix.compiler }} --log_file plz-out/log/e2e.log
+      - name: Archive logs
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: logs
+          path: |
+            plz-out/log
     strategy:
       fail-fast: false
       matrix:
@@ -24,3 +31,19 @@ jobs:
         compiler:
           - gcc
           - clang
+  release:
+    needs:
+      - test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: build
+        run: mkdir -p plz-out/package
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: tatskaari/release-action@master
+        with:
+          release-files: plz-out/package
