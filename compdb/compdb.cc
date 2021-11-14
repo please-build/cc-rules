@@ -2,12 +2,13 @@
 #include <unistd.h>
 
 #include <fstream>
+#include <iomanip>
 
 #include "nlohmann/json.hpp"
 #include "subprocess.hpp"
 
 using namespace nlohmann;
-using namespace std;
+typedef std::string string;
 
 int main(int argc, const char* argv[]) {
   // Obviously std::filesystem is quite a bit nicer but it's _relatively_ new (e.g. on the
@@ -19,7 +20,7 @@ int main(int argc, const char* argv[]) {
   if (!getcwd(buf, path_max)) {
     return 1;
   }
-  const string dir(buf);
+  const string dir = string(buf) + "/plz-out/gen";
 
   auto obuf = subprocess::check_output({"plz", "query", "graph", "-c", "dbg"});
   auto graph = json::parse(obuf.buf.begin(), obuf.buf.end());
@@ -32,15 +33,22 @@ int main(int argc, const char* argv[]) {
       if (target.contains("command") && target.contains("srcs") && target["srcs"].contains("srcs")) {
         auto cmd = target["command"].get<string>();
         if (cmd.rfind("$TOOLS_CC", 0) == 0) {  // no starts_with until C++20 :(
-          const auto idx = cmd.find(" && ");
+          // Strip the end parts where we archive the output
+          auto idx = cmd.find(" && ");
           if (idx != string::npos) {
             cmd.resize(idx);
-            cmd.resize(cmd.find_last_not_of(" "));
+            cmd.resize(cmd.find_last_not_of(" ") + 1);
           }
           for (const auto& src : target["srcs"]["srcs"]) {
+            // Hardcode the filename in place of variables
+            string c = cmd;
+            idx = c.find("${SRCS_SRCS}");
+            if (idx != string::npos) {
+              c = c.replace(idx, idx + 12, src);
+            }
             json j = {
               {"directory", dir},
-              {"command", cmd},
+              {"command", c},
               {"file", src},
             };
             out.emplace_back(j);
@@ -51,7 +59,7 @@ int main(int argc, const char* argv[]) {
   }
   std::ofstream f;
   f.open("compile_commands.json");
-  f << out.dump();
+  f << std::setw(4) << out << std::endl;
   f.close();
   return 0;
 }
