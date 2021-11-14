@@ -7,6 +7,12 @@ which can be read by Clang / libclang etc.
 See https://clang.llvm.org/docs/JSONCompilationDatabase.html for more information about
 the format.
 
+You may find it convenient to add an alias in your project for it:
+```
+alias ["clangcompdb"]
+cmd = run ///cc//compdb
+desc = Generate Clang compile_commands.json file
+```
 
 Limitations
 -----------
