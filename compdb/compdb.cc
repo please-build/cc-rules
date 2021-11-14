@@ -10,6 +10,14 @@
 using namespace nlohmann;
 typedef std::string string;
 
+string replace(string in, const string& before, const string& after) {
+  const auto idx = in.find(before);
+  if (idx == string::npos) {
+    return in;
+  }
+  return in.replace(idx, before.size(), after);
+}
+
 int main(int argc, const char* argv[]) {
   // Obviously std::filesystem is quite a bit nicer but it's _relatively_ new (e.g. on the
   // box I'm writing this, it doesn't seem to be available, even with --std=c++17).
@@ -20,9 +28,10 @@ int main(int argc, const char* argv[]) {
   if (!getcwd(buf, path_max)) {
     return 1;
   }
-  const string dir = string(buf) + "/plz-out/gen";
+  const string dir(buf);
+  const string genDir = dir + "/plz-out/gen";
 
-  auto obuf = subprocess::check_output({"plz", "query", "graph", "-c", "dbg"});
+  auto obuf = subprocess::check_output({"plz", "query", "graph", "-c", "dbg", "--profile", "clang"});
   auto graph = json::parse(obuf.buf.begin(), obuf.buf.end());
 
   auto out = json::array();
@@ -40,16 +49,13 @@ int main(int argc, const char* argv[]) {
             cmd.resize(cmd.find_last_not_of(" ") + 1);
           }
           for (const auto& src : target["srcs"]["srcs"]) {
-            // Hardcode the filename in place of variables
-            string c = cmd;
-            idx = c.find("${SRCS_SRCS}");
-            if (idx != string::npos) {
-              c = c.replace(idx, idx + 12, src);
-            }
+            // Hardcode the filenames in place of variables
+            string c = replace(cmd, "${SRCS_SRCS}", src);
+            c = replace(c, "$TOOLS_CC", target["tools"]["cc"][0].get<string>());
             json j = {
-              {"directory", dir},
+              {"directory", genDir},
               {"command", c},
-              {"file", src},
+              {"file", dir + "/" + src.get<string>()},
             };
             out.emplace_back(j);
           }
