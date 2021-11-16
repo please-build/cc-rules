@@ -1,6 +1,3 @@
-#include <stdlib.h>
-#include <unistd.h>
-
 #include <fstream>
 #include <iomanip>
 
@@ -18,17 +15,15 @@ string replace(string in, const string& before, const string& after) {
   return in.replace(idx, before.size(), after);
 }
 
+string trim(string in) {
+  in.resize(in.find_last_not_of(" \n") + 1);
+  return in;
+}
+
 int main(int argc, const char* argv[]) {
-  // Obviously std::filesystem is quite a bit nicer but it's _relatively_ new (e.g. on the
-  // box I'm writing this, it doesn't seem to be available, even with --std=c++17).
-  // TODO(peterebden): This is not quite right, it always returns the current path, but we
-  //                   really want the repo root. Maybe we should be able to ask plz for it?
-  const auto path_max = pathconf(".", _PC_PATH_MAX);
-  char* buf = (char*)malloc(path_max);
-  if (!getcwd(buf, path_max)) {
-    return 1;
-  }
-  const string dir(buf);
+  // Get the repo root from plz (not necessarily the same as the cwd).
+  auto rbuf = subprocess::check_output({"plz", "query", "reporoot"});
+  const string dir = trim(string(rbuf.buf.begin(), rbuf.buf.end()));
   const string genDir = dir + "/plz-out/gen";
 
   auto obuf = subprocess::check_output({"plz", "query", "graph", "-c", "dbg", "--profile", "clang"});
@@ -46,7 +41,7 @@ int main(int argc, const char* argv[]) {
           auto idx = cmd.find(" && ");
           if (idx != string::npos) {
             cmd.resize(idx);
-            cmd.resize(cmd.find_last_not_of(" ") + 1);
+            cmd = trim(cmd);
           }
           for (const auto& src : target["srcs"]["srcs"]) {
             // Hardcode the filenames in place of variables
