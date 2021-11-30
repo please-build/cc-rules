@@ -41,7 +41,7 @@ DefaultValue = --std=c++11 -g3 -pipe -DDEBUG -Wall -Werror
 
 [PluginConfig "default_ldflags"]
 ConfigKey = DefaultLdFlags
-DefaultValue =
+DefaultValue = -lpthread -ldl
 
 [PluginConfig "pkg_config_path"]
 ConfigKey = PkgConfigPath
