@@ -42,32 +42,27 @@ There are several different targets available providing different rules:
 
 ### //build_defs:cc
 
-Contains C++ rules. These use `cpp_tool`, `default_opt_cppflags`, `default_dbg_cppflags`
+Contains the following C++ rules that use `cpp_tool`, `default_opt_cppflags`, `default_dbg_cppflags`
 and `test_main`.
-The following rules are defined.
 
- - `cc_library`
- - `cc_binary`
- - `cc_test`
- - `cc_object`
- - `cc_static_library`
- - `cc_shared_object`
- - `cc_module` (N.B. this is still experimental)
+ - `cc_library()` 
+ - `cc_binary()`
+ - `cc_test()`
+ - `cc_object()`
+ - `cc_static_library()`
+ - `cc_shared_object()`
+ - `cc_module()` (N.B. this is still experimental)
+
+And the following C rules that use `cc_tool`, `default_opt_cflags` and `default_dbg_cflags`:
+
+- `c_library()`
+- `c_binary()`
+- `c_test()`
+- `c_object()`
+- `c_static_library()`
+- `c_shared_object()`
 
 See the docstring for each rule for more specific detail on what they each do.
-
-
-### //build_defs:c
-
-Contains C rules. These use `cc_tool`, `default_opt_cflags` and `default_dbg_cflags`.
-The following rules are defined.
-
- - `c_library`
- - `c_binary`
- - `c_test`
- - `c_object`
- - `c_static_library`
- - `c_shared_object`
 
 
 ### //build_defs:cc_embed_binary
@@ -82,8 +77,8 @@ generate; it can also be overridden per target.
 When building on OSX, the config value `asm_tool` is also used (by default this is `nasm`).
 On other platforms this is not required.
 
- - `c_embed_binary`
- - `cc_embed_binary`
+ - `c_embed_binary()`
+ - `cc_embed_binary()`
 
 
 ## Configuration

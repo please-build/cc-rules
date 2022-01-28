@@ -7,6 +7,10 @@ preloadbuilddefs = build_defs/cc.build_defs
 [PluginDefinition]
 name = cc
 
+[PluginConfig "cc_build_defs"]
+ConfigKey = CCBuildDefs
+DefaultValue = //build_defs:cc
+
 [PluginConfig "cc_tool"]
 ConfigKey = CCTool
 DefaultValue = gcc
