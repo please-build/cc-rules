@@ -116,7 +116,7 @@ def c_object(name:str, src:str, hdrs:list=[], private_hdrs:list=[], out:str=None
 
 
 def c_static_library(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&cflags&copts=[], linker_flags:list&ldflags&linkopts=[],
-                     deps:list=[], out:str, visibility:list=None, test_only:bool&testonly=False, pkg_config_libs:list=[], pkg_config_cflags:list=[]):
+                     deps:list=[], out:str='', visibility:list=None, test_only:bool&testonly=False, pkg_config_libs:list=[], pkg_config_cflags:list=[]):
     """Generates a C static library (.a).
 
     This is essentially just a collection of other c_library rules into a single archive.
