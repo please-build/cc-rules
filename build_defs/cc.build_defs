@@ -15,7 +15,7 @@ _WHOLE_ARCHIVE = '-all_load' if CONFIG.OS == 'darwin' else '--whole-archive'
 _NO_WHOLE_ARCHIVE = '-noall_load' if CONFIG.OS == 'darwin' else '--no-whole-archive'
 
 
-def cc_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:list=[],
+def cc_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:list=[], out:str='',
                visibility:list=None, test_only:bool&testonly=False, compiler_flags:list&cflags&copts=[],
                linker_flags:list&ldflags&linkopts=[], pkg_config_libs:list=[], pkg_config_cflags:list=[], includes:list=[],
                defines:list|dict=[], alwayslink:bool=False, linkstatic:bool=False, _c=False,
@@ -30,6 +30,8 @@ def cc_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:
       private_hdrs (list): Header files that are available only to this rule and not exported to
                            dependent rules.
       deps (list): Dependent rules.
+      out (str): Name of the output library. Defaults to lib<name>.a (or just <name>.a if name already
+                       begins with 'lib').
       visibility (list): Visibility declaration for this rule.
       test_only (bool): If True, is only available to other test rules.
       compiler_flags (list): Flags to pass to the compiler.
@@ -127,6 +129,8 @@ def cc_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:
         all_deps = deps
 
     cmds, tools = _library_cmds(_c, compiler_flags, pkg_config_libs, pkg_config_cflags)
+    if not out:
+        out = f'{name}.a' if name.startswith('lib') else f'lib{name}.a'
     if len(srcs) > 1:
         # Compile all the sources separately, this is much faster for large numbers of files
         # than giving them all to gcc in one invocation.
@@ -156,7 +160,7 @@ def cc_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:
             name = name,
             tag = 'a',
             srcs = {'srcs': a_rules},
-            outs = [name + '.a'],
+            outs = [out],
             cmd = '"$TOOLS_JARCAT" ar --combine && "$TOOLS_AR" s "$OUT"',
             building_description = 'Archiving...',
             test_only = test_only,
@@ -168,7 +172,7 @@ def cc_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:
             },
         )
         if alwayslink:
-            labels += [f'cc:al:{pkg}/{name}.a']
+            labels += [f'cc:al:{pkg}/{out}']
 
         # Filegroup to pick that up with extra deps. This is a little annoying but means that
         # things depending on this get the combined rule and not the individual ones, but do get
@@ -190,9 +194,9 @@ def cc_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:
             name=name,
             tag='cc',
             srcs={'srcs': srcs, 'hdrs': hdrs, 'priv': private_hdrs},
-            outs=[name + '.a'],
             optional_outs=['*.gcno'],  # For coverage
             deps=deps if srcs == _interfaces else all_deps,
+            outs=[out],
             cmd=cmds,
             building_description='Compiling...',
             requires=requires,
@@ -203,7 +207,7 @@ def cc_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:
             needs_transitive_deps=True,
         )
         if alwayslink:
-            labels += [f'cc:al:{pkg}/{name}.a']
+            labels += [f'cc:al:{pkg}/{out}']
         # Need another rule to cover require / provide stuff. This is getting a bit complicated...
         lib_rule = filegroup(
             name = name,
@@ -294,7 +298,7 @@ def cc_object(name:str, src:str, hdrs:list=[], private_hdrs:list=[], out:str=Non
     )
 
 
-def cc_static_library(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&cflags&copts=[],
+def cc_static_library(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&cflags&copts=[], out:str='',
                       linker_flags:list&ldflags&linkopts=[], deps:list=[], visibility:list=None,
                       test_only:bool&testonly=False, pkg_config_libs:list=[], pkg_config_cflags:list=[],_c=False):
     """Generates a C++ static library (.a).
@@ -310,6 +314,8 @@ def cc_static_library(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&
       compiler_flags (list): Flags to pass to the compiler.
       linker_flags (list): Flags to pass to the linker.
       deps (list): Dependent rules.
+      out (str): Name of the output library. Defaults to lib<name>.a (or just <name>.a if name already
+                       begins with 'lib').
       visibility (list): Visibility declaration for this rule.
       test_only (bool): If True, is only available to other test rules.
       pkg_config_libs (list): Libraries to declare a dependency on using `pkg-config --libs`
@@ -334,10 +340,12 @@ def cc_static_library(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&
             'cc_hdrs': f':_{name}#lib_hdrs',
             'cc': ':' + name,
         }
+    if not out:
+        out = f'{name}.a' if name.startswith('lib') else f'lib{name}.a'
     return build_rule(
         name = name,
         deps = deps,
-        outs = [f'lib{name}.a'],
+        outs = [out],
         cmd = '"$TOOLS_JARCAT" ar --find && "$TOOLS_AR" s "$OUT"',
         needs_transitive_deps = True,
         output_is_complete = True,

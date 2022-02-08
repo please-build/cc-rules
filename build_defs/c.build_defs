@@ -8,7 +8,7 @@ you must pay attention to interoperability when needed (e.g. 'extern "C"' and so
 """
 subinclude("///cc//build_defs:cc")
 
-def c_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:list=[],
+def c_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:list=[], out:str='',
               visibility:list=None, test_only:bool&testonly=False, compiler_flags:list&cflags&copts=[],
               linker_flags:list&ldflags&linkopts=[], pkg_config_libs:list=[], pkg_config_cflags:list=[],
               includes:list=[], defines:list|dict=[], alwayslink:bool=False):
@@ -22,6 +22,8 @@ def c_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:l
       private_hdrs (list): Header files that are available only to this rule and not exported to
                            dependent rules.
       deps (list): Dependent rules.
+      out (str): Name of the output library. Defaults to lib<name>.a (or just <name>.a if name already
+                       begins with 'lib').
       visibility (list): Visibility declaration for this rule.
       test_only (bool): If True, is only available to other test rules.
       compiler_flags (list): Flags to pass to the compiler.
@@ -44,6 +46,7 @@ def c_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:l
         hdrs = hdrs,
         private_hdrs = private_hdrs,
         deps = deps,
+        out = out,
         visibility = visibility,
         test_only = test_only,
         compiler_flags = compiler_flags,
@@ -113,7 +116,7 @@ def c_object(name:str, src:str, hdrs:list=[], private_hdrs:list=[], out:str=None
 
 
 def c_static_library(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&cflags&copts=[], linker_flags:list&ldflags&linkopts=[],
-                     deps:list=[], visibility:list=None, test_only:bool&testonly=False, pkg_config_libs:list=[], pkg_config_cflags:list=[]):
+                     deps:list=[], out:str, visibility:list=None, test_only:bool&testonly=False, pkg_config_libs:list=[], pkg_config_cflags:list=[]):
     """Generates a C static library (.a).
 
     This is essentially just a collection of other c_library rules into a single archive.
@@ -127,6 +130,8 @@ def c_static_library(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&c
       compiler_flags (list): Flags to pass to the compiler.
       linker_flags (list): Flags to pass to the linker.
       deps (list): Dependent rules.
+      out (str): Name of the output library. Defaults to lib<name>.a (or just <name>.a if name already
+                       begins with 'lib').
       visibility (list): Visibility declaration for this rule.
       test_only (bool): If True, is only available to other test rules.
       pkg_config_libs (list): Libraries to declare a dependency on using pkg-config
@@ -138,6 +143,7 @@ def c_static_library(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&c
         srcs = srcs,
         hdrs = hdrs,
         deps = deps,
+        out = out,
         visibility = visibility,
         test_only = test_only,
         compiler_flags = compiler_flags,
