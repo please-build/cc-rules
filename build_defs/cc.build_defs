@@ -752,7 +752,7 @@ def _binary_transitive_labels(c, linker_flags, pkg_config_libs, shared=False):
     """Applies commands from transitive labels to a cc_binary, cc_test or cc_shared_object rule."""
     def apply_transitive_labels(name):
         labels = get_labels(name, 'cc:')
-        flags = ['-Wl,' + l[3:] for l in labels if l.startswith('ld:')]
+        flags = ['-Wl,' + l[3:].replace(" ", ",") for l in labels if l.startswith('ld:')]
 
         flags += ['`pkg-config --libs %s`' % l[3:] for l in labels if l.startswith('pc:')]
 
