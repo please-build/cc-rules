@@ -689,7 +689,7 @@ def _binary_build_flags(linker_flags:list, pkg_config_libs:list, shared=False, a
         linker_flags += ['--build-id=none']
     if shared:
         objs = f'-shared -Wl,{_WHOLE_ARCHIVE} {objs} -Wl,{_NO_WHOLE_ARCHIVE}'
-    linker_flags = ' '.join(['-Wl,' + f for f in linker_flags] + [_default_cflags(c, dbg)])
+    linker_flags = ' '.join(['-Wl,' + f.replace(" ", ",") for f in linker_flags] + [_default_cflags(c, dbg)])
     if static:
         linker_flags += ' -static'
     return ' '.join([objs, linker_flags, pkg_config_cmd])
