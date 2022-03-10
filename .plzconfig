@@ -49,7 +49,7 @@ DefaultValue =
 
 [PluginConfig "test_main"]
 ConfigKey = TestMain
-DefaultValue = @self//unittest-pp:main
+DefaultValue = //unittest-pp:main
 
 [PluginConfig "dsym_tool"]
 ConfigKey = DsymTool
