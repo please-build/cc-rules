@@ -64,8 +64,8 @@ Inherit = true
 
 [PluginConfig "test_main"]
 ConfigKey = TestMain
-DefaultValue = @self//unittest-pp:main
 Inherit = true
+DefaultValue = //unittest-pp:main
 
 [PluginConfig "dsym_tool"]
 ConfigKey = DsymTool
