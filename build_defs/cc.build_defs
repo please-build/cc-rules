@@ -707,7 +707,7 @@ def _library_cmds(c, compiler_flags, pkg_config_libs, pkg_config_cflags, extra_f
         'opt': cmd_template % (opt_flags, extra_flags),
     }
     if CONFIG.CC.COVERAGE:
-        cmds['cover'] = cmd_template % (dbg_flags + _COVERAGE_FLAGS, extra_flags),
+        cmds['cover'] = cmd_template % (dbg_flags + _COVERAGE_FLAGS, extra_flags)
     return cmds, {
         'cc': [CONFIG.CC.CC_TOOL if c else CONFIG.CC.CPP_TOOL],
         'jarcat': [CONFIG.JARCAT_TOOL if archive else None],
