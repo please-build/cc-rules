@@ -1,3 +1,8 @@
+Version 0.3.0
+-------------
+    * Ported some changes from the built in Please rules
+    * Added a config option to disable coverage
+
 Version 0.1.0
 -------------
     * Initial release
