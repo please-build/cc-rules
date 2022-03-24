@@ -7,6 +7,11 @@ preloadbuilddefs = build_defs/cc.build_defs
 [PluginDefinition]
 name = cc
 
+[PluginConfig "coverage"]
+ConfigKey = Coverage
+DefaultValue = true
+Type = bool
+
 [PluginConfig "cc_tool"]
 ConfigKey = CCTool
 DefaultValue = gcc
