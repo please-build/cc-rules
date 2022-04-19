@@ -1,3 +1,7 @@
+Version 0.3.1
+-------------
+    * Inherit coverage setting from host
+
 Version 0.3.0
 -------------
     * Ported some changes from the built in Please rules
