@@ -11,6 +11,7 @@ name = cc
 ConfigKey = Coverage
 DefaultValue = true
 Type = bool
+Inherit = true
 
 [PluginConfig "cc_tool"]
 ConfigKey = CCTool
