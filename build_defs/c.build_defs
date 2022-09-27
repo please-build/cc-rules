@@ -11,7 +11,7 @@ subinclude("///cc//build_defs:cc")
 def c_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:list=[], out:str='',
               visibility:list=None, test_only:bool&testonly=False, compiler_flags:list&cflags&copts=[],
               linker_flags:list&ldflags&linkopts=[], pkg_config_libs:list=[], pkg_config_cflags:list=[],
-              includes:list=[], defines:list|dict=[], alwayslink:bool=False):
+              includes:list=[], defines:list|dict=[], alwayslink:bool=False, labels:list=[]):
     """Generate a C library target.
 
     Args:
@@ -39,6 +39,7 @@ def c_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:l
       alwayslink (bool): If True, any binaries / tests using this library will link in all symbols,
                          even if they don't directly reference them. This is useful for e.g. having
                          static members that register themselves at construction time.
+      labels (list): Labels to attach to this rule.
     """
     return cc_library(
         name = name,
@@ -57,13 +58,14 @@ def c_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:l
         defines = defines,
         alwayslink = alwayslink,
         _c = True,
+        labels = labels,
     )
 
 
 def c_object(name:str, src:str, hdrs:list=[], private_hdrs:list=[], out:str=None, test_only:bool&testonly=False,
              compiler_flags:list&cflags&copts=[], linker_flags:list&ldflags&linkopts=[],
              pkg_config_libs:list=[], pkg_config_cflags:list=[], includes:list=[], defines:list|dict=[],
-             alwayslink:bool=False, visibility:list=None, deps:list=[]):
+             alwayslink:bool=False, visibility:list=None, deps:list=[], labels:list=[]):
     """Generate a C object file from a single source.
 
     N.B. This is fairly low-level; for most use cases c_library should be preferred.
@@ -112,11 +114,12 @@ def c_object(name:str, src:str, hdrs:list=[], private_hdrs:list=[], out:str=None
         defines = defines,
         alwayslink = alwayslink,
         _c = True,
+        labels = labels,
     )
 
 
 def c_static_library(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&cflags&copts=[], linker_flags:list&ldflags&linkopts=[],
-                     deps:list=[], out:str='', visibility:list=None, test_only:bool&testonly=False, pkg_config_libs:list=[], pkg_config_cflags:list=[]):
+        deps:list=[], out:str='', visibility:list=None, test_only:bool&testonly=False, pkg_config_libs:list=[], pkg_config_cflags:list=[], labels:list=[]):
     """Generates a C static library (.a).
 
     This is essentially just a collection of other c_library rules into a single archive.
@@ -151,12 +154,13 @@ def c_static_library(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&c
         pkg_config_libs = pkg_config_libs,
         pkg_config_cflags = pkg_config_cflags,
         _c = True,
+        labels = labels,
     )
 
 
 def c_shared_object(name:str, srcs:list=[], hdrs:list=[], out:str='', compiler_flags:list&cflags&copts=[],
                     linker_flags:list&ldflags&linkopts=[], deps:list=[], visibility:list=None, test_only:bool&testonly=False,
-                    pkg_config_libs:list=[], pkg_config_cflags:list=[], includes:list=[]):
+                    pkg_config_libs:list=[], pkg_config_cflags:list=[], includes:list=[], labels:list=[]):
     """Generates a C shared object (.so) with its dependencies linked in.
 
     Args:
@@ -188,12 +192,13 @@ def c_shared_object(name:str, srcs:list=[], hdrs:list=[], out:str='', compiler_f
         pkg_config_cflags = pkg_config_cflags,
         includes = includes,
         _c = True,
+        labels = labels,
     )
 
 
 def c_binary(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], compiler_flags:list&cflags&copts=[],
              linker_flags:list&ldflags&linkopts=[], deps:list=[], visibility:list=None, pkg_config_libs:list=[],
-             pkg_config_cflags:list=[], test_only:bool&testonly=False, static:bool=False, includes:list=[], defines:list|dict=[]):
+             pkg_config_cflags:list=[], test_only:bool&testonly=False, static:bool=False, includes:list=[], defines:list|dict=[], labels:list=[]):
     """Builds a binary from a collection of C rules.
 
     Args:
@@ -231,6 +236,7 @@ def c_binary(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], compile
         defines = defines,
         static = static,
         _c = True,
+        labels = labels,
     )
 
 
