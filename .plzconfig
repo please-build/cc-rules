@@ -70,8 +70,9 @@ DefaultValue = //unittest-pp:main
 
 [PluginConfig "dsym_tool"]
 ConfigKey = DsymTool
-DefaultValue = dsymutil
 Inherit = true
+DefaultValue =
+Help = Set this to dsymutil or equivalent on MacOS to use this tool to generate xcode symbol information for debug builds.
 
 [PluginConfig "asm_tool"]
 ConfigKey = AsmTool
