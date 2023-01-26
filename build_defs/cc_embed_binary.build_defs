@@ -50,7 +50,7 @@ def cc_embed_binary(name:str, src:str, deps:list=[], visibility:list=None,
         test_only = test_only,
     )
 
-    tools = {'arcat': ["//tools:arcat"], 'ar': [CONFIG.AR_TOOL]}
+    tools = {'arcat': ["/////tools:arcat"], 'ar': [CONFIG.AR_TOOL]}
     if darwin:
         # OSX's ld doesn't support '--format binary', and this is the least fiddly
         # alternative. Requiring an additional tool is a bit suboptimal but probably
