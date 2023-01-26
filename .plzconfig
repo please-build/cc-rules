@@ -105,4 +105,10 @@ Help = The tool to use for assembling assembly code
 [PluginConfig "default_namespace"]
 ConfigKey = DefaultNamespace
 DefaultValue =
+<<<<<<< HEAD
 Help = The default namespace to compile c++ code in
+||||||| parent of 89ed1b0 (Use arcat instead of jarcat)
+=======
+
+[Plugin "cc"]
+>>>>>>> 89ed1b0 (Use arcat instead of jarcat)
