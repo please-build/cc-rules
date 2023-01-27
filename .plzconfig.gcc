@@ -1,6 +1,6 @@
 [plugin "cc"]
-cctool = gcc-10
-cpptool = g++-10
+cctool = gcc-11
+cpptool = g++-11
 ldtool = gold
 defaultdbgcppflags = --std=c++1z -g3 -DDEBUG -Wall -Wextra -Werror -Wno-unused-parameter
 defaultoptcppflags = --std=c++1z -O2 -DNDEBUG -Wall -Wextra -Werror -Wno-unused-parameter
