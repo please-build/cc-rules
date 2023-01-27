@@ -170,7 +170,7 @@ def cc_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:
             labels = labels,
             output_is_complete = True,
             tools = {
-                'arcat': ["/////tools:arcat"],
+                'arcat': [CONFIG.ARCAT_TOOL],
                 'ar': [CONFIG.CC.AR_TOOL],
             },
         )
@@ -364,7 +364,7 @@ def cc_static_library(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&
         provides = provides,
         requires = ['cc'],
         tools = {
-            'arcat': ["/////tools:arcat"],
+            'arcat': [CONFIG.ARCAT_TOOL],
             'ar': [CONFIG.CC.AR_TOOL],
         },
         labels = labels,
@@ -733,7 +733,7 @@ def _library_cmds(c, compiler_flags, pkg_config_libs, pkg_config_cflags, extra_f
         cmds['cover'] = cmd_template % (dbg_flags + _COVERAGE_FLAGS, extra_flags)
     return cmds, {
         'cc': [CONFIG.CC.CC_TOOL if c else CONFIG.CC.CPP_TOOL],
-        'arcat': ["/////tools:arcat" if archive else None],
+        'arcat': [CONFIG.ARCAT_TOOL if archive else None],
         'ar': [CONFIG.CC.AR_TOOL if archive else None],
     }
 
