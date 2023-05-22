@@ -2,7 +2,8 @@
 version = >=16.12.1
 
 [parse]
-preloadbuilddefs = build_defs/cc.build_defs
+preloadsubincludes = //build_defs:c
+preloadsubincludes = //build_defs:cc
 
 [PluginDefinition]
 name = cc
