@@ -1,5 +1,5 @@
 [please]
-version = >=16.12.1
+version = >=17.0.0-beta.10
 
 [parse]
 preloadsubincludes = //build_defs:c
