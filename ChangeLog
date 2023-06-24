@@ -1,3 +1,7 @@
+Version 0.3.3
+-------------
+    * Add subincludes so we don't rely on them being globally subincluded to use
+
 Version 0.3.2
 -------------
     * Fix dsymutil to have no default value (as plz was with its builtin rules)
