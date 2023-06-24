@@ -1,3 +1,5 @@
+subinclude("//build_defs:cc")
+
 github_repo(
     name = "unittest_cpp",
     repo = "unittest-cpp/unittest-cpp",
