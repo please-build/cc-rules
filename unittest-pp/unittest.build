@@ -2,9 +2,15 @@
 
 os = "Win32" if CONFIG.OS == "windows" else "Posix"
 
-cc_library(
-    name = "unittest_cpp",
+filegroup(
+    name = "unittest_cpp_srcs",
     srcs = glob(["UnitTest++/*.cpp", f"UnitTest++/{os}/*.cpp"]),
-    hdrs = glob(["UnitTest++/*.h", f"UnitTest++/{os}/*.h"]),
+    visibility = ["PUBLIC"],
+)
+
+
+filegroup(
+    name = "unittest_cpp_hdrs",
+    srcs = glob(["UnitTest++/*.h", f"UnitTest++/{os}/*.h"]),
     visibility = ["PUBLIC"],
 )
