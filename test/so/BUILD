@@ -1,3 +1,5 @@
+subinclude("//build_defs:cc", "///python//build_defs:python")
+
 # TODO(peterebden): now Python is becoming a plugin, we should choose something else to test with.
 cc_shared_object(
     name = "so_test",
@@ -30,5 +32,6 @@ python_test(
     zip_safe = False,
     deps = [
         ":so_test",
+        "//third_party/python:six",
     ],
 )

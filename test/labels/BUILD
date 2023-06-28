@@ -1,3 +1,5 @@
+subinclude("//build_defs:cc")
+
 cc_library(
     name = "lib1",
     hdrs = ["lib1/include/lib.hpp"],
