@@ -1,6 +1,8 @@
 # Test the way cc rules depend on one another; ideally we should be able to
 # pick up all transitive dependencies correctly but compile the .o files independently.
 
+subinclude("//build_defs:cc")
+
 cc_library(
     name = "lib1",
     srcs = ["lib1.cc"],

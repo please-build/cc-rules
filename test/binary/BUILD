@@ -1,3 +1,5 @@
+subinclude("//build_defs:cc")
+
 cc_binary(
     name = "test_binary",
     srcs = ["test_binary.cc"],
