@@ -8,7 +8,6 @@ WheelRepo = https://get.please.build/third_party/python/py3
 WheelNameScheme = {url_base}/{package_name}-{version}-${{OS}}_${{ARCH}}.whl
 WheelNameScheme = "{url_base}/{package_name}-{version}.whl"
 
-
 [PluginDefinition]
 name = cc
 
@@ -106,4 +105,9 @@ Help = The tool to use for assembling assembly code
 [PluginConfig "default_namespace"]
 ConfigKey = DefaultNamespace
 DefaultValue =
+<<<<<<< HEAD
 Help = The default namespace to compile c++ code in
+||||||| parent of cbf14f0 (Add subincludes and fix unit test runners)
+=======
+
+>>>>>>> cbf14f0 (Add subincludes and fix unit test runners)
