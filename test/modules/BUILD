@@ -1,3 +1,5 @@
+subinclude("//build_defs:cc")
+
 # Currently only supported for Clang.
 if "clang" in CONFIG.CC.CPP_TOOL:
     cc_module(
