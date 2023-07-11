@@ -30,13 +30,13 @@ Help = The path or build label for the C++ compiler
 ConfigKey = LDTool
 DefaultValue = ld
 Inherit = true
-Hel- = The path or build label for the linker
+Help = The path or build label for the linker
 
 [PluginConfig "ar_tool"]
 ConfigKey = ARTool
 DefaultValue = ar
 Inherit = true
-Hel- = The path or build label for the archiver
+Help = The path or build label for the archiver
 
 [PluginConfig "default_opt_cflags"]
 ConfigKey = DefaultOptCFlags
