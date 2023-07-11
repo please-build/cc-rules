@@ -1,7 +1,5 @@
 package(default_visibility = ["PUBLIC"])
 
-subinclude("///cc//build_defs:cc")
-
 # Google Test including Google Mock
 cc_library(
     name = "gtest",
