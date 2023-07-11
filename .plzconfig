@@ -1,5 +1,5 @@
 [please]
-version = >=16.12.1
+version = >=17.0.0
 
 [parse]
 preloadbuilddefs = build_defs/cc.build_defs
@@ -12,7 +12,7 @@ ConfigKey = Coverage
 DefaultValue = true
 Type = bool
 Inherit = true
-Help = Whether to build with coverage 
+Help = Whether to build with coverage
 
 [PluginConfig "cc_tool"]
 ConfigKey = CCTool
@@ -42,7 +42,7 @@ Hel- = The path or build label for the archiver
 ConfigKey = DefaultOptCFlags
 DefaultValue = --std=c99 -O3 -pipe -DNDEBUG -Wall -Werror
 Inherit = true
-Help = The default c compiler flags when compiling for release 
+Help = The default c compiler flags when compiling for release
 
 [PluginConfig "default_dbg_cflags"]
 ConfigKey = DefaultDbgCFlags
@@ -54,7 +54,7 @@ Help = The default c compiler flags when compiling for debug
 ConfigKey = DefaultOptCppFlags
 DefaultValue = --std=c++11 -O3 -pipe -DNDEBUG -Wall -Werror
 Inherit = true
-Help = The default c++ compiler flags when compiling for release 
+Help = The default c++ compiler flags when compiling for release
 
 [PluginConfig "default_dbg_cppflags"]
 ConfigKey = DefaultDbgCppFlags
@@ -66,19 +66,19 @@ Help = The default c++ compiler flags when compiling for debug
 ConfigKey = DefaultLdFlags
 DefaultValue = -lpthread -ldl
 Inherit = true
-Help = The default set of flags to apply when linking 
+Help = The default set of flags to apply when linking
 
 [PluginConfig "pkg_config_path"]
 ConfigKey = PkgConfigPath
 DefaultValue =
 Inherit = true
-Help = A path to the systems package configs 
+Help = A path to the systems package configs
 
 [PluginConfig "test_main"]
 ConfigKey = TestMain
 Inherit = true
 DefaultValue = //unittest-pp:main
-Help = A build label with c/c++ source code to use run tests. 
+Help = A build label with c/c++ source code to use run tests.
 
 [PluginConfig "dsym_tool"]
 ConfigKey = DsymTool
@@ -90,7 +90,7 @@ Help = Set this to dsymutil or equivalent on MacOS to use this tool to generate 
 ConfigKey = AsmTool
 DefaultValue = nasm
 Inherit = true
-Help = The tool to use for assembling assembly code 
+Help = The tool to use for assembling assembly code
 
 [PluginConfig "default_namespace"]
 ConfigKey = DefaultNamespace
