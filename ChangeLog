@@ -1,3 +1,7 @@
+Version 0.4.0
+-------------
+    * Change to using build.arcat instead of the deprecated jarcat config option.
+
 Version 0.3.2
 -------------
     * Fix dsymutil to have no default value (as plz was with its builtin rules)
