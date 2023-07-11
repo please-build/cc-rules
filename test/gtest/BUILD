@@ -1,3 +1,5 @@
+subinclude("//build_defs:cc")
+
 package(cc = {
     "test_main": "//gtest:main",
 })

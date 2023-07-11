@@ -1,3 +1,5 @@
+subinclude("//build_defs:cc")
+
 # Test the way cc rules depend on one another; ideally we should be able to
 # pick up all transitive dependencies correctly but compile the .o files independently.
 

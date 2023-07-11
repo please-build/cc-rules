@@ -1,4 +1,4 @@
-subinclude("//build_defs:cc_embed_binary")
+subinclude("//build_defs:cc", "//build_defs:cc_embed_binary")
 
 cc_embed_binary(
     name = "embedded_file_1",
@@ -32,9 +32,9 @@ cc_library(
     name = "embedded_files",
     srcs = ["embedded_files.cc"],
     hdrs = ["embedded_files.h"],
+    visibility = ["//test/..."],
     deps = [
         ":embedded_file_1",
         ":embedded_file_3",
     ],
-    visibility = ["//test/..."],
 )
