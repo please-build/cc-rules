@@ -1,5 +1,7 @@
 # BUILD file for UnitTest++ (github.com/unittest-cpp/unittest-cpp)
 
+subinclude("///cc//build_defs:cc")
+
 os = "Win32" if CONFIG.OS == "windows" else "Posix"
 
 cc_library(
