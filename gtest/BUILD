@@ -2,7 +2,7 @@ subinclude("//build_defs:cc")
 
 github_repo(
     name = "gtest",
-    bazel_compat = True,
+    build_file = "gtest.build",
     repo = "google/googletest",
     revision = "release-1.8.1",
 )
