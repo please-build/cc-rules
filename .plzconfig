@@ -14,6 +14,12 @@ Type = bool
 Inherit = true
 Help = Whether to build with coverage 
 
+[PluginConfig "coverage_tool"]
+ConfigKey = CoverageTool
+DefaultValue = gcov
+Inherit = true
+Help = The path or build target for the C coverage analysis tool
+
 [PluginConfig "cc_tool"]
 ConfigKey = CCTool
 DefaultValue = gcc

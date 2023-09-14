@@ -9,7 +9,7 @@ you can write a cc_library rule specifying e.g. linker_flags = ['-lz'] and not h
 that on every single cc_binary / cc_test that transitively depends on that library.
 """
 
-_COVERAGE_FLAGS = ' -ftest-coverage -fprofile-arcs -fprofile-dir=.'
+_COVERAGE_FLAGS = ' --coverage -fprofile-dir=.'
 # OSX's ld uses --all_load / --noall_load instead of --whole-archive.
 _WHOLE_ARCHIVE = '-all_load' if CONFIG.OS == 'darwin' else '--whole-archive'
 _NO_WHOLE_ARCHIVE = '-noall_load' if CONFIG.OS == 'darwin' else '--no-whole-archive'
@@ -645,8 +645,9 @@ def cc_test(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&cflags&cop
         test_cmd = {
             'opt': test_cmd,
             'dbg': test_cmd,
-            'cover': test_cmd + '; R=$?; cp $GCNO_DIR/*.gcno . && gcov *.gcda && cat *.gcov > test.coverage; exit $R'
+            'cover': test_cmd + '; R=$?; cp $GCNO_DIR/*.gcno . && $TOOLS_COVERAGE *.gcda && cat *.gcov > test.coverage; exit $R'
         }
+        tools['coverage'] = CONFIG.CC.COVERAGE_TOOL
 
     return build_rule(
         name=name,
@@ -742,16 +743,19 @@ def _binary_cmds(c, linker_flags, pkg_config_libs, extra_flags='', shared=False,
     dbg_flags = _binary_build_flags(linker_flags, pkg_config_libs, shared, alwayslink, c=c, dbg=True, static=static)
     opt_flags = _binary_build_flags(linker_flags, pkg_config_libs, shared, alwayslink, c=c, dbg=False, static=static)
     cmds = {
-        'dbg': f'"$TOOL" -o "$OUT" {dbg_flags} {extra_flags}',
-        'opt': f'"$TOOL" -o "$OUT" {opt_flags} {extra_flags}',
+        'dbg': f'"$TOOLS_CC" -o "$OUT" {dbg_flags} {extra_flags}',
+        'opt': f'"$TOOLS_CC" -o "$OUT" {opt_flags} {extra_flags}',
+    }
+    tools = {
+        'cc': (CONFIG.CC.CC_TOOL if c else CONFIG.CC.CPP_TOOL),
     }
     if CONFIG.CC.COVERAGE:
-        cmds['cover'] = f'"$TOOL" -o "$OUT" {dbg_flags} {extra_flags} {_COVERAGE_FLAGS} -lgcov'
+        cmds['cover'] = f'"$TOOLS_CC" -o "$OUT" {dbg_flags} {extra_flags} {_COVERAGE_FLAGS}'
 
     if CONFIG.CC.DSYM_TOOL:
         dbg = cmds['dbg']
         cmds['dbg'] = f'{dbg} && {CONFIG.CC.DSYM_TOOL} $OUT'
-    return cmds, [CONFIG.CC.CC_TOOL if c else CONFIG.CC.CPP_TOOL]
+    return cmds, tools
 
 
 def _library_transitive_labels(c, compiler_flags, pkg_config_libs, pkg_config_cflags, archive=True):
