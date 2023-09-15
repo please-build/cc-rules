@@ -1,3 +1,7 @@
+Version 0.4.0
+-------------
+    * Add a config option to make the coverage tool customisable (#32)
+
 Version 0.3.2
 -------------
     * Fix dsymutil to have no default value (as plz was with its builtin rules)
