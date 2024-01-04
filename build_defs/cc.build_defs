@@ -10,10 +10,6 @@ that on every single cc_binary / cc_test that transitively depends on that libra
 """
 
 _COVERAGE_FLAGS = ' --coverage -fprofile-dir=.'
-# OSX's ld uses --all_load / --noall_load instead of --whole-archive.
-_WHOLE_ARCHIVE = '-all_load' if CONFIG.OS == 'darwin' else '--whole-archive'
-_NO_WHOLE_ARCHIVE = '-noall_load' if CONFIG.OS == 'darwin' else '--no-whole-archive'
-
 
 def cc_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:list=[], out:str='', optional_outs:list=[],
                visibility:list=None, test_only:bool&testonly=False, compiler_flags:list&cflags&copts=[],
@@ -699,7 +695,10 @@ def _binary_build_flags(linker_flags:list, pkg_config_libs:list, shared=False, a
 
     objs = '`find . -name "*.o" -or -name "*.a" | sort`'
     if (not shared) and alwayslink:
-        objs = f'-Wl,{_WHOLE_ARCHIVE} {alwayslink} -Wl,{_NO_WHOLE_ARCHIVE} {objs}'
+        if CONFIG.OS == 'darwin':
+            objs = ''.join([f'-Wl,--force-load={l} ' for l in alwayslink.split()]) + objs
+        else:
+            objs = f'-Wl,--whole-archive {alwayslink} -Wl,--no-whole-archive {objs}'
     if CONFIG.OS != 'darwin':
         # We don't order libraries in a way that is especially useful for the linker, which is
         # nicely solved by --start-group / --end-group. Unfortunately the OSX linker doesn't
@@ -711,7 +710,10 @@ def _binary_build_flags(linker_flags:list, pkg_config_libs:list, shared=False, a
         # but there isn't much alternative.
         linker_flags += ['--build-id=none']
     if shared:
-        objs = f'-shared -Wl,{_WHOLE_ARCHIVE} {objs} -Wl,{_NO_WHOLE_ARCHIVE}'
+        if CONFIG.OS == 'darwin':
+            objs = '-shared ' + ' '.join([f'-Wl,--force-load={o}' for o in objs.split()])
+        else:
+            objs = f'-shared -Wl,--whole-archive {objs} -Wl,--no-whole-archive'
     linker_flags = ' '.join(['-Wl,' + f.replace(" ", ",") for f in linker_flags] + [_default_cflags(c, dbg)])
     if static:
         linker_flags += ' -static'
