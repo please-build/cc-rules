@@ -17,11 +17,10 @@ jobs:
         run: ./pleasew test -i e2e --profile ${{ matrix.compiler }} --log_file plz-out/log/e2e.log
       - name: Archive logs
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
-          name: logs
-          path: |
-            plz-out/log
+          name: logs-${{ matrix.os }}-${{ matrix.compiler }}
+          path: plz-out/log
     strategy:
       fail-fast: false
       matrix:
