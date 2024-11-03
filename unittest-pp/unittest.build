@@ -6,5 +6,6 @@ cc_library(
     name = "unittest_cpp",
     srcs = glob(["UnitTest++/*.cpp", f"UnitTest++/{os}/*.cpp"]),
     hdrs = glob(["UnitTest++/*.h", f"UnitTest++/{os}/*.h"]),
+    compiler_flags = ["-Wno-suggest-override"],
     visibility = ["PUBLIC"],
 )

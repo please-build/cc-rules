@@ -10,6 +10,7 @@ github_repo(
 cc_library(
     name = "main",
     srcs = ["unittest_main.cc"],
+    compiler_flags = ["-Wno-suggest-override"],
     visibility = ["PUBLIC"],
     deps = ["///unittest-pp/unittest_cpp//:unittest_cpp"],
 )
