@@ -105,9 +105,4 @@ Help = The tool to use for assembling assembly code
 [PluginConfig "default_namespace"]
 ConfigKey = DefaultNamespace
 DefaultValue =
-<<<<<<< HEAD
 Help = The default namespace to compile c++ code in
-||||||| parent of cbf14f0 (Add subincludes and fix unit test runners)
-=======
-
->>>>>>> cbf14f0 (Add subincludes and fix unit test runners)
