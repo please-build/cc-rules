@@ -1,4 +1,4 @@
-subinclude("//build_defs:cc_embed_binary")
+subinclude("//build_defs:cc", "//build_defs:cc_embed_binary")
 
 cc_embed_binary(
     name = "embedded_file_1",

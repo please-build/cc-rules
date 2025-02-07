@@ -1,3 +1,5 @@
+subinclude("///cc//build_defs:cc")
+
 github_repo(
     name = "unittest_cpp",
     repo = "unittest-cpp/unittest-cpp",
@@ -7,9 +9,21 @@ github_repo(
     strip_prefix = "unittest-cpp-2.0.0",
 )
 
+
+filegroup(
+    name = "srcs",
+    srcs = ["unittest_main.cc", "///unittest-pp/unittest_cpp//:unittest_cpp_srcs"],
+)
+
+filegroup(
+    name = "hdrs",
+    srcs = ["///unittest-pp/unittest_cpp//:unittest_cpp_hdrs"],
+)
+
 cc_library(
     name = "main",
-    srcs = ["unittest_main.cc"],
+    srcs = [":srcs"],
+    hdrs = [":hdrs"],
     visibility = ["PUBLIC"],
-    deps = ["///unittest-pp/unittest_cpp//:unittest_cpp"],
+    includes = ["."],
 )
