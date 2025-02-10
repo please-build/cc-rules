@@ -4,17 +4,17 @@ on:
   - pull_request
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Install nasm
-        if: ${{ matrix.os == 'macos-latest' }}
+        if: ${{ matrix.os == 'macos' }}
         run: brew install nasm
       - name: Run tests
-        run: ./pleasew test -e e2e --profile ${{ matrix.compiler }} --log_file plz-out/log/test.log
+        run: ./pleasew test -e e2e --profile gha_${{ matrix.os }}_${{ matrix.compiler }} --log_file plz-out/log/test.log
       - name: Run e2e test
-        run: ./pleasew test -i e2e --profile ${{ matrix.compiler }} --log_file plz-out/log/e2e.log
+        run: ./pleasew test -i e2e --profile gha_${{ matrix.os }}_${{ matrix.compiler }} --log_file plz-out/log/e2e.log
       - name: Archive logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -25,8 +25,8 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-latest
-          - macos-latest
+          - ubuntu
+          - macos
         compiler:
           - gcc
           - clang
