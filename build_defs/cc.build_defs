@@ -722,7 +722,7 @@ def _library_cmds(c, compiler_flags, pkg_config_libs, pkg_config_cflags, extra_f
     """Returns the commands needed for a cc_library rule."""
     dbg_flags = _build_flags(compiler_flags, pkg_config_libs, pkg_config_cflags, c=c, dbg=True)
     opt_flags = _build_flags(compiler_flags, pkg_config_libs, pkg_config_cflags, c=c)
-    cmd_template = '$TOOLS_CC -c -I . ${SRCS_SRCS} %s %s'
+    cmd_template = '$TOOLS_CC -c -I . %s %s ${SRCS_SRCS}'
     if archive:
         cmd_template += ' && "$TOOLS_ARCAT" ar -r && "$TOOLS_AR" s "$OUT"'
     cmds = {
