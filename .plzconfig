@@ -16,93 +16,93 @@ ConfigKey = Coverage
 DefaultValue = true
 Type = bool
 Inherit = true
-Help = Whether to build with coverage 
+Help = If true, generates a "cover" build configuration for c_test and cc_test that outputs coverage analysis alongside test results.
 
 [PluginConfig "coverage_tool"]
 ConfigKey = CoverageTool
 DefaultValue = gcov
 Inherit = true
-Help = The path or build target for the C coverage analysis tool
+Help = The path or build target for the C coverage analysis tool.
 
 [PluginConfig "cc_tool"]
 ConfigKey = CCTool
 DefaultValue = gcc
 Inherit = true
-Help = The path or build label for the C compiler
+Help = The path or build target for the C compiler tool.
 
 [PluginConfig "cpp_tool"]
 ConfigKey = CPPTool
 DefaultValue = g++
 Inherit = true
-Help = The path or build label for the C++ compiler
+Help = The path or build target for the C++ compiler tool.
 
 [PluginConfig "ld_tool"]
 ConfigKey = LDTool
 DefaultValue = ld
 Inherit = true
-Hel- = The path or build label for the linker
+Help = The path or build target for the linker tool.
 
 [PluginConfig "ar_tool"]
 ConfigKey = ARTool
 DefaultValue = ar
 Inherit = true
-Hel- = The path or build label for the archiver
+Help = The path or build target for the archiver tool.
 
 [PluginConfig "default_opt_cflags"]
 ConfigKey = DefaultOptCFlags
 DefaultValue = --std=c99 -O3 -pipe -DNDEBUG -Wall -Werror
 Inherit = true
-Help = The default c compiler flags when compiling for release 
+Help = The default flags to pass to the C compiler when compiling a release build.
 
 [PluginConfig "default_dbg_cflags"]
 ConfigKey = DefaultDbgCFlags
 DefaultValue = --std=c99 -g3 -pipe -DDEBUG -Wall -Werror
 Inherit = true
-Help = The default c compiler flags when compiling for debug
+Help = The default flags to pass to the C compiler when compiling a debug build.
 
 [PluginConfig "default_opt_cppflags"]
 ConfigKey = DefaultOptCppFlags
 DefaultValue = --std=c++11 -O3 -pipe -DNDEBUG -Wall -Werror
 Inherit = true
-Help = The default c++ compiler flags when compiling for release 
+Help = The default flags to pass to the C++ compiler when compiling a release build.
 
 [PluginConfig "default_dbg_cppflags"]
 ConfigKey = DefaultDbgCppFlags
 DefaultValue = --std=c++11 -g3 -pipe -DDEBUG -Wall -Werror
 Inherit = true
-Help = The default c++ compiler flags when compiling for debug
+Help = The default flags to pass to the C++ compiler when compiling a debug build.
 
 [PluginConfig "default_ldflags"]
 ConfigKey = DefaultLdFlags
 DefaultValue = -lpthread -ldl
 Inherit = true
-Help = The default set of flags to apply when linking 
+Help = The default flags to pass to the linker.
 
 [PluginConfig "pkg_config_path"]
 ConfigKey = PkgConfigPath
 DefaultValue =
 Inherit = true
-Help = A path to the systems package configs 
+Help = A path in which pkg-config should search for .pc files. This is used whenever the pkg_config_libs or pkg_config_cflags parameters are passed to the plugin's build rules.
 
 [PluginConfig "test_main"]
 ConfigKey = TestMain
 Inherit = true
 DefaultValue = //unittest-pp:main
-Help = A build label with c/c++ source code to use run tests. 
+Help = A build target for the source code that defines the entry point for C++ tests (see the cc_test build rule).
 
 [PluginConfig "dsym_tool"]
 ConfigKey = DsymTool
 Inherit = true
 DefaultValue =
-Help = Set this to dsymutil or equivalent on MacOS to use this tool to generate xcode symbol information for debug builds.
+Help = The path or build target for dsymutil. If set, a .dSYM file containing symbol information is additionally outputted when compiling a debug build.
 
 [PluginConfig "asm_tool"]
 ConfigKey = AsmTool
 DefaultValue = nasm
 Inherit = true
-Help = The tool to use for assembling assembly code 
+Help = The path or build target for the assembler tool.
 
 [PluginConfig "default_namespace"]
 ConfigKey = DefaultNamespace
 DefaultValue =
-Help = The default namespace to compile c++ code in
+Help = The default namespace in which to compile C++ code.
