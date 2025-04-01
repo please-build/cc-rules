@@ -684,7 +684,7 @@ def _default_cflags(c, dbg):
 
 def _build_flags(compiler_flags:list, pkg_config_libs:list, pkg_config_cflags:list, defines=None, c=False, dbg=False):
     """Builds flags that we'll pass to the compiler invocation."""
-    compiler_flags = [_default_cflags(c, dbg), '-fPIC'] + compiler_flags  # N.B. order is important!
+    compiler_flags = [_default_cflags(c, dbg)] + compiler_flags
     if defines:
         compiler_flags += ['-D' + define for define in defines]
 
