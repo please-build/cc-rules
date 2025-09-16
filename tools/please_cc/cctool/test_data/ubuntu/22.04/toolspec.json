@@ -1,0 +1,24 @@
+# These packages should all be installed from the official Ubuntu Jammy repositories:
+# gcc-{9,10,11,12} clang-{11,12,13,14,15} lld-{11,12,13,14,15} binutils
+{
+    "compilers": {
+        "/usr/bin/gcc-9": {"id": "gcc-9", "name": "GCC 9.5.0"},
+        "/usr/bin/gcc-10": {"id": "gcc-10", "name": "GCC 10.5.0"},
+        "/usr/bin/gcc-11": {"id": "gcc-11", "name": "GCC 11.4.0"},
+        "/usr/bin/gcc-12": {"id": "gcc-12", "name": "GCC 12.3.0"},
+        "/usr/bin/clang-11": {"id": "clang-11", "name": "Clang 11.1.0"},
+        "/usr/bin/clang-12": {"id": "clang-12", "name": "Clang 12.0.1"},
+        "/usr/bin/clang-13": {"id": "clang-13", "name": "Clang 13.0.1"},
+        "/usr/bin/clang-14": {"id": "clang-14", "name": "Clang 14.0.0"},
+        "/usr/bin/clang-15": {"id": "clang-15", "name": "Clang 15.0.7"}
+    },
+    "linkers": {
+        "/usr/bin/ld": {"id": "gnuld", "name": "GNU ld 2.38"},
+        "/usr/bin/gold": {"id": "gold", "name": "GNU gold 1.16"},
+        "/usr/bin/ld.lld-11": {"id": "lld-11", "name": "LLD 11.1.0"},
+        "/usr/bin/ld.lld-12": {"id": "lld-12", "name": "LLD 12.0.1"},
+        "/usr/bin/ld.lld-13": {"id": "lld-13", "name": "LLD 13.0.1"},
+        "/usr/bin/ld.lld-14": {"id": "lld-14", "name": "LLD 14.0.0"},
+        "/usr/bin/ld.lld-15": {"id": "lld-15", "name": "LLD 15.0.7"}
+    }
+}

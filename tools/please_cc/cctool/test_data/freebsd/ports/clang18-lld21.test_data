@@ -1,0 +1,14 @@
+#expected: cc="Clang 18.1.8" ld="LLD 21.1.1"
+#stdout:
+LLD 21.1.1 (compatible with GNU linkers)
+
+#stderr:
+clang version 18.1.8
+Target: x86_64-portbld-freebsd14.2
+Thread model: posix
+InstalledDir: /usr/local/llvm18/bin
+ "/tmp/ld.2830335935/ld" --eh-frame-hdr -dynamic-linker /libexec/ld-elf.so.1 --hash-style=both --enable-new-dtags -o a.out /usr/lib/crt1.o /usr/lib/crti.o /usr/lib/crtbegin.o -L/usr/local/llvm18/lib/clang/18/lib/x86_64-portbld-freebsd14.2 -L/usr/lib -v -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/crtend.o /usr/lib/crtn.o
+ld.lld: error: undefined symbol: main
+>>> referenced by crt1_s.S:66 (/usr/src/lib/csu/amd64/crt1_s.S:66)
+>>>               /usr/lib/crt1.o:(_start)
+clang: error: linker command failed with exit code 1 (use -v to see invocation)

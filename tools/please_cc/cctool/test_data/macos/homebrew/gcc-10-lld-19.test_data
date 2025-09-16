@@ -1,0 +1,164 @@
+#expected: cc="GCC 10.5.0" ld="LLD 19.1.7"
+#stdout:
+Homebrew LLD 19.1.7 (compatible with GNU linkers)
+
+#stderr:
+Using built-in specs.
+COLLECT_GCC=/usr/local/opt/gcc@10/bin/gcc-10
+COLLECT_LTO_WRAPPER=/usr/local/Cellar/gcc@10/10.5.0/libexec/gcc/x86_64-apple-darwin22/10.5.0/lto-wrapper
+Target: x86_64-apple-darwin22
+Configured with: ../configure --prefix=/usr/local/Cellar/gcc@10/10.5.0 --libdir=/usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10 --disable-nls --enable-checking=release --enable-languages=c,c++,objc,obj-c++,fortran --program-suffix=-10 --with-gmp=/usr/local/opt/gmp --with-mpfr=/usr/local/opt/mpfr --with-mpc=/usr/local/opt/libmpc --with-isl=/usr/local/opt/isl --with-pkgversion='Homebrew GCC 10.5.0' --with-bugurl=https://github.com/Homebrew/homebrew-core/issues --build=x86_64-apple-darwin22 --with-system-zlib --disable-multilib --with-native-system-header-dir=/usr/include --with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 10.5.0 (Homebrew GCC 10.5.0) 
+COMPILER_PATH=/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.3879441205/:/usr/local/Cellar/gcc@10/10.5.0/libexec/gcc/x86_64-apple-darwin22/10.5.0/:/usr/local/Cellar/gcc@10/10.5.0/libexec/gcc/x86_64-apple-darwin22/10.5.0/:/usr/local/Cellar/gcc@10/10.5.0/libexec/gcc/x86_64-apple-darwin22/:/usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/:/usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/
+LIBRARY_PATH=/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.3879441205/:/usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/:/usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/../../../
+COLLECT_GCC_OPTIONS='-B' '/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.3879441205' '-v' '-mmacosx-version-min=13.0.0' '-asm_macosx_version_min=13.0' '-nodefaultexport' '-mtune=core2'
+ /usr/local/Cellar/gcc@10/10.5.0/libexec/gcc/x86_64-apple-darwin22/10.5.0/collect2 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk/ -dynamic -arch x86_64 -macosx_version_min 13.0.0 -o a.out -L/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.3879441205 -L/usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0 -L/usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/../../.. -v -lemutls_w -lgcc -lSystem -no_compact_unwind
+collect2 version 10.5.0
+/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.3879441205/ld -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk/ -dynamic -arch x86_64 -macosx_version_min 13.0.0 -o a.out -L/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.3879441205 -L/usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0 -L/usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/../../.. -v -lemutls_w -lgcc -lSystem -no_compact_unwind
+ld: error: unknown argument '-syslibroot'
+ld: error: unknown argument '-dynamic', did you mean '-Bdynamic'
+ld: error: unknown argument '-arch'
+ld: error: unknown argument '-no_compact_unwind'
+ld: error: unknown emulation: acosx_version_min
+ld: error: cannot open /Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk/: Is a directory
+ld: error: cannot open x86_64: No such file or directory
+ld: error: cannot open 13.0.0: No such file or directory
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libemutls_w.a: archive member 'emutls_s.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_muldi3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_negdi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_lshrdi3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_ashldi3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_ashrdi3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_cmpdi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_ucmpdi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_clear_cache.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_trampoline.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '__main.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_absvsi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_absvdi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_addvsi3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_addvdi3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_subvsi3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_subvdi3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_mulvsi3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_mulvdi3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_negvsi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_negvdi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_ctors.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_ffssi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_ffsdi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_clz.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_clzsi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_clzdi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_ctzsi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_ctzdi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_popcount_tab.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_popcountsi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_popcountdi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_paritysi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_paritydi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_powisf2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_powidf2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_powixf2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_powitf2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_mulhc3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_mulsc3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_muldc3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_mulxc3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_multc3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_divhc3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_divsc3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_divdc3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_divxc3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_divtc3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_bswapsi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_bswapdi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_clrsbsi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_clrsbdi2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_eprintf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '__gcc_bcmp.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixunssfsi.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixunsdfsi.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixunsxfsi.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixsfdi.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixdfdi.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixxfdi.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixunssfdi.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixunsdfdi.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixunsxfdi.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_floatdisf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_floatdidf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_floatdixf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_floatundisf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_floatundidf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_floatundixf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixsfti.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixdfti.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixxfti.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixtfti.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixunssfti.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixunsdfti.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixunsxfti.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_fixunstfti.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_floattisf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_floattidf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_floattixf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_floattitf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_floatuntisf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_floatuntidf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_floatuntixf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_floatuntitf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_divdi3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_moddi3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_divmoddi4.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_udivdi3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_umoddi3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_udivmoddi4.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member '_udiv_w_sdiv.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'darwin-64.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'cpuinfo.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'sfp-exceptions.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'addtf3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'divtf3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'eqtf2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'getf2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'letf2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'multf3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'negtf2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'subtf3.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'unordtf2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'fixtfsi.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'fixunstfsi.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'floatsitf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'floatunsitf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'fixtfdi.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'fixunstfdi.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'floatditf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'floatunditf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'fixtfti.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'fixunstfti.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'floattitf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'floatuntitf.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'extendsftf2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'extenddftf2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'extendxftf2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'trunctfsf2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'trunctfdf2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'trunctfxf2.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'enable-execute-stack.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'avx_savms64.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'avx_resms64.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'avx_resms64x.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'avx_savms64f.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'avx_resms64f.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'avx_resms64fx.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'sse_savms64.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'sse_resms64.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'sse_resms64x.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'sse_savms64f.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'sse_resms64f.o' is neither ET_REL nor LLVM bitcode
+ld: warning: /usr/local/Cellar/gcc@10/10.5.0/lib/gcc/10/gcc/x86_64-apple-darwin22/10.5.0/libgcc.a: archive member 'sse_resms64fx.o' is neither ET_REL nor LLVM bitcode
+ld: error: unable to find library -lSystem
+collect2: error: ld returned 1 exit status

@@ -1,0 +1,32 @@
+#expected: cc="GCC 9.5.0" ld="LLD 14.0.6"
+#stdout:
+Homebrew LLD 14.0.6 (compatible with GNU linkers)
+
+#stderr:
+Using built-in specs.
+COLLECT_GCC=/usr/local/opt/gcc@9/bin/gcc-9
+COLLECT_LTO_WRAPPER=/usr/local/Cellar/gcc@9/9.5.0/libexec/gcc/x86_64-apple-darwin21/9.5.0/lto-wrapper
+Target: x86_64-apple-darwin21
+Configured with: ../configure --prefix=/usr/local/Cellar/gcc@9/9.5.0 --libdir=/usr/local/Cellar/gcc@9/9.5.0/lib/gcc/9 --disable-nls --enable-checking=release --enable-languages=c,c++,objc,obj-c++,fortran --program-suffix=-9 --with-gmp=/usr/local/opt/gmp --with-mpfr=/usr/local/opt/mpfr --with-mpc=/usr/local/opt/libmpc --with-isl=/usr/local/opt/isl --with-pkgversion='Homebrew GCC 9.5.0' --with-bugurl=https://github.com/Homebrew/homebrew-core/issues --build=x86_64-apple-darwin21 --with-system-zlib --disable-multilib --without-build-config --with-native-system-header-dir=/usr/include --with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX12.sdk
+Thread model: posix
+gcc version 9.5.0 (Homebrew GCC 9.5.0) 
+COMPILER_PATH=/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.2072605387/:/usr/local/Cellar/gcc@9/9.5.0/libexec/gcc/x86_64-apple-darwin21/9.5.0/:/usr/local/Cellar/gcc@9/9.5.0/libexec/gcc/x86_64-apple-darwin21/9.5.0/:/usr/local/Cellar/gcc@9/9.5.0/libexec/gcc/x86_64-apple-darwin21/:/usr/local/Cellar/gcc@9/9.5.0/lib/gcc/9/gcc/x86_64-apple-darwin21/9.5.0/:/usr/local/Cellar/gcc@9/9.5.0/lib/gcc/9/gcc/x86_64-apple-darwin21/
+LIBRARY_PATH=/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.2072605387/:/usr/local/Cellar/gcc@9/9.5.0/lib/gcc/9/gcc/x86_64-apple-darwin21/9.5.0/:/usr/local/Cellar/gcc@9/9.5.0/lib/gcc/9/gcc/x86_64-apple-darwin21/9.5.0/../../../
+COLLECT_GCC_OPTIONS='-B' '/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.2072605387' '-v' '-mmacosx-version-min=11.5.0' '-asm_macosx_version_min=11.5' '-mtune=core2'
+ /usr/local/Cellar/gcc@9/9.5.0/libexec/gcc/x86_64-apple-darwin21/9.5.0/collect2 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.sdk/ -dynamic -arch x86_64 -macosx_version_min 11.5.0 -weak_reference_mismatches non-weak -o a.out -L/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.2072605387 -L/usr/local/Cellar/gcc@9/9.5.0/lib/gcc/9/gcc/x86_64-apple-darwin21/9.5.0 -L/usr/local/Cellar/gcc@9/9.5.0/lib/gcc/9/gcc/x86_64-apple-darwin21/9.5.0/../../.. -v -lSystem -lgcc_ext.10.5 -lgcc -lSystem -no_compact_unwind -v
+collect2 version 9.5.0
+/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.2072605387/ld -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.sdk/ -dynamic -arch x86_64 -macosx_version_min 11.5.0 -weak_reference_mismatches non-weak -o a.out -L/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.2072605387 -L/usr/local/Cellar/gcc@9/9.5.0/lib/gcc/9/gcc/x86_64-apple-darwin21/9.5.0 -L/usr/local/Cellar/gcc@9/9.5.0/lib/gcc/9/gcc/x86_64-apple-darwin21/9.5.0/../../.. -v -lSystem -lgcc_ext.10.5 -lgcc -lSystem -no_compact_unwind -v
+ld: error: unknown argument '-syslibroot'
+ld: error: unknown argument '-dynamic', did you mean '-Bdynamic'
+ld: error: unknown argument '-arch'
+ld: error: unknown argument '-weak_reference_mismatches'
+ld: error: unknown argument '-no_compact_unwind'
+ld: error: unknown emulation: acosx_version_min
+ld: error: cannot open /Library/Developer/CommandLineTools/SDKs/MacOSX12.sdk/: Is a directory
+ld: error: cannot open x86_64: No such file or directory
+ld: error: cannot open 11.5.0: No such file or directory
+ld: error: cannot open non-weak: No such file or directory
+ld: error: unable to find library -lSystem
+ld: error: unable to find library -lgcc_ext.10.5
+ld: error: unable to find library -lSystem
+collect2: error: ld returned 1 exit status

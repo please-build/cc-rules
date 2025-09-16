@@ -1,0 +1,5 @@
+#expected: ld="LLD 14.0.6"
+#stdout:
+LLD 14.0.6 (compatible with GNU linkers)
+
+#stderr:

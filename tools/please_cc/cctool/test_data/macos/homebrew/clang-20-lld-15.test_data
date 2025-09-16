@@ -1,0 +1,27 @@
+#expected: cc="Clang 20.1.8" ld="LLD 15.0.7"
+#stdout:
+Homebrew LLD 15.0.7 (compatible with GNU linkers)
+
+#stderr:
+Homebrew clang version 20.1.8
+Target: x86_64-apple-darwin22.6.0
+Thread model: posix
+InstalledDir: /usr/local/Cellar/llvm@20/20.1.8/bin
+Configuration file: /usr/local/etc/clang/x86_64-apple-darwin22.cfg
+System configuration file directory: /usr/local/etc/clang
+User configuration file directory: /Users/runner/.config/clang
+ "/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.4096504608/ld" -demangle -lto_library /usr/local/Cellar/llvm@20/20.1.8/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 13.0.0 13.3 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk -mllvm -enable-linkonceodr-outlining -o a.out -v -lSystem /usr/local/Cellar/llvm@20/20.1.8/lib/clang/20/lib/darwin/libclang_rt.osx.a
+ld: error: unknown argument '-dynamic', did you mean '-Bdynamic'
+ld: error: unknown argument '-arch'
+ld: error: unknown argument '-platform_version'
+ld: error: unknown argument '-syslibroot'
+ld: error: unable to find library -lto_library
+ld: error: /usr/local/Cellar/llvm@20/20.1.8/lib/libLTO.dylib: unknown file type
+ld: error: cannot open x86_64: No such file or directory
+ld: error: cannot open macos: No such file or directory
+ld: error: cannot open 13.0.0: No such file or directory
+ld: error: cannot open 13.3: No such file or directory
+ld: error: cannot open /Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk: Is a directory
+ld: error: unable to find library -lSystem
+ld: error: /usr/local/Cellar/llvm@20/20.1.8/lib/clang/20/lib/darwin/libclang_rt.osx.a: unknown file type
+clang-20: error: linker command failed with exit code 1 (use -v to see invocation)

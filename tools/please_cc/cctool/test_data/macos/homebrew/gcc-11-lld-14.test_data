@@ -1,0 +1,31 @@
+#expected: cc="GCC 11.5.0" ld="LLD 14.0.6"
+#stdout:
+Homebrew LLD 14.0.6 (compatible with GNU linkers)
+
+#stderr:
+Using built-in specs.
+COLLECT_GCC=/usr/local/opt/gcc@11/bin/gcc-11
+COLLECT_LTO_WRAPPER=/usr/local/Cellar/gcc@11/11.5.0/bin/../libexec/gcc/x86_64-apple-darwin22/11/lto-wrapper
+Target: x86_64-apple-darwin22
+Configured with: ../configure --prefix=/usr/local/opt/gcc@11 --libdir=/usr/local/opt/gcc@11/lib/gcc/11 --disable-nls --enable-checking=release --with-gcc-major-version-only --enable-languages=c,c++,objc,obj-c++,fortran,d --program-suffix=-11 --with-gmp=/usr/local/opt/gmp --with-mpfr=/usr/local/opt/mpfr --with-mpc=/usr/local/opt/libmpc --with-isl=/usr/local/opt/isl --with-zstd=/usr/local/opt/zstd --with-pkgversion='Homebrew GCC 11.5.0' --with-bugurl=https://github.com/Homebrew/homebrew-core/issues --enable-libphobos --build=x86_64-apple-darwin22 --with-system-zlib --with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk --with-ld=/Library/Developer/CommandLineTools/usr/bin/ld-classic
+Thread model: posix
+Supported LTO compression algorithms: zlib zstd
+gcc version 11.5.0 (Homebrew GCC 11.5.0) 
+COMPILER_PATH=/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.3790113943/:/usr/local/Cellar/gcc@11/11.5.0/bin/../libexec/gcc/x86_64-apple-darwin22/11/:/usr/local/Cellar/gcc@11/11.5.0/bin/../libexec/gcc/
+LIBRARY_PATH=/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.3790113943/:/usr/local/Cellar/gcc@11/11.5.0/bin/../lib/gcc/11/gcc/x86_64-apple-darwin22/11/:/usr/local/Cellar/gcc@11/11.5.0/bin/../lib/gcc/11/gcc/:/usr/local/Cellar/gcc@11/11.5.0/bin/../lib/gcc/11/gcc/x86_64-apple-darwin22/11/../../../
+COLLECT_GCC_OPTIONS='-B' '/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.3790113943' '-v' '-mmacosx-version-min=13.0.0' '-asm_macosx_version_min=13.0' '-nodefaultexport' '-mtune=core2' '-dumpdir' 'a.'
+ /usr/local/Cellar/gcc@11/11.5.0/bin/../libexec/gcc/x86_64-apple-darwin22/11/collect2 -demangle -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk/ -dynamic -arch x86_64 -platform_version macos 13.0.0 0.0 -o a.out -L/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.3790113943 -L/usr/local/Cellar/gcc@11/11.5.0/bin/../lib/gcc/11/gcc/x86_64-apple-darwin22/11 -L/usr/local/Cellar/gcc@11/11.5.0/bin/../lib/gcc/11/gcc -L/usr/local/Cellar/gcc@11/11.5.0/bin/../lib/gcc/11/gcc/x86_64-apple-darwin22/11/../../.. -lemutls_w -lheapt_w -v -lgcc -lSystem -no_compact_unwind -rpath @loader_path -rpath /private/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.3790113943 -rpath /usr/local/Cellar/gcc@11/11.5.0/lib/gcc/11/gcc/x86_64-apple-darwin22/11 -rpath /usr/local/Cellar/gcc@11/11.5.0/lib/gcc/11/gcc -rpath /usr/local/Cellar/gcc@11/11.5.0/lib/gcc/11
+collect2 version 11.5.0
+/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.3790113943/ld -demangle -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk/ -dynamic -arch x86_64 -platform_version macos 13.0.0 0.0 -o a.out -L/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.3790113943 -L/usr/local/Cellar/gcc@11/11.5.0/bin/../lib/gcc/11/gcc/x86_64-apple-darwin22/11 -L/usr/local/Cellar/gcc@11/11.5.0/bin/../lib/gcc/11/gcc -L/usr/local/Cellar/gcc@11/11.5.0/bin/../lib/gcc/11/gcc/x86_64-apple-darwin22/11/../../.. -lemutls_w -lheapt_w -v -lgcc -lSystem -no_compact_unwind -rpath @loader_path -rpath /private/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.3790113943 -rpath /usr/local/Cellar/gcc@11/11.5.0/lib/gcc/11/gcc/x86_64-apple-darwin22/11 -rpath /usr/local/Cellar/gcc@11/11.5.0/lib/gcc/11/gcc -rpath /usr/local/Cellar/gcc@11/11.5.0/lib/gcc/11
+ld: error: unknown argument '-syslibroot'
+ld: error: unknown argument '-dynamic', did you mean '-Bdynamic'
+ld: error: unknown argument '-arch'
+ld: error: unknown argument '-platform_version'
+ld: error: unknown argument '-no_compact_unwind'
+ld: error: cannot open /Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk/: Is a directory
+ld: error: cannot open x86_64: No such file or directory
+ld: error: cannot open macos: No such file or directory
+ld: error: cannot open 13.0.0: No such file or directory
+ld: error: cannot open 0.0: No such file or directory
+ld: error: unable to find library -lSystem
+collect2: error: ld returned 1 exit status
