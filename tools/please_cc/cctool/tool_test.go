@@ -75,32 +75,36 @@ func TestFilterLinkerArgs(t *testing.T) {
 
 func TestParseOutput(t *testing.T) {
 	err := filepath.WalkDir(testDataPath, func(path string, info fs.DirEntry, err error) error {
-		if info.Type().IsRegular() && strings.HasSuffix(path, ".test_data") {
-			relPath := strings.TrimPrefix(path, testDataPath+"/")
-			t.Run(strings.TrimSuffix(relPath, ".test_data"), func(t *testing.T) {
-				testData, err := os.ReadFile(path)
-				if err != nil {
-					panic("failed to read "+path)
-				}
-				test := regexpTestData.FindSubmatch(testData)
-				if test == nil {
-					panic("malformed .test_data file: "+path)
-				}
-				expectedCompiler := string(test[regexpTestData.SubexpIndex("cc")])
-				expectedLinker := string(test[regexpTestData.SubexpIndex("ld")])
-				stdout := test[regexpTestData.SubexpIndex("stdout")]
-				stderr := test[regexpTestData.SubexpIndex("stderr")]
-				actualCompiler, actualLinker := parseOutput(stdout, stderr)
-				if expectedCompiler == "" {
-					assert.Nil(t, actualCompiler, "Compiler is nil")
-				} else {
-					assert.NotNil(t, actualCompiler, "Compiler is not nil")
-					assert.Equal(t, expectedCompiler, actualCompiler.String(), "Compiler correctly identified")
-				}
-				assert.NotNil(t, actualLinker, "Linker is not nil")
-				assert.Equal(t, expectedLinker, actualLinker.String(), "Linker correctly identified")
-			})
+		if err != nil {
+			return err
 		}
+		if !info.Type().IsRegular() || !strings.HasSuffix(path, ".test_data") {
+			return nil
+		}
+		relPath := strings.TrimPrefix(path, testDataPath+"/")
+		t.Run(strings.TrimSuffix(relPath, ".test_data"), func(t *testing.T) {
+			testData, err := os.ReadFile(path)
+			if err != nil {
+				panic("failed to read "+path)
+			}
+			test := regexpTestData.FindSubmatch(testData)
+			if test == nil {
+				panic("malformed .test_data file: "+path)
+			}
+			expectedCompiler := string(test[regexpTestData.SubexpIndex("cc")])
+			expectedLinker := string(test[regexpTestData.SubexpIndex("ld")])
+			stdout := test[regexpTestData.SubexpIndex("stdout")]
+			stderr := test[regexpTestData.SubexpIndex("stderr")]
+			actualCompiler, actualLinker := parseOutput(stdout, stderr)
+			if expectedCompiler == "" {
+				assert.Nil(t, actualCompiler, "Compiler is nil")
+			} else {
+				assert.NotNil(t, actualCompiler, "Compiler is not nil")
+				assert.Equal(t, expectedCompiler, actualCompiler.String(), "Compiler correctly identified")
+			}
+			assert.NotNil(t, actualLinker, "Linker is not nil")
+			assert.Equal(t, expectedLinker, actualLinker.String(), "Linker correctly identified")
+		})
 		return nil
 	})
 	assert.NoError(t, err, testDataPath+" walked successfully")
