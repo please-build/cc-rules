@@ -214,7 +214,7 @@ func identify(typ Type, path string, args []string) (*Tool, *Tool, error) {
 // - `-fuse-ld=[PATH]` (Clang): use the linker at `PATH`; deprecated in favour of `--ld-path`.
 // - `--ld-path=[PATH]` (Clang): use the linker at `PATH`.
 //
-// [Linker command line options]: https://github.com/rust-lang/rust/issues/97402
+// [linker command line options]: https://github.com/rust-lang/rust/issues/97402
 func filterLinkerArgs(args []string) []string {
 	linkerArgs := make([]string, 0)
 	nextArg := false

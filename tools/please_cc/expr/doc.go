@@ -44,5 +44,5 @@
 // Operators earlier in the list above bind more tightly than those later in the list. This order of precedence can be
 // overridden with the use of parentheses (`()`).
 //
-// [Dot-decimal notation]: https://en.wikipedia.org/wiki/Dot-decimal_notation#Version_numbers
+// [dot-decimal notation]: https://en.wikipedia.org/wiki/Dot-decimal_notation#Version_numbers
 package expr
