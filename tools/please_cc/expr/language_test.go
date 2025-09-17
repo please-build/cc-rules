@@ -972,8 +972,8 @@ func TestEvaluate(t *testing.T) {
 				Expected: []string{"y"},
 			},
 			"&& over ||": {
-				Expr:     "y || a && z ? 'y' : 'n'",
-				Expected: []string{"n"},
+				Expr:     "a || b && z ? 'y' : 'n'",
+				Expected: []string{"y"},
 			},
 			"|| over ==": {
 				Expr:     "a == 1.2.3 || z == 5 ? 'y' : 'n'",
@@ -992,7 +992,7 @@ func TestEvaluate(t *testing.T) {
 				Expected: []string{"n"},
 			},
 			"Parentheses give || precedence over &&": {
-				Expr:     "(y || a) && z ? 'y' : 'n'",
+				Expr:     "(a || b) && z ? 'y' : 'n'",
 				Expected: []string{"n"},
 			},
 		},
