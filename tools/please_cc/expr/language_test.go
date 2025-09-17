@@ -773,8 +773,12 @@ func TestEvaluate(t *testing.T) {
 				Expr: "z || '2' ? 'y' : 'n'",
 				Err:  "right-hand operand to || must be a boolean expression or a version",
 			},
-			"Both operands are versions": {
-				Expr:     "0 || 1 ? 'y' : 'n'",
+			"Both operands are zero versions": {
+				Expr:     "0 || 0 ? 'y' : 'n'",
+				Expected: []string{"y"},
+			},
+			"Both operands are non-zero versions": {
+				Expr:     "1 || 2 ? 'y' : 'n'",
 				Expected: []string{"y"},
 			},
 			"Left-hand operand is bound identifier": {
@@ -863,8 +867,12 @@ func TestEvaluate(t *testing.T) {
 				Expr: "z && '2' ? 'y' : 'n'",
 				Err:  "right-hand operand to && must be a boolean expression or a version",
 			},
-			"Both operands are versions": {
-				Expr:     "0 && 1 ? 'y' : 'n'",
+			"Both operands are zero versions": {
+				Expr:     "0 && 0 ? 'y' : 'n'",
+				Expected: []string{"y"},
+			},
+			"Both operands are non-zero versions": {
+				Expr:     "1 && 2 ? 'y' : 'n'",
 				Expected: []string{"y"},
 			},
 			"Left-hand operand is bound identifier": {
@@ -929,6 +937,10 @@ func TestEvaluate(t *testing.T) {
 			},
 		},
 		"? operator": {
+			"Zero version as condition": {
+				Expr:     "0 ? 'y' : 'n'",
+				Expected: []string{"y"},
+			},
 			"Implicit false branch evaluates to empty array": {
 				Expr:     "0 > 1 ? 'y'",
 				Expected: []string{},
