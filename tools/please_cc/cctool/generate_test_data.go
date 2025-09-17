@@ -33,14 +33,44 @@ var opts struct {
 	} `positional-args:"true"`
 }
 
+// toolspec describes the C/C++ compilers and linkers from which test cases should be generated.
+//
+// generate_test_data runs each compiler multiple times, configuring it to invoke a different linker each time; it then
+// runs each linker independently of a compiler. The total number of test cases produced from a single toolspec is
+// therefore (len(toolspec.Compilers) * len(toolspec.Linkers)) + len(toolspec.Linkers), assuming no linkers are excluded
+// for any compilers (see toolspec.Compilers.Exclude).
 var toolspec struct {
+	// Compilers identifies the C/C++ compilers for which output should be collected for test cases. Keys are paths to
+	// executable files that invoke compilers; they may or may not be wrappers for other executables.
 	Compilers map[string]struct {
-		ID      string   `json:"id"`
-		Name    string   `json:"name"`
+		// ID is a string, unique to this toolspec, that identifies this compiler. The string forms part of the names of the
+		// test files involving this compiler that generate_test_data writes.
+		ID string `json:"id"`
+
+		// Name is the compiler name and version that Tool.String is expected to return after the compiler's output has been
+		// parsed.
+		Name string `json:"name"`
+
+		// Exclude is a list of IDs of linkers for which test cases should not be generated in combination with this compiler.
+		//
+		// generate_test_data combines linkers with compilers by creating an "ld" symlink that points to the linker in a
+		// temporary directory, then prepending the path to the temporary directory to the compiler's search path. This is the
+		// only universally-supported method of invoking an arbitrary linker among the compilers that Tool supports, but it
+		// relies on the compiler being configured to use the relative path "ld" as its default compiler at build time - if
+		// this is not the case, the compiler may invoke a different linker than the one generate_test_data expects. Exclude
+		// can be defined in these circumstances to avoid generating bogus test cases.
 		Exclude []string `json:"exclude"`
 	} `json:"compilers"`
+
+	// Linkers identifies the linkers for which output should be collected for test cases. Keys are paths to executable
+	// files that invoke linkers; they may or may not be wrappers for other executables.
 	Linkers map[string]struct {
-		ID   string `json:"id"`
+		// ID is a string, unique to this toolspec, that identifies this linker. The string forms part of the names of the
+		// test files involving this linker that generate_test_data writes.
+		ID string `json:"id"`
+
+		// Name is the linker name and version that Tool.String is expected to return after the linker's output has been
+		// parsed.
 		Name string `json:"name"`
 	} `json:"linkers"`
 }
