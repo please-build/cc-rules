@@ -145,9 +145,14 @@ func run(compiler, linker, expected, testPath string) error {
 		if err := os.Symlink(linker, ldLink); err != nil {
 			return fmt.Errorf("symlink %s to %s: %v", linker, ldLink, err)
 		}
+		// -B prepends the temporary directory to the compiler's search path, so it finds the linker at "ld" in that
+		// directory. -v causes the compiler to identify itself on one of the standard streams; -Wl,-v passes -v through to
+		// the linker, causing it to do the same.
 		args = []string{"-B", linkerDir, "-v", "-Wl,-v"}
 	} else {
 		tool = linker
+		// We're invoking the linter directly, so there's no need for the complexity above here - just ask it to identify
+		// itself on one of the standard streams.
 		args = []string{"-v"}
 	}
 
