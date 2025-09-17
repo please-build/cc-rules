@@ -76,7 +76,7 @@ func Evaluate(expr string, env any) ([]string, error) {
 		return nil, ErrInvalidReturnType
 	} else if tout.Kind() == reflect.String {
 		return []string{out.(string)}, nil
-	} else if tout.Kind() == reflect.Slice && reflect.TypeOf(out).Elem().Kind() == reflect.String {
+	} else if tout.Kind() == reflect.Slice && tout.Elem().Kind() == reflect.String {
 		return out.([]string), nil
 	}
 	return nil, ErrInvalidReturnType
