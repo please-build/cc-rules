@@ -107,7 +107,7 @@ func main() {
 			if err := run(
 				compilerPath,
 				linkerPath,
-				fmt.Sprintf("cc=\"%s\" ld=\"%s\"", compilerData.Name, linkerData.Name),
+				fmt.Sprintf("cc=%q ld=%q", compilerData.Name, linkerData.Name),
 				filepath.Join(opts.OutputDir, compilerData.ID+"-"+linkerData.ID+".test_data"),
 			); err != nil {
 				log.Fatalf("Failed to generate test data for %s / %s: %v", compilerData.ID, linkerData.ID, err)
@@ -117,7 +117,7 @@ func main() {
 		if err := run(
 			"",
 			linkerPath,
-			fmt.Sprintf("ld=\"%s\"", linkerData.Name),
+			fmt.Sprintf("ld=%q", linkerData.Name),
 			filepath.Join(opts.OutputDir, linkerData.ID+".test_data"),
 		); err != nil {
 			log.Fatalf("Failed to generate test data for %s: %v", linkerData.ID, err)
