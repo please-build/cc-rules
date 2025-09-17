@@ -43,6 +43,6 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        uses: tatskaari/release-action@master
+        uses: thought-machine/release-action@master
         with:
           release-files: plz-out/package
