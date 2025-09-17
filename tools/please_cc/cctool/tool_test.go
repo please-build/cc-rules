@@ -84,13 +84,9 @@ func TestParseOutput(t *testing.T) {
 		relPath := strings.TrimPrefix(path, testDataPath+"/")
 		t.Run(strings.TrimSuffix(relPath, ".test_data"), func(t *testing.T) {
 			testData, err := os.ReadFile(path)
-			if err != nil {
-				panic("failed to read "+path)
-			}
+			assert.NoErrorf(t, err, "Failed to read test file: %s", path)
 			test := regexpTestData.FindSubmatch(testData)
-			if test == nil {
-				panic("malformed .test_data file: "+path)
-			}
+			assert.NotNilf(t, test, "Malformed test file: %s", path)
 			expectedCompiler := string(test[regexpTestData.SubexpIndex("cc")])
 			expectedLinker := string(test[regexpTestData.SubexpIndex("ld")])
 			stdout := test[regexpTestData.SubexpIndex("stdout")]
