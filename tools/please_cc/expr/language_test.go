@@ -1004,11 +1004,11 @@ func TestEvaluate(t *testing.T) {
 				t.Run(desc, func(t *testing.T) {
 					actual, err := Evaluate(tc.Expr, env)
 					if tc.Err == "" {
-						assert.EqualValues(t, tc.Expected, actual, "Expression evaluates to expected value")
-						assert.NoError(t, err, "No error returned")
+						assert.EqualValues(t, tc.Expected, actual)
+						assert.NoError(t, err)
 					} else {
-						assert.Nil(t, actual, "No value returned")
-						assert.ErrorContains(t, err, tc.Err, "Expected error returned")
+						assert.Nil(t, actual)
+						assert.ErrorContains(t, err, tc.Err)
 					}
 				})
 			}

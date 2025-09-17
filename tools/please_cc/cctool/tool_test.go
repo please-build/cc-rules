@@ -93,13 +93,13 @@ func TestParseOutput(t *testing.T) {
 			stderr := test[regexpTestData.SubexpIndex("stderr")]
 			actualCompiler, actualLinker := parseOutput(stdout, stderr)
 			if expectedCompiler == "" {
-				assert.Nil(t, actualCompiler, "Compiler is nil")
+				assert.Nil(t, actualCompiler)
 			} else {
-				assert.NotNil(t, actualCompiler, "Compiler is not nil")
-				assert.Equal(t, expectedCompiler, actualCompiler.String(), "Compiler correctly identified")
+				assert.NotNil(t, actualCompiler)
+				assert.Equal(t, expectedCompiler, actualCompiler.String())
 			}
-			assert.NotNil(t, actualLinker, "Linker is not nil")
-			assert.Equal(t, expectedLinker, actualLinker.String(), "Linker correctly identified")
+			assert.NotNil(t, actualLinker)
+			assert.Equal(t, expectedLinker, actualLinker.String())
 		})
 		return nil
 	})
