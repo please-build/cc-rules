@@ -200,8 +200,8 @@ func identify(typ Type, path string, args []string) (*Tool, *Tool, error) {
 	return compiler, linker, nil
 }
 
-// filterArgs returns the C/C++ compiler toolchain command line options in args that influence the toolchain's choice of
-// linker.
+// filterLinkerArgs returns the C/C++ compiler toolchain command line options in args that influence the toolchain's
+// choice of linker.
 //
 // The C/C++ compilers supported by cc-rules honour a subset of the following [linker command line options], which are
 // returned if present, regardless of whether the compiler in use actually supports them:
@@ -214,7 +214,7 @@ func identify(typ Type, path string, args []string) (*Tool, *Tool, error) {
 // - `-fuse-ld=[PATH]` (Clang): use the linker at `PATH`; deprecated in favour of `--ld-path`.
 // - `--ld-path=[PATH]` (Clang): use the linker at `PATH`.
 //
-// [linker command line options]: https://github.com/rust-lang/rust/issues/97402
+// [Linker command line options]: https://github.com/rust-lang/rust/issues/97402
 func filterLinkerArgs(args []string) []string {
 	linkerArgs := make([]string, 0)
 	nextArg := false
