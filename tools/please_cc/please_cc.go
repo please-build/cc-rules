@@ -26,7 +26,7 @@
 //   `please_cc cc cctool -o example '{{ gcc || (clang && clang <= 15) ? "-fmodules-ts" : "-std=c++20" }}' example.cc`
 // - Link objects using the old ld64 code path if linking with Apple's new ld linker (enabled using `-ld64` prior to
 //   Xcode 15.1, and `-ld_classic` from Xcode 15.1 onwards):
-//   `please_cc ld ldtool '{{ appleld ? (appleld >= 1022.1 ? "-ld_classic" : "-ld64") }}' obj1.o obj2.o -o example
+//   `please_cc ld ldtool '{{ appleld ? (appleld >= 1022.1 ? "-ld_classic" : "-ld64") }}' obj1.o obj2.o -o example`
 //
 // please_cc is known to be compatible with the following compilers and linkers:
 //
