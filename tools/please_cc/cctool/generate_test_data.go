@@ -125,10 +125,21 @@ func main() {
 	}
 }
 
+// filterComments removes lines prepended with `#` from a byte slice.
 func filterComments(in []byte) []byte {
 	return regexpComment.ReplaceAll(in, []byte{})
 }
 
+// run invokes the linker at the given path - indirectly via the compiler, if a compiler path is also specified - and
+// writes the output on the standard streams to the test file at testPath, overwriting any existing file. The compiler
+// and/or linker are invoked with options that cause them to identify themselves on the standard streams. expected
+// should be a string in one of the following forms:
+//
+// - `cc="CC_TOOL_STRING" ld="LD_TOOL_STRING"` (if compiler is non-nil)
+// - `ld="LD_TOOL_STRING"` (if compiler is nil)
+//
+// where `CC_TOOL_STRING` is the compiler's identity as it would be expected to be reported by `Tool.String`, and
+// `LD_TOOL_STRING` is the linker's identity as it would be expected to be reported by `Tool.String`.
 func run(compiler, linker, expected, testPath string) error {
 	var (
 		tool string
