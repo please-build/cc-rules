@@ -16,7 +16,8 @@
 // presence of that version of that compiler/linker during invocation, while a nil value indicates that please_cc did
 // not detect the presence of that compiler/linker.
 //
-// The language supports limited type coercion: the nil type evaluates to false in boolean contexts.
+// The language supports limited type coercion: the nil type evaluates to false in boolean contexts, and version numbers
+// evaluate to true in boolean contexts.
 //
 // # Expressions
 //
