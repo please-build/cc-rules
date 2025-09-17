@@ -27,7 +27,7 @@ import (
 var regexpComment = regexp.MustCompile(`(?m)^\s*#.*?$`)
 
 var opts struct {
-	OutputDir string `short:"o" long:"output" value-name:"DIR" default:"test_data" description:"Write test data to DIR"`
+	OutputDir string `short:"o" long:"output_dir" value-name:"DIR" default:"test_data" description:"Write test data to DIR"`
 	Args struct {
 		ToolSpec string `positional-arg-name:"TOOLSPEC_FILE" description:"Read toolspec from TOOLSPEC_FILE" required:"true"`
 	} `positional-args:"true"`
