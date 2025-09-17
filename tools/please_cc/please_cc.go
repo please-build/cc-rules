@@ -28,16 +28,18 @@
 //   Xcode 15.1, and `-ld_classic` from Xcode 15.1 onwards):
 //   `please_cc ld ldtool '{{ appleld ? (appleld >= 1022.1 ? "-ld_classic" : "-ld64") }}' obj1.o obj2.o -o example
 //
-// please_cc is known to be compatible with:
+// please_cc is known to be compatible with the following compilers and linkers:
 //
-// - GCC >= 9
-// - Clang >= 11
-// - Apple Clang >= 12
-// - GNU ld >= 2.38
-// - GNU gold >= 1.15
-// - LLD >= 11
-// - ld64 >= 609.8
-// - Apple ld >= 1015.7
+// | Tool        | Minimum supported version | Expression language identifier |
+// | ----------- | ------------------------- | ------------------------------ |
+// | GCC         | 9                         | `gcc`                          |
+// | Clang       | 11                        | `clang`                        |
+// | Apple Clang | 12                        | `aclang`                       |
+// | GNU ld      | 2.38                      | `gnuld`                        |
+// | GNU gold    | 1.15                      | `gold`                         |
+// | LLD         | 11                        | `lld`                          |
+// | ld64        | 609.8                     | `ld64`                         |
+// | Apple ld    | 1015.7                    | `appleld`                      |
 package main
 
 import (
