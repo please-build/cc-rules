@@ -1,6 +1,13 @@
 [please]
 version = >=17.0.0
 
+[Plugin "go"]
+Target = //plugins:go
+GoTool = //third_party/go:toolchain|go
+Stdlib = //third_party/go:std
+ImportPath = github.com/please-build/cc-rules
+RequireLicences = true
+
 [Plugin "python"]
 Target = //plugins:python
 ModuleDir = third_party.python

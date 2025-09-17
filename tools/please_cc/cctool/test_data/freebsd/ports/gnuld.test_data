@@ -1,0 +1,5 @@
+#expected: ld="GNU ld 2.44"
+#stdout:
+GNU ld (GNU Binutils) 2.44
+
+#stderr:

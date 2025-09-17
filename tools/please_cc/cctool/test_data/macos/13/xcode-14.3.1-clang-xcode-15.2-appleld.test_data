@@ -1,0 +1,19 @@
+#expected: cc="Apple Clang 14.0.3" ld="Apple ld 1022.1"
+#stdout:
+
+#stderr:
+Apple clang version 14.0.3 (clang-1403.0.22.14.1)
+Target: x86_64-apple-darwin22.6.0
+Thread model: posix
+InstalledDir: /Applications/Xcode_14.3.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+ "/var/folders/vk/nx37ffx50hv5djclhltc26vw0000gn/T/ld.3310812972/ld" -demangle -lto_library /Applications/Xcode_14.3.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 13.0.0 13.0.0 -o a.out -v -lSystem /Applications/Xcode_14.3.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/lib/darwin/libclang_rt.osx.a
+@(#)PROGRAM:ld  PROJECT:dyld-1022.1
+BUILD 05:26:33 Dec  7 2023
+configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h
+will use ld-classic for: armv6 armv7 armv7s arm64_32 i386 armv6m armv7k armv7m armv7em
+LTO support using: LLVM version 14.0.3, (clang-1403.0.22.14.1) (static support for 29, runtime is 29)
+TAPI support using: Apple TAPI version 14.0.3 (tapi-1403.0.5.1)
+Library search paths:
+Framework search paths:
+ld: library 'System' not found
+clang: error: linker command failed with exit code 1 (use -v to see invocation)

@@ -1,0 +1,5 @@
+#expected: ld="GNU gold 1.16"
+#stdout:
+GNU gold (GNU Binutils 2.44) 1.16
+
+#stderr:

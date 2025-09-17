@@ -1,0 +1,5 @@
+#expected: ld="LLD 19.1.7"
+#stdout:
+Homebrew LLD 19.1.7 (compatible with GNU linkers)
+
+#stderr:

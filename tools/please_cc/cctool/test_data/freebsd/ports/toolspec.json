@@ -1,0 +1,39 @@
+# These packages should all be installed from Ports on FreeBSD 14.3-RELEASE:
+# devel/binutils devel/llvm{11,12,13,14,15,16,17,18,19,20,21} lang/gcc{11,12,13,14,15}
+{
+    "compilers": {
+        # The gcc* binaries in FreeBSD Ports' lang/gcc* packages have /usr/local/bin/ld hardcoded as their linker; don't
+        # bother trying to invoke them with gold or any of the LLD linkers.
+        "/usr/local/bin/gcc11": {"id": "gcc11", "name": "GCC 11.5.0", "exclude": ["gold", "lld*"]},
+        "/usr/local/bin/gcc12": {"id": "gcc12", "name": "GCC 12.4.0", "exclude": ["gold", "lld*"]},
+        "/usr/local/bin/gcc13": {"id": "gcc13", "name": "GCC 13.3.0", "exclude": ["gold", "lld*"]},
+        "/usr/local/bin/gcc14": {"id": "gcc14", "name": "GCC 14.2.0", "exclude": ["gold", "lld*"]},
+        "/usr/local/bin/gcc15": {"id": "gcc15", "name": "GCC 15.2.0", "exclude": ["gold", "lld*"]},
+        "/usr/local/bin/clang11": {"id": "clang11", "name": "Clang 11.0.1"},
+        "/usr/local/bin/clang12": {"id": "clang12", "name": "Clang 12.0.1"},
+        "/usr/local/bin/clang13": {"id": "clang13", "name": "Clang 13.0.1"},
+        "/usr/local/bin/clang14": {"id": "clang14", "name": "Clang 14.0.6"},
+        "/usr/local/bin/clang15": {"id": "clang15", "name": "Clang 15.0.7"},
+        "/usr/local/bin/clang16": {"id": "clang16", "name": "Clang 16.0.6"},
+        "/usr/local/bin/clang17": {"id": "clang17", "name": "Clang 17.0.6"},
+        "/usr/local/bin/clang18": {"id": "clang18", "name": "Clang 18.1.8"},
+        "/usr/local/bin/clang19": {"id": "clang19", "name": "Clang 19.1.7"},
+        "/usr/local/bin/clang20": {"id": "clang20", "name": "Clang 20.1.8"},
+        "/usr/local/bin/clang21": {"id": "clang21", "name": "Clang 21.1.1"}
+    },
+    "linkers": {
+        "/usr/local/bin/ld.bfd": {"id": "gnuld", "name": "GNU ld 2.44"},
+        "/usr/local/bin/ld.gold": {"id": "gold", "name": "GNU gold 1.16"},
+        "/usr/local/bin/ld.lld11": {"id": "lld11", "name": "LLD 11.0.1"},
+        "/usr/local/bin/ld.lld12": {"id": "lld12", "name": "LLD 12.0.1"},
+        "/usr/local/bin/ld.lld13": {"id": "lld13", "name": "LLD 13.0.1"},
+        "/usr/local/bin/ld.lld14": {"id": "lld14", "name": "LLD 14.0.6"},
+        "/usr/local/bin/ld.lld15": {"id": "lld15", "name": "LLD 15.0.7"},
+        "/usr/local/bin/ld.lld16": {"id": "lld16", "name": "LLD 16.0.6"},
+        "/usr/local/bin/ld.lld17": {"id": "lld17", "name": "LLD 17.0.6"},
+        "/usr/local/bin/ld.lld18": {"id": "lld18", "name": "LLD 18.1.8"},
+        "/usr/local/bin/ld.lld19": {"id": "lld19", "name": "LLD 19.1.7"},
+        "/usr/local/bin/ld.lld20": {"id": "lld20", "name": "LLD 20.1.8"},
+        "/usr/local/bin/ld.lld21": {"id": "lld21", "name": "LLD 21.1.1"}
+    }
+}

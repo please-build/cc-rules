@@ -1,0 +1,23 @@
+# These Xcode versions are installed in GitHub's (arm64) macos-15 runner image as of 2025-09-15:
+# https://github.com/actions/runner-images/blob/main/images/macos/macos-15-arm64-Readme.md#xcode
+{
+    "compilers": {
+        "/Applications/Xcode_16.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang": {"id": "xcode-16.0-clang", "name": "Apple Clang 16.0.0"},
+        "/Applications/Xcode_16.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang": {"id": "xcode-16.1-clang", "name": "Apple Clang 16.0.0"},
+        "/Applications/Xcode_16.2.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang": {"id": "xcode-16.2-clang", "name": "Apple Clang 16.0.0"},
+        "/Applications/Xcode_16.3.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang": {"id": "xcode-16.3-clang", "name": "Apple Clang 17.0.0"},
+        "/Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang": {"id": "xcode-16.4-clang", "name": "Apple Clang 17.0.0"}
+    },
+    "linkers": {
+        "/Applications/Xcode_16.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld": {"id": "xcode-16.0-appleld", "name": "Apple ld 1115.7.3"},
+        "/Applications/Xcode_16.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld-classic": {"id": "xcode-16.0-ld64", "name": "ld64 954.16"},
+        "/Applications/Xcode_16.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld": {"id": "xcode-16.1-appleld", "name": "Apple ld 1115.7.3"},
+        "/Applications/Xcode_16.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld-classic": {"id": "xcode-16.1-ld64", "name": "ld64 954.16"},
+        "/Applications/Xcode_16.2.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld": {"id": "xcode-16.2-appleld", "name": "Apple ld 1115.7.3"},
+        "/Applications/Xcode_16.2.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld-classic": {"id": "xcode-16.2-ld64", "name": "ld64 954.16"},
+        "/Applications/Xcode_16.3.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld": {"id": "xcode-16.3-appleld", "name": "Apple ld 1167.4.1"},
+        "/Applications/Xcode_16.3.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld-classic": {"id": "xcode-16.3-ld64", "name": "ld64 955.13"},
+        "/Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld": {"id": "xcode-16.4-appleld", "name": "Apple ld 1167.5"},
+        "/Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld-classic": {"id": "xcode-16.4-ld64", "name": "ld64 955.13"}
+    }
+}

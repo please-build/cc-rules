@@ -1,0 +1,10 @@
+#expected: ld="Apple ld 1053.12"
+#stdout:
+
+#stderr:
+@(#)PROGRAM:ld PROJECT:ld-1053.12
+BUILD 15:45:29 Feb  3 2024
+configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em
+will use ld-classic for: armv6 armv7 armv7s arm64_32 i386 armv6m armv7k armv7m armv7em
+LTO support using: LLVM version 15.0.0 (static support for 29, runtime is 29)
+TAPI support using: Apple TAPI version 15.0.0 (tapi-1500.3.2.2)

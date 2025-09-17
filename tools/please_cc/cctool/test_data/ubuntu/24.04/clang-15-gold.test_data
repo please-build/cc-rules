@@ -1,0 +1,21 @@
+#expected: cc="Clang 15.0.7" ld="GNU gold 1.16"
+#stdout:
+GNU gold (GNU Binutils for Ubuntu 2.42) 1.16
+
+#stderr:
+Ubuntu clang version 15.0.7
+Target: x86_64-pc-linux-gnu
+Thread model: posix
+InstalledDir: /usr/bin
+Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/10
+Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/11
+Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/12
+Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/13
+Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/14
+Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/9
+Selected GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/14
+Candidate multilib: .;@m64
+Selected multilib: .;@m64
+ "/tmp/ld.561758821/ld" -pie --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o a.out /lib/x86_64-linux-gnu/Scrt1.o /lib/x86_64-linux-gnu/crti.o /usr/bin/../lib/gcc/x86_64-linux-gnu/14/crtbeginS.o -L/usr/bin/../lib/gcc/x86_64-linux-gnu/14 -L/usr/bin/../lib/gcc/x86_64-linux-gnu/14/../../../../lib64 -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib64 -L/lib -L/usr/lib -v -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/bin/../lib/gcc/x86_64-linux-gnu/14/crtendS.o /lib/x86_64-linux-gnu/crtn.o
+/lib/x86_64-linux-gnu/Scrt1.o:function _start:(.text+0x1b): error: undefined reference to 'main'
+clang: error: linker command failed with exit code 1 (use -v to see invocation)

@@ -1,0 +1,5 @@
+#expected: ld="GNU ld 2.38"
+#stdout:
+GNU ld (GNU Binutils for Ubuntu) 2.38
+
+#stderr:
