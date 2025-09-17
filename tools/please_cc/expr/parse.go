@@ -109,6 +109,7 @@ func parseIf(c context.Context, p *gval.Parser, e gval.Evaluable) (gval.Evaluabl
 		}
 		fNil = false
 	case scanner.EOF:
+		// Undefined false branch, which implicitly evaluates to the empty string array - see the comment below.
 	default:
 		return nil, p.Expected("ternary operator,", ':', scanner.EOF)
 	}
@@ -118,9 +119,9 @@ func parseIf(c context.Context, p *gval.Parser, e gval.Evaluable) (gval.Evaluabl
 			return nil, err
 		}
 		if condBool, condIsBool := cond.(bool); cond == nil || (condIsBool && !condBool) {
-			// If the condition evaluates to false and the false branch is undefined, the expression evaluates to an empty array.
-			// This allows "<cond> ? <expr>" to evaluate to a legal value when <cond> is false, which is preferable to the more
-			// strictly correct but uglier "<cond> ? <expr> : []".
+			// If the condition evaluates to false and the false branch is undefined, the expression evaluates to an empty string
+			// array. This allows "<cond> ? <expr>" to evaluate to a legal value when <cond> is false, which is preferable to the
+			// more strictly correct but uglier "<cond> ? <expr> : []".
 			if fNil {
 				return []string{}, nil
 			}
