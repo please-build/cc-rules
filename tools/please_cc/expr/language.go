@@ -29,7 +29,7 @@ var language = gval.NewLanguage(
 	}),
 
 	gval.PrefixExtension(scanner.Int, parseVersion),
-	gval.PrefixExtension(scanner.String, parseString),
+	gval.PrefixExtension(scanner.String, parseDoubleQuotedString),
 	gval.PrefixExtension(scanner.Char, parseSingleQuotedString),
 	gval.PrefixExtension(scanner.Ident, parseIdent),
 

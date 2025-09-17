@@ -41,7 +41,7 @@ func parseVersion(c context.Context, p *gval.Parser) (gval.Evaluable, error) {
 	}
 }
 
-func parseString(c context.Context, p *gval.Parser) (gval.Evaluable, error) {
+func parseDoubleQuotedString(c context.Context, p *gval.Parser) (gval.Evaluable, error) {
 	s, err := unquoteString(p.TokenText(), false)
 	if err != nil {
 		return nil, err
