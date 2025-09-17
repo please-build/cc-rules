@@ -5,7 +5,7 @@
 // The language consists of five types:
 //
 // - The nil type.
-// - [Version] numbers, represented in [dot-decimal notation] (e.g. `1`, `1.5`, `14.0.6`).
+// - Version numbers, represented in [dot-decimal notation] (e.g. `1`, `1.5`, `14.0.6`).
 // - Booleans.
 // - Strings, delimited with either `'` or `"` (e.g. `'single'`, `"double"`).
 // - String arrays, delimited with `,` and enclosed by `[` and `]` (e.g. `['single', "double"]`).
@@ -33,12 +33,12 @@
 // The language consists of three types of operators:
 //
 // - The comparison operators - `==`, `!=`, `<`, `<=`, `>`, and `>=` - which compare version numbers according to the
-//   rules described in [Version.Compare] and return a boolean value. The nil type is equal to itself, and is always
-//   less than any version number.
+//   rules described in [github.com/please-build/cc-rules/tools/please_cc/cctool.Version.Compare] and return a boolean
+//   value. The nil type is equal to itself, and is always less than any version number.
 // - The logical operators - `!`, `&&`, and `||` - which consume expressions as operands and return boolean values.
 // - The ternary operator - `? :` - which evaluates the expression on the left-hand side of `?` and returns the
 //   evaluation of the expression on the right-hand side of `?` if true and the evaluation of the expression on the
-//   right-hand side of `:` if false. If the false branch is omitted, it implicitly evaluates to the empty array.
+//   right-hand side of `:` if false. If the false branch is omitted, it implicitly evaluates to the empty string array.
 //
 // Operators earlier in the list above bind more tightly than those later in the list. This order of precedence can be
 // overridden with the use of parentheses (`()`).

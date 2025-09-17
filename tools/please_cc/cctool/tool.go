@@ -120,7 +120,7 @@ var matchers = map[stream]matcher{
 		//
 		// [Compiler Explorer]: https://godbolt.org
 		{ Compiler, Clang, regexp.MustCompile(`^(?:[[:print:]]+ )?clang version (?P<version>[\d.]+)`) },
-		// Between Xcode 15 and 15.2, Apple ld identifies itself with the project name "dyld" (version 1015.7 in Xcode 15 and
+		// Between Xcode 15 and 15.2, Apple ld identified itself with the project name "dyld" (version 1015.7 in Xcode 15 and
 		// 15.0.1, and version 1022.1 in Xcode 15.1 and 15.2). From Xcode 15.3 onwards, it identifies itself with the project
 		// name "ld".
 		//
