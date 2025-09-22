@@ -38,9 +38,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: build
-        run: mkdir -p plz-out/package
-      - name: Release
+      - name: Release please_cc tool
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: thought-machine/release-action@master
+        with:
+          version-file: tools/please_cc/VERSION
+          change-log-file: tools/please_cc/ChangeLog
+          release-prefix: please-cc
+          release-files: plz-out/package/please_cc
+      - name: Release plugin
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: thought-machine/release-action@master
