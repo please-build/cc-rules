@@ -84,13 +84,6 @@ The tool used by `cc_xxx()` build definitions to compile C++ code. Defaults to `
 CPPTool = clang++
 ```
 
-### LDTool
-The tool used to link C and C++ binaries and shared objects. Defaults to `ld`.
-```ini
-[Plugin "cc"]
-LDTool = ld
-```
-
 ### ARTool
 The tool used to manipulate `.a` archives. Defaults to `ar`. 
 ```ini
