@@ -1,10 +1,14 @@
 package(default_visibility = ["PUBLIC"])
 
-subinclude("///go//build_defs:go")
+subinclude(
+    "///go//build_defs:go",
+    "//build_defs:arch",
+)
 
 go_toolchain(
     name = "toolchain",
     install_std = False,
+    architectures = SUPPORTED_ARCHITECTURES,
     version = "1.24.6",
 )
 

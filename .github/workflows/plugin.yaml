@@ -30,7 +30,22 @@ jobs:
         compiler:
           - gcc
           - clang
-  release:
+  release-tools:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Release please_cc tool
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: thought-machine/release-action@master
+        with:
+          version-file: tools/please_cc/VERSION
+          change-log-file: tools/please_cc/ChangeLog
+          release-prefix: please_cc
+          release-files: plz-out/package/please_cc
+  release-plugin:
     needs:
       - test
     runs-on: ubuntu-latest
@@ -38,9 +53,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: build
-        run: mkdir -p plz-out/package
-      - name: Release
+      - name: Release plugin
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: thought-machine/release-action@master
