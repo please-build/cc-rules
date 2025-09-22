@@ -57,25 +57,25 @@ Help = The path or build target for the archiver tool.
 
 [PluginConfig "default_opt_cflags"]
 ConfigKey = DefaultOptCFlags
-DefaultValue = --std=c99 -O3 -pipe -DNDEBUG -Wall -Werror
+DefaultValue = --std=c99 -O3 -pipe -DNDEBUG -Wall -Werror -fPIC
 Inherit = true
 Help = The default flags to pass to the C compiler when compiling a release build.
 
 [PluginConfig "default_dbg_cflags"]
 ConfigKey = DefaultDbgCFlags
-DefaultValue = --std=c99 -g3 -pipe -DDEBUG -Wall -Werror
+DefaultValue = --std=c99 -g3 -pipe -DDEBUG -Wall -Werror -fPIC
 Inherit = true
 Help = The default flags to pass to the C compiler when compiling a debug build.
 
 [PluginConfig "default_opt_cppflags"]
 ConfigKey = DefaultOptCppFlags
-DefaultValue = --std=c++11 -O3 -pipe -DNDEBUG -Wall -Werror
+DefaultValue = --std=c++11 -O3 -pipe -DNDEBUG -Wall -Werror -fPIC
 Inherit = true
 Help = The default flags to pass to the C++ compiler when compiling a release build.
 
 [PluginConfig "default_dbg_cppflags"]
 ConfigKey = DefaultDbgCppFlags
-DefaultValue = --std=c++11 -g3 -pipe -DDEBUG -Wall -Werror
+DefaultValue = --std=c++11 -g3 -pipe -DDEBUG -Wall -Werror -fPIC
 Inherit = true
 Help = The default flags to pass to the C++ compiler when compiling a debug build.
 
