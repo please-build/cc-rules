@@ -8,9 +8,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Install nasm
-        if: ${{ matrix.os == 'macos' }}
-        run: brew install nasm
       - name: Run tests
         run: ./pleasew test -e e2e --profile gha_${{ matrix.os }}_${{ matrix.compiler }} --log_file plz-out/log/test.log
       - name: Run e2e test

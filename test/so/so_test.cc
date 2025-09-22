@@ -4,22 +4,20 @@
 #include <string>
 #include <Python.h>
 
-#include "test/embed/embedded_files.h"
-
 
 namespace plz {
 
 PyObject* get_file1(PyObject *self, PyObject *args) {
-    return PyUnicode_FromString(embedded_file1_contents().c_str());
+    return PyUnicode_FromString("testing message 1\n");
 }
 
 PyObject* get_file3(PyObject *self, PyObject *args) {
-    return PyUnicode_FromString(embedded_file3_contents().c_str());
+    return PyUnicode_FromString("testing message 3\n");
 }
 
 static PyMethodDef so_test_methods[] = {
-    {"get_embedded_file_1", get_file1, METH_VARARGS, "gets the first embedded file"},
-    {"get_embedded_file_3", get_file3, METH_VARARGS, "gets the third embedded file"},
+    {"get_file_1", get_file1, METH_VARARGS, "gets the first file"},
+    {"get_file_3", get_file3, METH_VARARGS, "gets the third file"},
     {NULL, NULL, 0, NULL}
 };
 

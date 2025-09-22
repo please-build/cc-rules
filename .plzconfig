@@ -109,12 +109,6 @@ Inherit = true
 DefaultValue =
 Help = The path or build target for dsymutil. If set, a .dSYM file containing symbol information is additionally outputted when compiling a debug build.
 
-[PluginConfig "asm_tool"]
-ConfigKey = AsmTool
-DefaultValue = nasm
-Inherit = true
-Help = The path or build target for the assembler tool.
-
 [PluginConfig "default_namespace"]
 ConfigKey = DefaultNamespace
 DefaultValue =
