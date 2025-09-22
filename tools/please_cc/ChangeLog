@@ -1,3 +1,7 @@
+Version 0.1.1
+-------------
+    * Ensure please_cc binaries are built before attempting a release
+
 Version 0.1.0
 -------------
     * Initial release.
