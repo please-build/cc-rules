@@ -65,22 +65,6 @@ And the following C rules that use `cc_tool`, `default_opt_cflags` and `default_
 See the docstring for each rule for more specific detail on what they each do.
 
 
-### //build_defs:cc_embed_binary
-
-Contains rules for embedding files into an object file that can be linked into a
-binary and loaded at runtime. There are both C and C++ variants that work similarly
-to the other build actions for each language.
-
-These have the extra config value `default_namespace` to set the default namespace to
-generate; it can also be overridden per target.
-
-When building on OSX, the config value `asm_tool` is also used (by default this is `nasm`).
-On other platforms this is not required.
-
- - `c_embed_binary()`
- - `cc_embed_binary()`
-
-
 ## Configuration
 
 This plugin can be configured by adding fields to the `[Plugin "cc"]` section in your 
@@ -171,13 +155,6 @@ On `macOS`, the tool used to create debug symbols. Defaults to `dsymutil`.
 ```ini
 [Plugin "cc"]
 DsymTool = dsymutil
-```
-
-## AsmTool
-The tool to use to compile asm sources. Defaults to `nasm`. 
-```ini
-[Plugin "cc"]
-AsmTool = nasm
 ```
 
 ### DefaultNamespace

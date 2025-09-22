@@ -7,9 +7,6 @@ cc_shared_object(
     out = "so_test.so",
     linker_flags = ["-bundle -undefined dynamic_lookup"] if is_platform(os = "darwin") else [],
     pkg_config_cflags = ["python3"],
-    deps = [
-        "//test/embed:embedded_files",
-    ],
 )
 
 # Used by Python build code as a convenient way of testing itself.
