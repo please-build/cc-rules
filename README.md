@@ -115,31 +115,31 @@ ARTool = ar
 ```
 
 ### DefaultOptCFlags
-Default flags used to compile C code. Defaults to `--std=c99 -O3 -pipe -DNDEBUG -Wall -Werror`. 
+Default flags used to compile C code. Defaults to `-std=c99 -O3 -pipe -DNDEBUG -Wall -Werror`.
 ```ini
 [Plugin "cc"]
-DefaultOptCFlags = --std=c99 -O4
+DefaultOptCFlags = -std=c99 -O4
 ```
 
 ### DefaultDbgCFlags 
-Default flags used to compile C code for debugging. Defaults to `--std=c99 -g3 -pipe -DDEBUG -Wall -Werror`.
+Default flags used to compile C code for debugging. Defaults to `-std=c99 -g3 -pipe -DDEBUG -Wall -Werror`.
 ```ini
 [Plugin "cc"]
-DefaultDbgCFlags = --std=c99 -O4
+DefaultDbgCFlags = -std=c99 -O4
 ```
 
 ### DefaultOptCppFlags
-Default flags used to compile C++ code. Defaults to `--std=c++11 -O3 -pipe -DNDEBUG -Wall -Werror`.     
+Default flags used to compile C++ code. Defaults to `-std=c++11 -O3 -pipe -DNDEBUG -Wall -Werror`.
 ```ini
 [Plugin "cc"]
-DefaultOptCFlags = --std=c99 -O4
+DefaultOptCFlags = -std=c99 -O4
 ```
 
 ### DefaultDbgCppFlags 
-Default flags used to compile C++ code for debugging. Defaults to `--std=c++11 -g3 -pipe -DDEBUG -Wall -Werror`.
+Default flags used to compile C++ code for debugging. Defaults to `-std=c++11 -g3 -pipe -DDEBUG -Wall -Werror`.
 ```ini
 [Plugin "cc"]
-DefaultDbgCFlags = --std=c99 -O4
+DefaultDbgCFlags = -std=c99 -O4
 ```
 
 ### DefaultLDFlags
