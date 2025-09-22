@@ -6,5 +6,5 @@ cctool = clang
 cpptool = clang++
 ldtool = lld
 defaultdbgcppflags = -std=c++1z -g3 -DDEBUG -Wall -Wextra -Werror -Wno-unused-parameter
-defaultoptcppflags = -std=c++1z -O2 -DNDEBUG -Wall -Wextra -Werror -Wno-unused-parameter
+defaultoptcppflags = -std=c++1z -O3 -DNDEBUG -Wall -Wextra -Werror -Wno-unused-parameter
 clangmodules = true
