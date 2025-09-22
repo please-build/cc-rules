@@ -55,6 +55,12 @@ DefaultValue = ar
 Inherit = true
 Help = The path or build target for the archiver tool.
 
+[PluginConfig "please_cc_tool"]
+ConfigKey = PleaseCCTool
+DefaultValue = //tools:please_cc
+Help = The path or build target for the please_cc tool, an internal tool used by the build definitions to invoke C/C++ compilers and linkers with appropriate command line arguments.
+Inherit = true
+
 [PluginConfig "default_opt_cflags"]
 ConfigKey = DefaultOptCFlags
 DefaultValue = --std=c99 -O3 -pipe -DNDEBUG -Wall -Werror

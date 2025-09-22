@@ -722,7 +722,7 @@ def _library_cmds(c, compiler_flags, pkg_config_libs, pkg_config_cflags, extra_f
     """Returns the commands needed for a cc_library rule."""
     dbg_flags = _build_flags(compiler_flags, pkg_config_libs, pkg_config_cflags, c=c, dbg=True)
     opt_flags = _build_flags(compiler_flags, pkg_config_libs, pkg_config_cflags, c=c)
-    cmd_template = '$TOOLS_CC -c -I . %s %s ${SRCS_SRCS}'
+    cmd_template = '"$TOOLS_PLEASE_CC" cc "$TOOLS_CC" -c -I . %s %s ${SRCS_SRCS}'
     if archive:
         cmd_template += ' && "$TOOLS_ARCAT" ar -r && "$TOOLS_AR" s "$OUT"'
     cmds = {
@@ -732,6 +732,7 @@ def _library_cmds(c, compiler_flags, pkg_config_libs, pkg_config_cflags, extra_f
     if CONFIG.CC.COVERAGE:
         cmds['cover'] = cmd_template % (dbg_flags + _COVERAGE_FLAGS, extra_flags)
     return cmds, {
+        'please_cc': CONFIG.CC.PLEASE_CC_TOOL,
         'cc': [CONFIG.CC.CC_TOOL if c else CONFIG.CC.CPP_TOOL],
         'arcat': [CONFIG.ARCAT_TOOL if archive else None],
         'ar': [CONFIG.CC.AR_TOOL if archive else None],
@@ -743,14 +744,15 @@ def _binary_cmds(c, linker_flags, pkg_config_libs, extra_flags='', shared=False,
     dbg_flags = _binary_build_flags(linker_flags, pkg_config_libs, shared, alwayslink, c=c, dbg=True, static=static)
     opt_flags = _binary_build_flags(linker_flags, pkg_config_libs, shared, alwayslink, c=c, dbg=False, static=static)
     cmds = {
-        'dbg': f'"$TOOLS_CC" -o "$OUT" {dbg_flags} {extra_flags}',
-        'opt': f'"$TOOLS_CC" -o "$OUT" {opt_flags} {extra_flags}',
+        'dbg': f'"$TOOLS_PLEASE_CC" cc "$TOOLS_CC" -o "$OUT" {dbg_flags} {extra_flags}',
+        'opt': f'"$TOOLS_PLEASE_CC" cc "$TOOLS_CC" -o "$OUT" {opt_flags} {extra_flags}',
     }
     tools = {
+        'please_cc': CONFIG.CC.PLEASE_CC_TOOL,
         'cc': (CONFIG.CC.CC_TOOL if c else CONFIG.CC.CPP_TOOL),
     }
     if CONFIG.CC.COVERAGE:
-        cmds['cover'] = f'"$TOOLS_CC" -o "$OUT" {dbg_flags} {extra_flags} {_COVERAGE_FLAGS}'
+        cmds['cover'] = f'"$TOOLS_PLEASE_CC" cc "$TOOLS_CC" -o "$OUT" {dbg_flags} {extra_flags} {_COVERAGE_FLAGS}'
 
     if CONFIG.CC.DSYM_TOOL:
         dbg = cmds['dbg']
