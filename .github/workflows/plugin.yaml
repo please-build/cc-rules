@@ -36,7 +36,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Release please_cc tool
+      - name: Build please_cc
+        run: ./pleasew build --profile release -p -v notice //package:please_cc_release_files
+      - name: Release please_cc
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: thought-machine/release-action@master
