@@ -29,10 +29,8 @@ jobs:
           - macos
         compiler:
           - gcc
-          - clang
-  release:
-    needs:
-      - test
+         - clang
+  release-tools:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
@@ -47,6 +45,14 @@ jobs:
           change-log-file: tools/please_cc/ChangeLog
           release-prefix: please-cc
           release-files: plz-out/package/please_cc
+  release-plugin:
+    needs:
+      - test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Release plugin
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
