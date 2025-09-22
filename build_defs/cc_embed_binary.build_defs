@@ -64,8 +64,11 @@ def cc_embed_binary(name:str, src:str, deps:list=[], visibility:list=None,
         ])
         tools['asm'] = [CONFIG.CC.ASM_TOOL]
     else:
-        cmd = '$TOOLS_LD -r --format binary %s -o ${OUTS/.a/.o} $SRC && $TOOLS_ARCAT ar --srcs ${OUTS/.a/.o} && $TOOLS_AR s $OUTS' % CONFIG.CC.DEFAULT_LDFLAGS
-        tools['ld'] = [CONFIG.CC.LD_TOOL]
+        cmd = '"$TOOLS_PLEASE_CC" ld "$TOOLS_LD" -r --format binary %s -o ${OUTS/.a/.o} $SRC && $TOOLS_ARCAT ar --srcs ${OUTS/.a/.o} && $TOOLS_AR s $OUTS' % CONFIG.CC.DEFAULT_LDFLAGS
+        tools = tools | {
+            "please_cc": CONFIG.CC.PLEASE_CC_TOOL,
+            "ld": CONFIG.CC.LD_TOOL,
+        }
 
     lib_rule = build_rule(
         name = name,
