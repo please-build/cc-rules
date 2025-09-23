@@ -1,5 +1,5 @@
-import q1;
 module f1;
+import q1;
 
 int f(int n) {
   if (n == 0) {
