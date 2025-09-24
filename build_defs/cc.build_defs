@@ -9,6 +9,21 @@ you can write a cc_library rule specifying e.g. linker_flags = ['-lz'] and not h
 that on every single cc_binary / cc_test that transitively depends on that library.
 """
 
+# These options control cause C/C++ compiler toolchains to terminate early (i.e., before they output an executable
+# file). GCC doesn't give them a specific name; Clang calls them "actions". Not all of them are listed here, only the
+# ones we're likely to encounter in these build definitions.
+# GCC documentation: https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html
+# Clang documentation: https://clang.llvm.org/docs/ClangCommandLineReference.html#actions
+_ACTION_FLAGS = [
+    "-E",           # GCC & Clang
+    "--preprocess", # Long form of -E; Clang only
+    "-S",           # GCC & Clang
+    "--assemble",   # Long form of -S; Clang only
+    "-c",           # GCC & Clang
+    "--compile",    # Long form of -c; Clang only
+    "--precompile", # Clang only
+]
+
 _COVERAGE_FLAGS = ["--coverage", "-fprofile-dir=."]
 # OSX's ld uses --all_load / --noall_load instead of --whole-archive.
 _WHOLE_ARCHIVE = '-all_load' if CONFIG.OS == 'darwin' else '--whole-archive'
@@ -722,7 +737,12 @@ def _binary_build_flags(linker_flags:list=[], pkg_config_libs:list=[], shared:bo
 def _library_cmds(c:bool=False, compiler_flags:list=[], pkg_config_libs:list=[], pkg_config_cflags:list=[], extra_flags:list=[],
                   archive:bool=True):
     """Returns the commands needed for a cc_library rule."""
-    common_flags = ["-c", "-I", "."]
+    # Most compilers allow multiple action flags to be specified, with later flags overriding earlier ones. However,
+    # specifying more than one action is an error (-Wunused-command-line-argument) as of Clang 20, so if the compiler
+    # flags we were given contain one, we need to avoid adding our default action to build libraries (-c).
+    common_flags = [] if any([cf in _ACTION_FLAGS for cf in compiler_flags]) else ["-c"]
+
+    common_flags += ["-I", "."]
     dbg_flags = _build_flags(compiler_flags, pkg_config_libs, pkg_config_cflags, c=c, dbg=True)
     opt_flags = _build_flags(compiler_flags, pkg_config_libs, pkg_config_cflags, c=c)
     cmd_template = '"$TOOLS_PLEASE_CC" cc "$TOOLS_CC" %s ${SRCS_SRCS}'
