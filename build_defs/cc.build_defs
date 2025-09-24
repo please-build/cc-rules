@@ -9,9 +9,9 @@ you can write a cc_library rule specifying e.g. linker_flags = ['-lz'] and not h
 that on every single cc_binary / cc_test that transitively depends on that library.
 """
 
-# These options control cause C/C++ compiler toolchains to terminate early (i.e., before they output an executable
-# file). GCC doesn't give them a specific name; Clang calls them "actions". Not all of them are listed here, only the
-# ones we're likely to encounter in these build definitions.
+# These options cause C/C++ compiler toolchains to terminate early (i.e., before they output an executable file). GCC
+# doesn't give them a specific name; Clang calls them "actions". Not all of them are listed here, only the ones we're
+# likely to add as part of these build definitions.
 # GCC documentation: https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html
 # Clang documentation: https://clang.llvm.org/docs/ClangCommandLineReference.html#actions
 _ACTION_FLAGS = [
@@ -739,7 +739,8 @@ def _library_cmds(c:bool=False, compiler_flags:list=[], pkg_config_libs:list=[],
     """Returns the commands needed for a cc_library rule."""
     # Most compilers allow multiple action flags to be specified, with later flags overriding earlier ones. However,
     # specifying more than one action is an error (-Wunused-command-line-argument) as of Clang 20, so if the compiler
-    # flags we were given contain one, we need to avoid adding our default action to build libraries (-c).
+    # flags we were given contain one, we need to avoid adding our default action when building libraries (-c, a.k.a.
+    # "only run preprocess, compile and assemble steps").
     common_flags = [] if any([cf in _ACTION_FLAGS for cf in compiler_flags]) else ["-c"]
 
     common_flags += ["-I", "."]
