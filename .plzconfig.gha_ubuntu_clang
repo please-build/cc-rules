@@ -1,5 +1,0 @@
-[plugin "cc"]
-cctool = clang
-cpptool = clang++
-defaultdbgcppflags = -std=c++1z -g3 -DDEBUG -Wall -Wextra -Werror -Wno-unused-parameter
-defaultoptcppflags = -std=c++1z -O3 -DNDEBUG -Wall -Wextra -Werror -Wno-unused-parameter
