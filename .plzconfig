@@ -57,31 +57,57 @@ Inherit = true
 
 [PluginConfig "default_opt_cflags"]
 ConfigKey = DefaultOptCFlags
-DefaultValue = -std=c99 -O3 -pipe -DNDEBUG -Wall -Werror
+Repeatable = true
+DefaultValue = -std=c99
+DefaultValue = -O3
+DefaultValue = -pipe
+DefaultValue = -DNDEBUG
+DefaultValue = -Wall
+DefaultValue = -Werror
 Inherit = true
 Help = The default flags to pass to the C compiler when compiling a release build.
 
 [PluginConfig "default_dbg_cflags"]
 ConfigKey = DefaultDbgCFlags
-DefaultValue = -std=c99 -g3 -pipe -DDEBUG -Wall -Werror
+Repeatable = true
+DefaultValue = -std=c99
+DefaultValue = -g3
+DefaultValue = -pipe
+DefaultValue = -DDEBUG
+DefaultValue = -Wall
+DefaultValue = -Werror
 Inherit = true
 Help = The default flags to pass to the C compiler when compiling a debug build.
 
 [PluginConfig "default_opt_cppflags"]
 ConfigKey = DefaultOptCppFlags
-DefaultValue = -std=c++11 -O3 -pipe -DNDEBUG -Wall -Werror
+Repeatable = true
+DefaultValue = -std=c++11
+DefaultValue = -O3
+DefaultValue = -pipe
+DefaultValue = -DNDEBUG
+DefaultValue = -Wall
+DefaultValue = -Werror
 Inherit = true
 Help = The default flags to pass to the C++ compiler when compiling a release build.
 
 [PluginConfig "default_dbg_cppflags"]
 ConfigKey = DefaultDbgCppFlags
-DefaultValue = -std=c++11 -g3 -pipe -DDEBUG -Wall -Werror
+Repeatable = true
+DefaultValue = -std=c++11
+DefaultValue = -g3
+DefaultValue = -pipe
+DefaultValue = -DDEBUG
+DefaultValue = -Wall
+DefaultValue = -Werror
 Inherit = true
 Help = The default flags to pass to the C++ compiler when compiling a debug build.
 
 [PluginConfig "default_ldflags"]
 ConfigKey = DefaultLdFlags
-DefaultValue = -lpthread -ldl
+Repeatable = true
+DefaultValue = -lpthread
+DefaultValue = -ldl
 Inherit = true
 Help = The default flags to pass to the linker.
 
