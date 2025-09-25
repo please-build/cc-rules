@@ -728,13 +728,13 @@ def _binary_build_flags(linker_flags:list=[], pkg_config_libs:list=[], shared:bo
         # Ordering them would be ideal but we lack a convenient way of working that out from here.
         objs = ["-Wl,--start-group"] + objs + ["-Wl,--end-group"]
     # Don't add a .note.gnu.build-id section to ELF images. This improves the binary's determinism.
-    linker_flags += ["""'{{ gnuld || gold || lld ? "--build-id=none" }}'"""]
+    lflags = ["""'{{ gnuld || gold || lld ? "-Wl,--build-id=none" }}'"""]
     if shared:
         objs = ["-shared", f"-Wl,{_WHOLE_ARCHIVE}"] + objs + [f"-Wl,{_NO_WHOLE_ARCHIVE}"]
-    linker_flags = ["-Wl," + f.replace(" ", ",") for f in linker_flags] + _default_cflags(c, dbg)
+    lflags += ["-Wl," + f.replace(" ", ",") for f in linker_flags] + _default_cflags(c, dbg)
     if static:
-        linker_flags += ["-static"]
-    return objs + linker_flags + pkg_config_cmds
+        lflags += ["-static"]
+    return objs + lflags + pkg_config_cmds
 
 
 def _library_cmds(c:bool=False, compiler_flags:list=[], pkg_config_libs:list=[], pkg_config_cflags:list=[], extra_flags:list=[],
