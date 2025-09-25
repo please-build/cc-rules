@@ -1,0 +1,40 @@
+on:
+  workflow_call:
+    inputs:
+      # The GitHub runner type on which this workflow should run.
+      runner:
+        required: true
+        type: string
+      # The Please profile that should be loaded when testing the plugin.
+      plz_profile:
+        required: true
+        type: string
+      # A space-delimited list of Apt packages to install on the runner before testing the plugin.
+      # Only meaningful when the runner is Ubuntu-based.
+      apt_packages:
+        required: false
+        type: string
+jobs:
+  test:
+    name: Run C/C++ tests
+    runs-on: ${{ inputs.runner }}
+    steps:
+      - name: Install Apt packages
+        if: startsWith(inputs.runner, 'ubuntu-') && inputs.apt_packages
+        run: sudo apt-get install -y ${{ inputs.apt_packages }}
+      - name: Check out plugin code
+        uses: actions/checkout@v5
+      - name: Report compiler and linker versions
+        run: |
+          set -o pipefail
+          cc="$(grep -i '^CCTool =' .plzconfig.${{ inputs.plz_profile }} | sed -e 's/^CCTool = //')"
+          $cc -v -Wl,-v || true
+      - name: Run C/C++ tests
+        run: ./pleasew test -i test,cc --keep_going --log_file plz-out/log/test.log
+      - name: Archive logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-${{ inputs.plz_profile }}
+          path: plz-out/log
+    env:
+      PLZ_CONFIG_PROFILE: ${{ inputs.plz_profile }}

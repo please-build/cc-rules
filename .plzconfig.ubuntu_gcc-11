@@ -1,0 +1,3 @@
+[Plugin "cc"]
+CCTool = gcc-11
+CPPTool = g++-11

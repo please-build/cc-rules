@@ -1,40 +1,127 @@
-name: C & C++ rules
+name: Plugin
 on:
   - push
   - pull_request
 jobs:
-  test:
-    runs-on: ${{ matrix.os }}-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Run tests
-        run: ./pleasew test -e e2e --profile gha_${{ matrix.os }}_${{ matrix.compiler }} --log_file plz-out/log/test.log
-      - name: Run e2e test
-        run: ./pleasew test -i e2e --profile gha_${{ matrix.os }}_${{ matrix.compiler }} --log_file plz-out/log/e2e.log
-      - name: Archive logs
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: logs-${{ matrix.os }}-${{ matrix.compiler }}
-          path: plz-out/log
+  test-cc-ubuntu-22-04:
+    name: ${{ matrix.name }}
+    uses: ./.github/workflows/plugin_test_cc.yaml
+    with:
+      runner: ubuntu-22.04
+      apt_packages: ${{ matrix.packages }}
+      plz_profile: ubuntu_${{ matrix.profile }}
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - ubuntu
-          - macos
-        compiler:
-          - gcc
-          - clang
+        include:
+          - name: Clang 11
+            packages: clang-11
+            profile: clang-11
+          - name: Clang 12
+            packages: clang-12
+            profile: clang-12
+          - name: Clang 13
+            packages: clang-13
+            profile: clang-13
+  test-cc-ubuntu-24-04:
+    name: ${{ matrix.name }}
+    uses: ./.github/workflows/plugin_test_cc.yaml
+    with:
+      runner: ubuntu-24.04
+      apt_packages: ${{ matrix.packages }}
+      plz_profile: ubuntu_${{ matrix.profile }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Clang 14
+            packages: clang-14
+            profile: clang-14
+          - name: Clang 15
+            packages: clang-15
+            profile: clang-15
+          - name: Clang 16
+            packages: clang-16
+            profile: clang-16
+          - name: Clang 17
+            packages: clang-17
+            profile: clang-17
+          - name: Clang 18
+            packages: clang-18
+            profile: clang-18
+          - name: GCC 9
+            packages: gcc-9 g++-9
+            profile: gcc-9
+          - name: GCC 10
+            packages: gcc-10 g++-10
+            profile: gcc-10
+          - name: GCC 11
+            packages: gcc-11 g++-11
+            profile: gcc-11
+          - name: GCC 12
+            packages: gcc-12 g++-12
+            profile: gcc-12
+          - name: GCC 13
+            packages: gcc-13 g++-13
+            profile: gcc-13
+          - name: GCC 14
+            packages: gcc-14 g++-14
+            profile: gcc-14
+  test-cc-xcode-macos-14:
+    name: Xcode ${{ matrix.version }}
+    uses: ./.github/workflows/plugin_test_cc.yaml
+    with:
+      runner: macos-14
+      plz_profile: xcode-${{ matrix.version }}
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - '15.0.1'
+          - '15.1'
+          - '15.2'
+          - '15.3'
+          - '15.4'
+  test-cc-xcode-macos-15:
+    name: Xcode ${{ matrix.version }}
+    uses: ./.github/workflows/plugin_test_cc.yaml
+    with:
+      runner: macos-15
+      plz_profile: xcode-${{ matrix.version }}
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - '16.0'
+          - '16.1'
+          - '16.2'
+          - '16.3'
+          - '16.4'
+          - '26.0'
+  test-go:
+    name: Run Go tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out plugin code
+        uses: actions/checkout@v5
+      - name: Run Go tests
+        run: ./pleasew test -i test,go --keep_going --log_file plz-out/log/test.log
+      - name: Archive logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-go
+          path: plz-out/log
   release-tools:
+    name: Release please_cc
+    needs:
+      - test-go
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v5
       - name: Build please_cc
-        run: ./pleasew build --profile release -p -v notice //package:please_cc_release_files
+        run: ./pleasew build //package:please_cc_release_files
       - name: Release please_cc
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -45,13 +132,17 @@ jobs:
           release-prefix: please_cc
           release-files: plz-out/package/please_cc
   release-plugin:
+    name: Release plugin
     needs:
-      - test
+      - test-cc-ubuntu-22-04
+      - test-cc-ubuntu-24-04
+      - test-cc-xcode-macos-14
+      - test-cc-xcode-macos-15
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v5
       - name: Release plugin
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
