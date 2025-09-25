@@ -25,6 +25,11 @@ _ACTION_FLAGS = [
 ]
 
 _COVERAGE_FLAGS = ["--coverage", "-fprofile-dir=."]
+
+# Clang >= 16 just require C++20 features to be enabled in order to enable modules, while older versions explicitly
+# require the -fmodules-ts flag.
+_MODULE_FLAGS = ["""'{{ clang && clang < 16 ? "-fmodules-ts" : "-std=c++20" }}'"""]
+
 # OSX's ld uses --all_load / --noall_load instead of --whole-archive.
 _WHOLE_ARCHIVE = '-all_load' if CONFIG.OS == 'darwin' else '--whole-archive'
 _NO_WHOLE_ARCHIVE = '-noall_load' if CONFIG.OS == 'darwin' else '--no-whole-archive'
@@ -125,7 +130,7 @@ def cc_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:
 
     if _interfaces:
         # Generate the module interface file
-        xflags = ["-fmodules-ts", "--precompile", "-x", "c++-module", "-o", '"$OUT"']
+        xflags = _MODULE_FLAGS + ["--precompile", "-x", "c++-module", "-o", '"$OUT"']
         cmds, tools = _library_cmds(_c, compiler_flags + xflags, pkg_config_libs, pkg_config_cflags, archive=False)
         interface_rule = build_rule(
             name = name,
@@ -786,6 +791,24 @@ def _binary_cmds(c:bool=False, linker_flags:list=[], pkg_config_libs:list=[], ex
     return cmds, tools
 
 
+def _module_file_flag(module_file:str):
+    """Generates an appropriate C++ compiler flag for specifying the path to a precompiled module file.
+
+    From Clang 17 (and Apple Clang 16) onwards, not specifying the module's name along with its path generates a warning
+    (-Weager-load-cxx-named-modules), but specifying the module's name at all is a syntax error prior to Clang 16 (or Apple
+    Clang 15). When using Clang >= 16, specify the basename of the module file as the module name; nothing in the C++
+    specification says that a single module has to be declared in a file of the same name, but it'll be the case most of the
+    time (and will fail loudly in the other cases).
+    """
+    _, file = split_path(module_file)
+    name, _ = splitext(file)
+    return """'{{ (clang && clang < 16) || (aclang && aclang < 15) ? "-fmodule-file=%s" : "-fmodule-file=%s=%s" }}'""" % (
+        module_file,
+        name,
+        module_file,
+    )
+
+
 def _library_transitive_labels(c:bool=False, compiler_flags:list=[], pkg_config_libs:list=[], pkg_config_cflags:list=[], archive:bool=True):
     """Applies commands from transitive labels to a cc_library rule."""
     def apply_transitive_labels(name):
@@ -799,10 +822,10 @@ def _library_transitive_labels(c:bool=False, compiler_flags:list=[], pkg_config_
 
         pkg_config_libs += [l[3:] for l in labels if l.startswith('pc:') and l[3:] not in pkg_config_libs]
         pkg_config_cflags += [l[4:] for l in labels if l.startswith('pcc:') and l[4:] not in pkg_config_cflags]
-        mods = ['-fmodule-file=' + l[4:] for l in labels if l.startswith('mod:')]
+        mods = [_module_file_flag(l[4:]) for l in labels if l.startswith('mod:')]
         flags += mods
         if mods:
-            flags += ['-fmodules-ts']
+            flags += _MODULE_FLAGS
         if flags:  # Don't update if there aren't any relevant labels
             cmds, _ = _library_cmds(c, compiler_flags, pkg_config_libs, pkg_config_cflags, flags, archive=archive)
             for k, v in cmds.items():
