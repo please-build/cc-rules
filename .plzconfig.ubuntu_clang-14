@@ -1,3 +1,4 @@
 [Plugin "cc"]
 CCTool = clang-14
 CPPTool = clang++-14
+FeatureFlags = module_tests

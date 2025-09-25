@@ -1,7 +1,8 @@
 subinclude("//build_defs:cc")
 
-# Currently only supported for Clang.
-if "clang" in CONFIG.CC.CPP_TOOL:
+# cc-rules currently only supports the C++ module implementation in (mainline) Clang. Opt into these
+# tests by enabling this plugin's "module_tests" feature flag.
+if "module_tests" in CONFIG.CC.FEATURE_FLAGS:
     cc_module(
         name = "hello",
         srcs = ["hello.cc"],
