@@ -126,3 +126,10 @@ Help = The path or build target for dsymutil. If set, a .dSYM file containing sy
 ConfigKey = DefaultNamespace
 DefaultValue =
 Help = The default namespace in which to compile C++ code.
+
+[PluginConfig "feature_flags"]
+DefaultValue =
+Repeatable = true
+Optional = true
+Inherit = true
+Help = Flags to enable in-development features, or toggle breaking changes.
