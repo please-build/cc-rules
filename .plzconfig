@@ -8,13 +8,6 @@ Stdlib = //third_party/go:std
 ImportPath = github.com/please-build/cc-rules
 RequireLicences = true
 
-[Plugin "python"]
-Target = //plugins:python
-ModuleDir = third_party.python
-WheelRepo = https://get.please.build/third_party/python/py3
-WheelNameScheme = {url_base}/{package_name}-{version}-${{OS}}_${{ARCH}}.whl
-WheelNameScheme = "{url_base}/{package_name}-{version}.whl"
-
 [PluginDefinition]
 name = cc
 
