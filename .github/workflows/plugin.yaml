@@ -147,5 +147,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: thought-machine/release-action@master
-        with:
-          release-files: plz-out/package
