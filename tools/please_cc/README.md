@@ -94,11 +94,11 @@ known to correctly identify the following compilers and linkers:
   ```sh
   please_cc cc cctool -o example '{{ gcc ? "-Werror" }}' example.c
   ```
-- Compile C++ modules with GCC and Clang <= 15 with the `-fmodules-ts` option, or Clang >= 16 with the (equivalent,
+- Compile C++ modules with GCC and Clang < 16 with the `-fmodules-ts` option, or Clang >= 16 with the (equivalent,
   non-deprecated) `-std=c++20` option:
 
   ```sh
-  please_cc cc c++tool -o example '{{ gcc || (clang && clang <= 15) ? "-fmodules-ts" : "-std=c++20" }}' example.cc
+  please_cc cc c++tool -o example '{{ gcc || (clang && clang < 16) ? "-fmodules-ts" : "-std=c++20" }}' example.cc
   ```
 - Link objects using the old ld64 code path if linking with Apple's new ld linker (enabled using `-ld64` prior to
   Xcode 15.1, and `-ld_classic` from Xcode 15.1 onwards):
