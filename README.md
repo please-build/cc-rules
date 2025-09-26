@@ -161,9 +161,27 @@ The default C++ namespace to use. By default, no namespace is used.
 DefaultNamespace = foo
 ```
 
-## General notes
+## Compatibility
 
-These are very much based on GCC and Clang; while it would be theoretically possible
-to support MSVC the flag structure would need to change fairly dramatically (and hence it
-may be easier to support them as a totally parallel set of rules or even a different plugin).
-In practice this would also require Windows support for Please generally.
+This plugin is compatible with the same operating systems as Please itself:
+
+- Darwin (amd64, arm64)
+- FreeBSD (amd64)
+- Linux (amd64, arm64)
+
+and is compatible with the following tools:
+
+- C/C++ compilers:
+  - [GCC](https://gcc.gnu.org) >= 9
+  - [Clang](https://clang.llvm.org) >= 11
+  - [Apple Clang](https://developer.apple.com/xcode/cpp/) in [Xcode](https://developer.apple.com/xcode/) >= 15.0.1
+- Linkers:
+  - [GNU ld](https://www.gnu.org/software/binutils/) >= 2.38
+  - [GNU gold](https://www.gnu.org/software/binutils/) >= 1.15
+  - [LLD](https://lld.llvm.org) >= 11
+  - ld64 in [Xcode](https://developer.apple.com/xcode/) >= 15.0.1
+  - Apple ld in [Xcode](https://developer.apple.com/xcode/) >= 15.0.1
+
+The build definitions are likely to work fine with some older versions of these tools too, although they have only been
+tested on the versions listed above. Please [report](https://github.com/please-build/cc-rules/issues) any bugs you
+encounter.
