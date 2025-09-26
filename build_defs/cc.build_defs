@@ -30,10 +30,6 @@ _COVERAGE_FLAGS = ["--coverage", "-fprofile-dir=."]
 # require the -fmodules-ts flag.
 _MODULE_FLAGS = ["""'{{ clang && clang < 16 ? "-fmodules-ts" : "-std=c++20" }}'"""]
 
-# OSX's ld uses --all_load / --noall_load instead of --whole-archive.
-_WHOLE_ARCHIVE = '-all_load' if CONFIG.OS == 'darwin' else '--whole-archive'
-_NO_WHOLE_ARCHIVE = '-noall_load' if CONFIG.OS == 'darwin' else '--no-whole-archive'
-
 
 def cc_library(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], deps:list=[], out:str='', optional_outs:list=[],
                visibility:list=None, test_only:bool&testonly=False, compiler_flags:list&cflags&copts=[],
@@ -718,23 +714,58 @@ def _binary_build_flags(linker_flags:list=[], pkg_config_libs:list=[], shared:bo
     """Builds the list of flags that we'll pass to the linker invocation."""
     pkg_config_cmds = [f"`pkg-config --libs {x}`" for x in pkg_config_libs]
 
-    objs = ['`find . -name "*.o" -or -name "*.a" | sort`']
-    if (not shared) and alwayslink:
-        objs = [f"-Wl,{_WHOLE_ARCHIVE}"] + alwayslink + [f"-Wl,{_NO_WHOLE_ARCHIVE}"] + objs
-    if CONFIG.OS != 'darwin':
-        # We don't order libraries in a way that is especially useful for the linker, which is
-        # nicely solved by --start-group / --end-group. Unfortunately the OSX linker doesn't
-        # support those flags; in many cases it will work without, so try that.
-        # Ordering them would be ideal but we lack a convenient way of working that out from here.
-        objs = ["-Wl,--start-group"] + objs + ["-Wl,--end-group"]
+    # Construct oflags, a list of linker flags (passed to it via the compiler) that either dynamically or statically
+    # link the object files and static libraries (*.[oa]) discovered in the sandbox into an executable.
+    #
+    # There are three complications, two of them caused by the need to be compatible with a broad range of operating
+    # systems and linkers:
+    #
+    # - We can't determine ahead of time the paths to the object files and static libraries we need to link, so they
+    #   need to be discovered by the shell command when the build action runs, hence the find(1) invocations. The output
+    #   of find(1) is sorted to improve determinism.
+    # - When creating a shared library, every object file in the static libraries must be included in the link; this is
+    #   only the case for the static libraries given in alwayslink when creating a static library. This is indicated
+    #   differently for different linkers: the non-Darwin linkers use the --whole-archive flag (which is boolean and
+    #   remains in effect until the next occurrence of the --no-whole-archive flag), whereas the Darwin linkers use the
+    #   -force_load flag (which accepts a string value and must be repeated for each library). We therefore have to
+    #   construct both the "--whole-archive a.a b.a c.a ... --no-whole-archive" and "-force_load a.a -force_load b.a
+    #   -force_load c.a ..." list, and make sure the appropriate list is passed to the linker depending on its identity.
+    #   We have to rely on tr(1) and sed(1) to manipulate find(1)'s output into please_cc's syntax because BSD's find(1)
+    #   doesn't support the -printf option. Neither class of linker applies the effect of --whole-archive or -force_load
+    #   to object files, so we don't waste time partitioning object files and static libraries when constructing either
+    #   list.
+    # - Linkers expect the list of libraries to be passed in evaluation order (i.e., libraries earlier in the list must
+    #   not depend on libraries later in the list). Non-Darwin linkers support the --start-group and --end-group flags,
+    #   which allow libraries to be passed in an arbitrary order; this is convenient for us, given that we're relying
+    #   on find(1) to locate the static libraries we need to link and can't easily derive their evaluation order here.
+    #   (In many cases, linkers that don't support these flags will still successfully link the binary even when
+    #   libraries aren't passed in evaluation order, so Apple's linkers not supporting these flags doesn't necessarily
+    #   preclude us from being able to link Darwin binaries.
+    #
+    # The structure of oflags, therefore, broadly looks like this:
+    #
+    #   if shared:
+    #     -shared {-Wl,--start-group} {-Wl,--whole-archive} [*.[oa]] {-Wl,--no-whole-archive} {-Wl,--end-group}
+    #   else:
+    #     {-Wl,--start-group} {-Wl,--whole-archive} [alwayslink] {-Wl,--no-whole-archive} [*.[oa]] {-Wl,--end-group}
+    oflags = ["-shared"] if shared else []
+    oflags += ["""'{{ !ld64 && !appleld ? ["-Wl,--start-group", "-Wl,--whole-archive"] }}'"""]
+    if shared:
+        oflags += ['''"{{ ld64 || appleld ? [`find . -name '*.o' -or -name '*.a' | sort | sed -e 's/\(.*\)/"-Wl,-force_load","\1"/' | tr '\n' , | sed -e 's/.$//'`] : [`find . -name '*.o' -or -name '*.a' | sort | sed -e 's/\(.*\)/"\1"/' | tr '\n' , | sed -e 's/.$//'`] }}"''']
+    elif alwayslink:
+        oflags += ["""'{{ ld64 || appleld ? ["-Wl,-force_load", "%s"] : ["%s"] }}'""" % (al, al) for al in alwayslink]
+    oflags += ["""'{{ !ld64 && !appleld ? ["-Wl,--no-whole-archive"] }}'"""]
+    if not shared:
+        oflags += ["`find . -name '*.o' -or -name '*.a' | sort`"]
+    oflags += ["""'{{ !ld64 && !appleld ? "-Wl,--end-group" }}'"""]
+
     # Don't add a .note.gnu.build-id section to ELF images. This improves the binary's determinism.
     lflags = ["""'{{ gnuld || gold || lld ? "-Wl,--build-id=none" }}'"""]
-    if shared:
-        objs = ["-shared", f"-Wl,{_WHOLE_ARCHIVE}"] + objs + [f"-Wl,{_NO_WHOLE_ARCHIVE}"]
     lflags += ["-Wl," + f.replace(" ", ",") for f in linker_flags] + _default_cflags(c, dbg)
     if static:
         lflags += ["-static"]
-    return objs + lflags + pkg_config_cmds
+
+    return oflags + lflags + pkg_config_cmds
 
 
 def _library_cmds(c:bool=False, compiler_flags:list=[], pkg_config_libs:list=[], pkg_config_cflags:list=[], extra_flags:list=[],
