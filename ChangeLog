@@ -1,3 +1,21 @@
+Version 0.5.0
+-------------
+    * Use arcat instead of jarcat (#22)
+    * Ensure source file is final argument passed to CC and C++ tools (#42)
+    * Improve help text for plugin configuration options (#43)
+    * Use the ar tool defined in the plugin configuration (#45)
+    * Use `-std` option to set C/C++ language standard (#52)
+    * Remove `c_embed_binary` and `cc_embed_binary` (#54)
+    * Remove unused `LDTool` plugin configuration option (#55)
+    * Store compiler/linker flags in lists (#58)
+    * Specify at most one action flag when building libraries (#59)
+    * Replace Python-based shared object test with a C++-only version (#62)
+    * Support compiling C++ modules with Clang >= 16 (#60)
+    * Gate C++ module test behind module_tests feature flag (#63)
+    * Only pass `--build-id=none` to linker when building ELF binaries (#64)
+    * Improve linker flag generation (#66)
+    * Formally state OS/compiler/linker compatibility in `README.md` (#67)
+
 Version 0.4.0
 -------------
     * Add a config option to make the coverage tool customisable (#32)
