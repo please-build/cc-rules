@@ -788,7 +788,7 @@ def _library_cmds(c:bool=False, compiler_flags:list=[], pkg_config_libs:list=[],
         'opt': cmd_template % ' '.join(common_flags + opt_flags + extra_flags),
     }
     if CONFIG.CC.COVERAGE:
-        cmds['cover'] = cmd_template % ' '.join(dbg_flags + _COVERAGE_FLAGS + extra_flags)
+        cmds['cover'] = cmd_template % ' '.join(common_flags + dbg_flags + _COVERAGE_FLAGS + extra_flags)
     return cmds, {
         'please_cc': CONFIG.CC.PLEASE_CC_TOOL,
         'cc': [CONFIG.CC.CC_TOOL if c else CONFIG.CC.CPP_TOOL],
