@@ -1,3 +1,7 @@
+Version 0.5.1
+-------------
+    * Include common compiler flags in `cover` command (#71)
+
 Version 0.5.0
 -------------
     * Use arcat instead of jarcat (#22)
