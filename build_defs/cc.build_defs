@@ -654,6 +654,7 @@ def cc_test(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&cflags&cop
         deps += [lib_rule]
 
     test_cmd = f'$TEST {flags}'
+    test_tools = {}
     if worker:
         test_cmd = f'$(worker {worker}) && {test_cmd} '
         deps += [worker]
@@ -663,7 +664,7 @@ def cc_test(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&cflags&cop
             'dbg': test_cmd,
             'cover': test_cmd + '; R=$?; cp $GCNO_DIR/*.gcno . && $TOOLS_COVERAGE *.gcda && cat *.gcov > test.coverage; exit $R'
         }
-        tools['coverage'] = CONFIG.CC.COVERAGE_TOOL
+        test_tools['coverage'] = CONFIG.CC.COVERAGE_TOOL
 
     return build_rule(
         name=name,
@@ -681,6 +682,7 @@ def cc_test(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&cflags&cop
         requires=['cc', 'cc_hdrs', 'test'],
         labels=labels,
         tools=tools,
+        test_tools = test_tools,
         pre_build=_binary_transitive_labels(_c, linker_flags, pkg_config_libs),
         flaky=flaky,
         test_outputs=test_outputs,
