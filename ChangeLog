@@ -1,3 +1,7 @@
+Version 0.5.2
+-------------
+    * Make coverage tool visible in `cover` command (#74)
+
 Version 0.5.1
 -------------
     * Include common compiler flags in `cover` command (#71)
