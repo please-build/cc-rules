@@ -1,7 +1,23 @@
 # Test the way cc rules depend on one another; ideally we should be able to
 # pick up all transitive dependencies correctly but compile the .o files independently.
 
-subinclude("//build_defs:cc")
+subinclude(
+    "///e2e//build_defs:e2e",
+    "//build_defs:cc",
+)
+
+e2e_test_plugin(
+    name = "cc-rules",
+    srcs = [
+        "//build_defs:c",
+        "//build_defs:cc",
+        "//tools:please_cc",
+        "//:plzconfig",
+    ],
+    visibility = [
+        "//test/...",
+    ],
+)
 
 cc_library(
     name = "lib1",
@@ -78,4 +94,16 @@ cc_test(
     name = "cc_multisrc_test_2",
     srcs = ["cc_multisrc_test.cc"],
     deps = [":multisrc_lib_2"],
+)
+
+plugin_e2e_test(
+    name = "static_test",
+    repo = "static_repo",
+    test_cmd = [
+        "plz run //:static",
+        "file $(plz query outputs //:static) > file",
+    ],
+    expect_output_contains = {
+        "file": "statically linked",
+    },
 )
