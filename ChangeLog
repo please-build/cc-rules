@@ -1,3 +1,7 @@
+Version 0.5.3
+-------------
+    * Only pass `-static-libgcc` option to GCC compilers (#77)
+
 Version 0.5.2
 -------------
     * Make coverage tool visible in `cover` command (#74)
