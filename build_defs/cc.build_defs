@@ -558,7 +558,7 @@ def cc_binary(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[],
     cmds, tools = _binary_cmds(_c, linker_flags, pkg_config_libs, static=static)
     if srcs:
         if static:
-            compiler_flags += ["-static", "-static-libgcc"]
+            compiler_flags += ["-static", """'{{ gcc ? "-static-libgcc" }}'"""]
         lib_rule = cc_library(
             name=f'_{name}#lib',
             srcs=srcs,
