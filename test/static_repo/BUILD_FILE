@@ -1,0 +1,7 @@
+subinclude("///cc//build_defs:c")
+
+c_binary(
+    name = "static",
+    srcs = ["main.c"],
+    static = True,
+)

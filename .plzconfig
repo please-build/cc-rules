@@ -8,6 +8,10 @@ Stdlib = //third_party/go:std
 ImportPath = github.com/please-build/cc-rules
 RequireLicences = true
 
+[Plugin "e2e"]
+Target = //plugins:e2e
+DefaultPlugin = //test:cc-rules
+
 [PluginDefinition]
 name = cc
 
