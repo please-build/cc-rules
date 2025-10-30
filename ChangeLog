@@ -1,3 +1,7 @@
+Version 0.5.4
+-------------
+    * Permit please_cc expressions in `linker_flags` parameters (#80)
+
 Version 0.5.3
 -------------
     * Only pass `-static-libgcc` option to GCC compilers (#77)
