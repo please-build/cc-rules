@@ -763,11 +763,25 @@ def _binary_build_flags(linker_flags:list=[], pkg_config_libs:list=[], shared:bo
 
     # Don't add a .note.gnu.build-id section to ELF images. This improves the binary's determinism.
     lflags = ["""'{{ gnuld || gold || lld ? "-Wl,--build-id=none" }}'"""]
-    lflags += ["-Wl," + f.replace(" ", ",") for f in linker_flags] + _default_cflags(c, dbg)
+    lflags += [_escape_linker_flag(f) for f in linker_flags]
+    lflags += _default_cflags(c, dbg)
     if static:
         lflags += ["-static"]
 
     return oflags + lflags + pkg_config_cmds
+
+
+def _escape_linker_flag(flag:str):
+    """Returns a linker flag suitable for passing to a C/C++ compiler toolchain - the flag is prepended with "-Wl," and
+    spaces are replaced with commas.
+
+    Alternatively, please_cc expressions are permitted, but cannot be escaped automatically because of their non-trivial
+    structure; the escaping must therefore be performed as part of the expression itself.
+    """
+    if flag.startswith("{{ ") and flag.endswith(" }}"):
+        return f"'{flag}'" if '"' in flag else f'"{flag}"'
+    else:
+        return "-Wl," + flag.replace(" ", ",")
 
 
 def _library_cmds(c:bool=False, compiler_flags:list=[], pkg_config_libs:list=[], pkg_config_cflags:list=[], extra_flags:list=[],
