@@ -108,6 +108,13 @@ DefaultValue = -ldl
 Inherit = true
 Help = The default flags to pass to the linker.
 
+[PluginConfig "enable_gc"]
+ConfigKey = EnableGC
+Type = bool
+DefaultValue = false
+Inherit = true
+Help = If true, enables link-time garbage collection for binary outputs in release builds. This removes unused code and data, usually resulting in smaller file sizes.
+
 [PluginConfig "pkg_config_path"]
 ConfigKey = PkgConfigPath
 DefaultValue =

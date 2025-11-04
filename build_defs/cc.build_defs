@@ -702,13 +702,32 @@ def _default_cflags(c:bool=False, dbg:bool=False):
 
 def _build_flags(compiler_flags:list=[], pkg_config_libs:list=[], pkg_config_cflags:list=[], defines:list=[], c:bool=False, dbg:bool=False):
     """Builds the list of flags that we'll pass to the compiler invocation."""
-    compiler_flags = _default_cflags(c, dbg) + ["-fPIC"] + compiler_flags  # N.B. order is important!
+    cflags = _default_cflags(c, dbg) + ["-fPIC"]
+
+    if CONFIG.CC.ENABLE_GC and not dbg:
+        cflags += [
+            # Place all functions and data (global variables, constants) into their own sections in the object code.
+            # These options are only meaningful when building ELF object code, but they're both treated as no-ops by all
+            # the compilers we support when building Mach-O object code, so (thankfully) there's no need to figure out
+            # whether to pass them based on the target architecture (which we don't necessarily know here).
+            "-fdata-sections",
+            "-ffunction-sections",
+            # -ffunction-sections causes sections to be emitted with unique names. Avoid doing this, if the compiler
+            # and linker both support it: it significantly increases the size of the ELF string table. This requires a
+            # linker that can handle repeated section names, which all reasonably modern versions of linkers that
+            # generate ELF code already do (e.g. GNU ld/gold >= 2.35).
+            """'{{ clang || aclang ? "-fno-unique-section-names" }}'""",
+        ]
+
+    # Now append the compiler flags we were given, which allows the plugin defaults (and whatever else we set above) to
+    # be overridden (i.e. by the user).
+    cflags += compiler_flags
     if defines:
-        compiler_flags += ['-D' + define for define in defines]
+        cflags += ['-D' + define for define in defines]
 
     pkg_config_cmds = [f"`pkg-config --cflags {x}`" for x in (pkg_config_cflags + pkg_config_libs)]
 
-    return compiler_flags + pkg_config_cmds
+    return cflags + pkg_config_cmds
 
 
 def _binary_build_flags(linker_flags:list=[], pkg_config_libs:list=[], shared:bool=False, alwayslink:list=[], c:bool=False, dbg:bool=False,
@@ -763,8 +782,14 @@ def _binary_build_flags(linker_flags:list=[], pkg_config_libs:list=[], shared:bo
 
     # Don't add a .note.gnu.build-id section to ELF images. This improves the binary's determinism.
     lflags = ["""'{{ gnuld || gold || lld ? "-Wl,--build-id=none" }}'"""]
+
+    if CONFIG.CC.ENABLE_GC and not dbg:
+        lflags += ["""'{{ ld64 || appleld ? "-Wl,-dead_strip" : "-Wl,--gc-sections" }}'"""]
+
     lflags += [_escape_linker_flag(f) for f in linker_flags]
+
     lflags += _default_cflags(c, dbg)
+
     if static:
         lflags += ["-static"]
 
