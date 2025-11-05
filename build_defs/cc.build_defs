@@ -709,7 +709,7 @@ def _build_flags(compiler_flags:list=[], pkg_config_libs:list=[], pkg_config_cfl
     """Builds the list of flags that we'll pass to the compiler invocation."""
     cflags = _default_cflags(c, dbg) + ["-fPIC"]
 
-    if CONFIG.CC.ENABLE_GC and not dbg:
+    if CONFIG.CC.LD_GARBAGE_COLLECTION and not dbg:
         cflags += [
             # Place all functions and data (global variables, constants) into their own sections in the object code.
             # These options are only meaningful when building ELF object code, but they're both treated as no-ops by all
@@ -789,7 +789,7 @@ def _binary_build_flags(linker_flags:list=[], pkg_config_libs:list=[], shared:bo
     lflags = ["""'{{ gnuld || gold || lld ? "-Wl,--build-id=none" }}'"""]
 
     if not dbg:
-        if CONFIG.CC.ENABLE_GC:
+        if CONFIG.CC.LD_GARBAGE_COLLECTION:
             lflags += ["""'{{ ld64 || appleld ? "-Wl,-dead_strip" : "-Wl,--gc-sections" }}'"""]
         if strip and not test:
             lflags += ["""'{{ ld64 || appleld ? ["-Wl,-S", "-Wl,-x"] : "-Wl,--strip-all" }}'"""]
