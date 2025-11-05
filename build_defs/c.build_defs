@@ -166,8 +166,9 @@ def c_static_library(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&c
 
 
 def c_shared_object(name:str, srcs:list=[], hdrs:list=[], out:str='', compiler_flags:list&cflags&copts=[],
-                    linker_flags:list&ldflags&linkopts=[], deps:list=[], visibility:list=None, test_only:bool&testonly=False,
-                    pkg_config_libs:list=[], pkg_config_cflags:list=[], includes:list=[], labels:list=[], optional_outs:list=[]):
+                    linker_flags:list&ldflags&linkopts=[], strip:bool=CONFIG.CC.DEFAULT_STRIP, deps:list=[],
+                    visibility:list=None, test_only:bool&testonly=False, pkg_config_libs:list=[],
+                    pkg_config_cflags:list=[], includes:list=[], labels:list=[], optional_outs:list=[]):
     """Generates a C shared object (.so) with its dependencies linked in.
 
     Args:
@@ -178,6 +179,8 @@ def c_shared_object(name:str, srcs:list=[], hdrs:list=[], out:str='', compiler_f
       out (str): Name of the output .so. Defaults to name + .so.
       compiler_flags (list): Flags to pass to the compiler.
       linker_flags (list): Flags to pass to the linker.
+      strip (bool): If true, strip all symbol information from the output in release builds. Defaults
+                    to the value of the plugin's DefaultStrip configuration option.
       deps (list): Dependent rules.
       visibility (list): Visibility declaration for this rule.
       test_only (bool): If True, is only available to other test rules.
@@ -197,6 +200,7 @@ def c_shared_object(name:str, srcs:list=[], hdrs:list=[], out:str='', compiler_f
         test_only = test_only,
         compiler_flags = compiler_flags,
         linker_flags = linker_flags,
+        strip = strip,
         pkg_config_libs = pkg_config_libs,
         pkg_config_cflags = pkg_config_cflags,
         includes = includes,
@@ -206,9 +210,9 @@ def c_shared_object(name:str, srcs:list=[], hdrs:list=[], out:str='', compiler_f
 
 
 def c_binary(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], compiler_flags:list&cflags&copts=[],
-             linker_flags:list&ldflags&linkopts=[], deps:list=[], visibility:list=None, pkg_config_libs:list=[],
-             pkg_config_cflags:list=[], test_only:bool&testonly=False, static:bool=False, includes:list=[], defines:list|dict=[], labels:list=[],
-             optional_outs:list=[]):
+             linker_flags:list&ldflags&linkopts=[], strip:bool=CONFIG.CC.DEFAULT_STRIP, deps:list=[], visibility:list=None,
+             pkg_config_libs:list=[], pkg_config_cflags:list=[], test_only:bool&testonly=False, static:bool=False,
+             includes:list=[], defines:list|dict=[], labels:list=[], optional_outs:list=[]):
     """Builds a binary from a collection of C rules.
 
     Args:
@@ -219,6 +223,8 @@ def c_binary(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], compile
                            dependent rules.
       compiler_flags (list): Flags to pass to the compiler.
       linker_flags (list): Flags to pass to the linker.
+      strip (bool): If true, strip all symbol information from the output in release builds. Defaults
+                    to the value of the plugin's DefaultStrip configuration option.
       deps (list): Dependent rules.
       visibility (list): Visibility declaration for this rule.
       pkg_config_libs (list): Libraries to declare a dependency on using pkg-config
@@ -242,6 +248,7 @@ def c_binary(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], compile
         test_only = test_only,
         compiler_flags = compiler_flags,
         linker_flags = linker_flags,
+        strip = strip,
         pkg_config_libs = pkg_config_libs,
         pkg_config_cflags = pkg_config_cflags,
         includes = includes,

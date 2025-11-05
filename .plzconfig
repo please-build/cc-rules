@@ -138,6 +138,13 @@ ConfigKey = DefaultNamespace
 DefaultValue =
 Help = The default namespace in which to compile C++ code.
 
+[PluginConfig "default_strip"]
+ConfigKey = DefaultStrip
+Type = bool
+Inherit = true
+DefaultValue = true
+Help = If true, strip all symbol information from non-test binary outputs in release builds by default.
+
 [PluginConfig "feature_flags"]
 DefaultValue =
 Repeatable = true
