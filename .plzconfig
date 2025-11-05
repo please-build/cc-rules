@@ -108,8 +108,8 @@ DefaultValue = -ldl
 Inherit = true
 Help = The default flags to pass to the linker.
 
-[PluginConfig "enable_gc"]
-ConfigKey = EnableGC
+[PluginConfig "ld_garbage_collection"]
+ConfigKey = LdGarbageCollection
 Type = bool
 DefaultValue = false
 Inherit = true
