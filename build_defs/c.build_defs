@@ -234,7 +234,8 @@ def c_binary(name:str, srcs:list=[], hdrs:list=[], private_hdrs:list=[], compile
                              Alternatively can be a dict of name -> value to define, in which case
                              values are surrounded by quotes.
       test_only (bool): If True, this rule can only be used by tests.
-      static (bool): If True, the binary will be linked statically.
+      static (bool): If True, the binary will be linked statically. Statically-linked binaries are
+                     not supported on macOS, so this is a no-op when generating a Mach-O binary.
       optional_outs (list): Name of optional outputs.
     """
     return cc_binary(
