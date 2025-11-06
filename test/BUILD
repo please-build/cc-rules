@@ -104,6 +104,8 @@ plugin_e2e_test(
         "file $(plz query outputs //:static) > file",
     ],
     expect_output_contains = {
-        "file": "statically linked",
+        # Statically-linked executables can't be generated for Darwin, but //:static should at least
+        # output a functioning dynamically-linked executable.
+        "file": "executable" if CONFIG.TARGET_OS == "darwin" else "statically linked",
     },
 )
