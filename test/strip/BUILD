@@ -3,6 +3,16 @@ subinclude(
     "//build_defs:cc",
 )
 
+package(
+    cc = {
+        # This is slightly contrived, but Mach-O executables always contain at least one symbol, even when stripped.
+        # Emitting debug symbols ensures that Mach-O executables contain superfluous symbols that can later be stripped,
+        # thus providing a clear distinction between stripped and unstripped executables for our tests.
+        "default_opt_cflags": CONFIG.CC.DEFAULT_OPT_CFLAGS + ["-g"],
+        "default_opt_cppflags": CONFIG.CC.DEFAULT_OPT_CPPFLAGS + ["-g"],
+    },
+)
+
 binary_linker_flags = [
     "-L" + package_name(),
     "-rpath '%s'" % ("@executable_path" if CONFIG.OS == "darwin" else "$ORIGIN"),
@@ -21,7 +31,7 @@ for strip in [True, False]:
         linker_flags = [f"-install_name @rpath/libc_so_{stripped}.so"] if CONFIG.OS == "darwin" else [],
         strip = strip,
     )
-    data[f"c_binary_{stripped}"] = c_binary(
+    data[f"c_{stripped}"] = c_binary(
         name = f"c_binary_{stripped}",
         srcs = ["binary.c"],
         hdrs = ["so.h"],
@@ -37,7 +47,7 @@ for strip in [True, False]:
         linker_flags = [f"-install_name @rpath/libcc_so_{stripped}.so"] if CONFIG.OS == "darwin" else [],
         strip = strip,
     )
-    data[f"cc_binary_{stripped}"] = cc_binary(
+    data[f"cc_{stripped}"] = cc_binary(
         name = f"cc_binary_{stripped}",
         srcs = ["binary.cpp"],
         linker_flags = binary_linker_flags + [f"-lcc_so_{stripped}"],
@@ -45,13 +55,27 @@ for strip in [True, False]:
         deps = [f":cc_so_{stripped}"],
     )
 
+# Ensure the executables still function as expected after being stripped.
+test_cmd = ["for i in $DATA_C_STRIPPED $DATA_CC_STRIPPED $DATA_C_UNSTRIPPED $DATA_CC_UNSTRIPPED; do test $($i) = 42; done"]
+
+if CONFIG.TARGET_OS == "darwin":
+    test_cmd += [
+        # `nm -a` should show that the unstripped executables contain debug symbols ("-")...
+        "for i in $DATA_C_SO_UNSTRIPPED $DATA_C_UNSTRIPPED $DATA_CC_UNSTRIPPED; do nm -a $i | grep -qF ' - '; done",
+        # ...but that the stripped executables don't.
+        "for i in $DATA_C_SO_STRIPPED $DATA_C_STRIPPED $DATA_CC_STRIPPED; do ! nm -a $i | grep -qF ' - '; done",
+    ]
+else:
+    test_cmd += [
+        # `nm -a` should show that the unstripped executables contain at least one symbol...
+        "for i in $DATA_C_SO_UNSTRIPPED $DATA_C_UNSTRIPPED $DATA_CC_UNSTRIPPED; do ! nm -a $i 2>&1 | grep -qF 'no symbols'; done",
+        # ...but that the stripped executables contain none.
+        "for i in $DATA_C_SO_STRIPPED $DATA_C_STRIPPED $DATA_CC_STRIPPED; do nm -a $i 2>&1 | grep -qF 'no symbols'; done",
+    ]
+
 gentest(
     name = "strip_test",
-    test_cmd = [
-        "for i in $DATA_C_BINARY_STRIPPED $DATA_CC_BINARY_STRIPPED $DATA_C_BINARY_UNSTRIPPED $DATA_CC_BINARY_UNSTRIPPED; do test $($i) = 42; done",
-        "for i in $DATA_C_SO_UNSTRIPPED $DATA_C_BINARY_UNSTRIPPED $DATA_CC_BINARY_UNSTRIPPED; do file $i | grep -q 'not stripped'; done",
-        "for i in $DATA_C_SO_STRIPPED $DATA_C_BINARY_STRIPPED $DATA_CC_BINARY_STRIPPED; do file $i | grep -q ', stripped'; done",
-    ],
+    test_cmd = test_cmd,
     data = data,
     exit_on_error = True,
     no_test_output = True,
