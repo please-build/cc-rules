@@ -18,7 +18,7 @@ for strip in [True, False]:
         srcs = ["so.c"],
         out = f"libc_so_{stripped}.so",
         hdrs = ["so.h"],
-        linker_flags = [f"-install_name @rpath/lib_c_{stripped}.so"] if CONFIG.OS == "darwin" else [],
+        linker_flags = [f"-install_name @rpath/libc_so_{stripped}.so"] if CONFIG.OS == "darwin" else [],
         strip = strip,
     )
     data[f"c_binary_{stripped}"] = c_binary(
@@ -34,7 +34,7 @@ for strip in [True, False]:
         srcs = ["so.cpp"],
         out = f"libcc_so_{stripped}.so",
         hdrs = ["so.hpp"],
-        linker_flags = [f"-install_name @rpath/lib_cc_{stripped}.so"] if CONFIG.OS == "darwin" else [],
+        linker_flags = [f"-install_name @rpath/libcc_so_{stripped}.so"] if CONFIG.OS == "darwin" else [],
         strip = strip,
     )
     data[f"cc_binary_{stripped}"] = cc_binary(
