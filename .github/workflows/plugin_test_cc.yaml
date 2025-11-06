@@ -1,17 +1,16 @@
 on:
   workflow_call:
     inputs:
-      # The GitHub runner type on which this workflow should run.
       runner:
+        description: "The GitHub runner type on which this workflow should run."
         required: true
         type: string
-      # The Please profile that should be loaded when testing the plugin.
       plz_profile:
+        description: "The Please profile that should be loaded when testing the plugin."
         required: true
         type: string
-      # A space-delimited list of Apt packages to install on the runner before testing the plugin.
-      # Only meaningful when the runner is Ubuntu-based.
       apt_packages:
+        description: "A space-delimited list of Apt packages to install on the runner before testing the plugin. Only meaningful when the runner is Ubuntu-based."
         required: false
         type: string
 jobs:
@@ -30,7 +29,7 @@ jobs:
           cc="$(grep -i '^CCTool =' .plzconfig.${{ inputs.plz_profile }} | sed -e 's/^CCTool = //')"
           $cc -v -Wl,-v || true
       - name: Run C/C++ tests
-        run: ./pleasew test -i test,cc --keep_going --log_file plz-out/log/test.log
+        run: ./pleasew test -e test,go --keep_going --log_file plz-out/log/test.log
       - name: Archive logs
         uses: actions/upload-artifact@v4
         with:
