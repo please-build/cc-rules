@@ -1,8 +1,8 @@
 Version 0.6.0
 -------------
-    * Add `EnableGC` plugin configuration option for enabling link-time garbage collection (#82)
+    * Add `LdGarbageCollection` configuration option for enabling link-time garbage collection (#82)
     * Strip non-test binaries and shared objects by default (#83)
-      This can be disabled via the `DefaultStrip` plugin configuration option.
+      This can be disabled via the `DefaultStrip` configuration option.
 
 Version 0.5.4
 -------------
