@@ -30,13 +30,13 @@ Help = The path or build target for the C coverage analysis tool.
 
 [PluginConfig "cc_tool"]
 ConfigKey = CCTool
-DefaultValue = gcc
+DefaultValue = cc
 Inherit = true
 Help = The path or build target for the C compiler tool.
 
 [PluginConfig "cpp_tool"]
 ConfigKey = CPPTool
-DefaultValue = g++
+DefaultValue = c++
 Inherit = true
 Help = The path or build target for the C++ compiler tool.
 
