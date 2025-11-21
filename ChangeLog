@@ -1,3 +1,8 @@
+Version 0.7.0
+-------------
+    * Use `cc` and `c++` as the default values of the `CCTool` and `CPPTool` configuration options
+      respectively (#92)
+
 Version 0.6.0
 -------------
     * Add `LdGarbageCollection` configuration option for enabling link-time garbage collection (#82)
