@@ -109,3 +109,12 @@ plugin_e2e_test(
         "file": "executable" if CONFIG.TARGET_OS == "darwin" else "statically linked",
     },
 )
+
+plugin_e2e_test(
+    name = "transitive_deps_test",
+    repo = "transitive_deps_repo",
+    test_cmd = "plz run //:binary > out",
+    expected_output = {
+        "out": "one=1 one_plus_one=2",
+    },
+)

@@ -1,0 +1,4 @@
+plugin_repo(
+    name = "cc",
+    revision = "e2e",
+)
