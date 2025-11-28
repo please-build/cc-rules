@@ -1,0 +1,9 @@
+subinclude("///cc//build_defs:c")
+
+c_binary(
+    name = "binary",
+    srcs = ["binary.c"],
+    deps = [
+        "//one",
+    ],
+)

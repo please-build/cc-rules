@@ -1,0 +1,13 @@
+subinclude("///cc//build_defs:c")
+
+c_library(
+    name = "two",
+    srcs = ["two.c"],
+    hdrs = ["two.h"],
+    private_hdrs = ["two_private.h"],
+    defines = ["BUILDING_LIBTWO"],
+    includes = ["."],
+    visibility = [
+        "//one",
+    ],
+)

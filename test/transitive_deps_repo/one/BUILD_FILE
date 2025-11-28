@@ -1,0 +1,16 @@
+subinclude("///cc//build_defs:c")
+
+c_library(
+    name = "one",
+    srcs = ["one.c"],
+    hdrs = ["one.h"],
+    private_hdrs = ["one_private.h"],
+    defines = ["BUILDING_LIBONE"],
+    includes = ["."],
+    visibility = [
+        "//:binary",
+    ],
+    deps = [
+        "//two",
+    ],
+)
