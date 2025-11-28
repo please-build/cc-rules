@@ -1,5 +1,5 @@
 [please]
-version = >=17.19.1
+version = >=17.25.1
 
 [Plugin "go"]
 Target = //plugins:go
