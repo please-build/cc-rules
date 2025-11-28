@@ -1,3 +1,9 @@
+Version 0.7.1
+-------------
+    * Don't copy symbol tables when combining BSD-variant ar archives (#97)
+    * Don't collect headers and macros from dependencies transitively (#98)
+    * Prioritise headers provided by dependencies over system headers (#99)
+
 Version 0.7.0
 -------------
     * Use `cc` and `c++` as the default values of the `CCTool` and `CPPTool` configuration options
