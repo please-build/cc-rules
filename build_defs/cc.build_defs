@@ -828,6 +828,8 @@ def _library_cmds(c:bool=False, compiler_flags:list=[], pkg_config_libs:list=[],
     # "only run preprocess, compile and assemble steps").
     common_flags = [] if any([cf in _ACTION_FLAGS for cf in compiler_flags]) else ["-c"]
 
+    # Prepend the current directory to the header search path. This takes precedence over any header directories that
+    # this target inherits from its dependencies.
     common_flags += ["-I", "."]
     dbg_flags = _build_flags(compiler_flags, pkg_config_libs, pkg_config_cflags, defines, c=c, dbg=True)
     opt_flags = _build_flags(compiler_flags, pkg_config_libs, pkg_config_cflags, defines, c=c)
@@ -900,7 +902,7 @@ def _library_apply_labels(c:bool=False, compiler_flags:list=[], pkg_config_libs:
         # Only the headers for this library's direct dependencies should be collected - transitive dependencies aren't
         # needed at compile time, and just pollute the build environment.
         for l in get_labels(name, "cc:inc:", maxdepth=1):
-            flags += ["-isystem", l]
+            flags += ["-I", l]
         for l in get_labels(name, "cc:"):
             if l.startswith("pc:") and l[3:] not in pkg_config_libs:
                 pkg_config_libs += [l[3:]]
