@@ -669,7 +669,7 @@ def cc_test(name:str, srcs:list=[], hdrs:list=[], compiler_flags:list&cflags&cop
         test_cmd = {
             'opt': test_cmd,
             'dbg': test_cmd,
-            'cover': test_cmd + '; R=$?; cp $GCNO_DIR/*.gcno . && $TOOLS_COVERAGE *.gcda && cat *.gcov > test.coverage; exit $R'
+            'cover': test_cmd + '; R=$?; cp $GCNO_DIR/*.gcno . && for file in *.gcda ; do mv "$file" "$(echo $file | awk -F"#" \'{print $NF}\')"; done &&  $TOOLS_COVERAGE *.gcda && cat *.gcov > test.coverage; exit $R'
         }
         test_tools['coverage'] = CONFIG.CC.COVERAGE_TOOL
 
